@@ -1,10 +1,10 @@
 <?php
     //Clase de conexion a base de datos y ejecutar consultas PDO
     class Base{
-        private $host = DB_HOST;
-        private $usuario = DB_USUARIO;
-        private $password = DB_PASSWORD;
-        private $nombre_base = DB_NOMBRE;
+        private $host = 'localhost';
+        private $usuario = 'root';
+        private $password = 'Salamence13';
+        private $nombre_base = 'sarabastal';
         private $charset = 'utf8mb4';
 
         private $dbh;    //database handler
