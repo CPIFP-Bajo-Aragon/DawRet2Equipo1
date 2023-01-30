@@ -6,16 +6,12 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Menu</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Gestion Préstamos</li>
+        <li class="breadcrumb-item active" aria-current="page">Gestion Centros</li>
     </ol>
 </nav>
-    <h1>Préstamos</h1>
+    <h1>CENTROS</h1>
     
 
-<!-- Button trigger modal -->
-<button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-+
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -127,46 +123,12 @@
 </div>
 
 
-<!-- Modal ingresos -->
-<div class="modal fade" id="IngresoPrestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Ingresos</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
-
-    <div class="mb-3">
-        <label for="Importe" class="form-label">Ingreso:</label>
-        <input type="number" step="1.00" class="form-control" id="Importe" aria-describedby="text" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Fecha Movimiento:</label>
-        <input type="date" class="form-control" id="exampleFormControlInput1">
-    </div>
-  
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary">Guardar cambios</button>
-  </div>
-</div>
-</div>
-</div>
-</div>
-
-
-
 <div id="container">
-
-    <h1>CENTROS</h1>
-
   <!-- Boton para añadir nuevos centros -->
   <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <a  class="btn btn-primary me-md-2" type="button" href="<?php echo RUTA_URL ?>/sarabastall/addCentro">+</a>
   </div> -->
- <!-- <button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button>  -->
+ <button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button> 
 
 
     <br>
@@ -195,13 +157,12 @@
                     <td><?php echo $centro->Distancia?></td>
 
                     <td>
-                        <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
+                      <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
                         <i class="bi bi-pencil-square"></i>
-                        </a>
-
-                        <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
-                            <i class="bi bi-trash"></i>
-                        </a>
+                      </a>
+                      <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
+                          <i class="bi bi-trash"></i>
+                      </a>
                     </td>
                 <?php endforeach?>
 

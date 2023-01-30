@@ -16,68 +16,61 @@
     ?>
 
 <!-- Button trigger modal -->
-<button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<!-- <button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 +
-</button>
+</button> -->
+
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Nuevo Préstamo</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
 
-    <div class="mb-3">
-      <label for="NombreText" class="form-label">Nombre:</label>
-      <input type="text" class="form-control" id="text" aria-describedby="text">
-      <div id="textoAlumno" class="form-text">Introduce el nombre de una persona ya existente.</div>
-    </div>
+<button id="abrirModal">+</button>
 
-    <div class="mb-3">
-      <label for="Concepto" class="form-label">Concepto:</label>
-      <input type="text" class="form-control" id="text" aria-describedby="text">
-    </div>
 
-    <label for="NombreText" class="form-label">Tipo de Préstamo:</label>
-    <select class="form-select" aria-label="Default select example">
-        <option value="1">Agricultura</option>
-        <option value="2">Otros</option>
-    </select>
-
-    <label for="NombreText" class="form-label">Estado:</label>
-    <select class="form-select" aria-label="Default select example">
-        <option value="1">En proceso</option>
-        <option value="2">Pagado</option>
-    </select>
-    
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Fecha Inicio:</label>
-        <input type="date" class="form-control" id="exampleFormControlInput1">
-    </div>
-    
-    <div class="mb-3">
-        <label for="Importe" class="form-label">Importe:</label>
-        <input type="number" step="1.00" class="form-control" id="Importe" aria-describedby="text" required>
-    </div>
-    
-    <br>
-    <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-        <label for="floatingTextarea">Observaciones</label>
-    </div>
+<!-- Ventana modal JS -->
+<div id="ventanaModal" class="modalJS">
+    <div class="contenido-modal">
+        <span class="cerrar">&times;</span>
+        <h6 class="tituloModal">Ventana Modal</h6>
+        <br>
+        <hr>
+        <form onsubmit="return Validar(this, 'nombreCurso', 'profesor', 'fechaCurso')" >
+            <label>Nombre:</label>
+            <input type="text" id="nombreCurso" name="nombreCurso">
+            <p id="ErrorNombre"></p>
+            <br>
+            <label>Profesor:</label>
+            <input type="text" id="profesor" name="profesor">
+            <p id="ErrorProfesor"></p>
+            <br>
+            <label>Tipo de curso:</label>
+            <select>
+                <option value="1">Sanitaria</option>
+                <option value="2">Profesor</option>
+            </select>
+            <br>
+            <label>Fecha:</label>
+            <input type="date" id="fechaCurso" name="fechaCurso">
+            <p id="ErrorFecha"></p>
+            <br>
+            <label>Importe:</label>
+            <input type="number" step="1.00" id="importe" name="importe">
+            <p id="ErrorImporte"></p>
+            <br>
+            <hr>
+            <!-- <input class="boton" value="Guardar Cambios" type="button" onclick="importeNoNegativo()"> -->
+            <input type="submit" value="Entrar" onclick="todos()">
+        </form>
 
     </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary">Guardar cambios</button>
-  </div>
 </div>
-</div>
-</div>
-</div>
+
+
+
+
+
+
+
+
 
 <!-- Modal Ver Mas -->
 <div class="modal fade" id="VerMas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

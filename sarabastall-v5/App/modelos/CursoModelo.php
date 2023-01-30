@@ -33,7 +33,7 @@
 
             $this->db->query("SELECT c.Id_Curso, c.Nombre, p.Nombre, c.Fecha_Impartir FROM CURSO c, PERSONA p
             WHERE c.Id_Persona = p.Id_Persona AND c.Fecha_Impartir > CURDATE()
-            ORDER BY c.Nombre DESC");
+            ORDER BY c.Nombre ASC");
 
             return $this->db->registros();
         }
@@ -42,7 +42,7 @@
 
             $especialidad = 1; // Funcion que devuelve el id de la especialidad elegida
 
-            if(trim($datos['importe_input']) != 0){ // Puede que haya que poner '||trim($datos['importe_input']) != null'
+            if(trim($datos['importe_input']) != 0 || trim($datos['importe_input']) != null){ // Puede que haya que poner '||trim($datos['importe_input']) != null'
                 // Utilizar el modelo Economia para introducir un nuevo movimiento
 
 

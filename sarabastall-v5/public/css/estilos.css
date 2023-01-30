@@ -114,7 +114,8 @@ table{
 }
   
 .table-hover tbody tr:hover {
-    background-color: #2E64FE;
+    /* background-color: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)); */
+    background-color: #7598fd;
     color: #FFFFFF;
 }
   
@@ -139,3 +140,72 @@ table{
 .modal{
     font-family: 'Montserrat', sans-serif;
 }
+
+/* Css Ventana Modal */
+
+.modalJS {
+    display: none;
+    position: fixed;
+    z-index: 1; /* Se situará por encima de otros elementos de la página*/
+    padding-top: 30px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Se activará el scroll si es necesario */
+    background-color: rgba(0,0,0,0.5); /* Se diferencie entre el modal y resto de la pagina */
+    
+  }
+  
+  /* Ventana o caja modal */
+  .contenido-modal {
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 10px;
+    width: 25%;
+  }
+  
+  .cerrar{
+      float:right;
+  }
+  
+  input[type=text], [type=date], [type=number], select {
+      font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .tituloModal{
+      float:left;
+  }
+  
+  .boton{
+      background-color: #0d6efd;
+      border-radius: 5px;
+      color: white;
+      padding: 10px;
+  }
+  
+  #abrirModal{
+      float:right;
+      background-color: #0d6efd;
+      color:white;
+      border-radius: 5px;
+      padding-top:0.35em;
+      padding-left:0.75em;
+      padding-right:0.75em;
+      padding-bottom:0.35em;
+  }
+  
+  
+  input:focus, input[type]:focus, select:focus {
+      border-color: #95c0fe;
+      box-shadow: 0 1px 1px  #95c0fe inset, 0 0 8px  #95c0fe;
+      outline: 0 none;
+  }
