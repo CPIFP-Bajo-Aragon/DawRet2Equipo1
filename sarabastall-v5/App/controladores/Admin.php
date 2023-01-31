@@ -8,6 +8,10 @@
             //$this->datos["usuarioSesion"] = $this->asesoriaModelo->getPersona(1);
             $this->cursoModelo = $this->modelo('CursoModelo');
             $this->centroModelo = $this->modelo('CentroModelo');
+            $this->prestamoModelo = $this->modelo('PrestamoModelo');
+            $this->becaModelo = $this->modelo('BecaModelo');
+            $this->economiaModelo = $this->modelo('EconomiaModelo');
+            $this->personaModelo = $this->modelo('PersonaModelo');
 
             $this->datos["rolesPermitidos"] = [1];
 
@@ -31,6 +35,8 @@
         }
 
         public function gestionar_prestamos(){
+
+            $this->datos["PrestamosTotales"] = $this->prestamosModelo->get_prestamos();
             
             $this->vista("gestion/prestamos",$this->datos);
         }
@@ -43,16 +49,22 @@
         }
 
         public function gestionar_personas(){
+
+            $this->datos["PersonasTotales"] = $this->personaModelo->get_personas();
             
             $this->vista("gestion/personas",$this->datos);
         }
 
         public function gestionar_becas(){
+
+            $this->datos["BecasTotales"] = $this->becaModelo->get_becas();
             
             $this->vista("gestion/becas",$this->datos);
         }
 
         public function gestionar_economia(){
+
+            $this->datos["MovimientosTotales"] = $this->economiaModelo->get_movimientos();
             
             $this->vista("gestion/economia",$this->datos);
         }
