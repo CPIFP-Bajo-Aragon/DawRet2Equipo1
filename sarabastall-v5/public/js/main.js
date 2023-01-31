@@ -117,3 +117,11 @@ function todos(){
   textoVacioFecha();
   importeNoNegativo();
 }
+
+
+
+// Funciones Auxiliares Gestion Cursos
+
+function place_id(Id_Curso){
+  document.getElementById("id_curso").setAttribute("value", Id_Curso);
+}
