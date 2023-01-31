@@ -7,9 +7,9 @@
         }
 
         public function loginUsuario($datos){
-            $this->db->query("SELECT * FROM PERSONA WHERE Nom_User = :Nom_User AND Password = sha2(:pass,256)");
+            $this->db->query("SELECT * FROM PERSONA WHERE Login = :Login AND Password = sha2(:pass,256)");
         
-            $this->db->bind(':Nom_User', $datos['usuario']);
+            $this->db->bind(':Login', $datos['usuario']);
             $this->db->bind(':pass', $datos['password']);
 
     
