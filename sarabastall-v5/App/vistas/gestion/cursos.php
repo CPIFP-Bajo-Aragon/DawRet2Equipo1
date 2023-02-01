@@ -66,92 +66,6 @@
 
 
 
-
-
-
-
-
-
-<!-- Modal Ver Mas -->
-<div class="modal fade" id="VerMas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Ingresos</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
-
-  <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Ingreso realizado</h5>
-        <small class="text-muted">25/09/2022</small>
-      </div>
-      <p class="Ingreso">230</p>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Ingreso realizado</h5>
-        <small class="text-muted">26/09/2022</small>
-      </div>
-      <p class="Ingreso">150</p>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Ingreso realizado</h5>
-        <small class="text-muted">28/09/2022</small>
-      </div>
-      <p class="Ingreso">70</p>
-    </a>
-  </div>
-    
-    <br>
-    <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-        <label for="floatingTextarea">Observaciones</label>
-    </div>
-
-    </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary">Guardar cambios</button>
-  </div>
-</div>
-</div>
-</div>
-</div>
-
-
-<!-- Modal ingresos -->
-<div class="modal fade" id="IngresoPrestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ingresos</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <div class="mb-3">
-            <label for="Importe" class="form-label">Ingreso:</label>
-            <input type="number" step="1.00" class="form-control" id="Importe" aria-describedby="text" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Fecha Movimiento:</label>
-            <input type="date" class="form-control" id="exampleFormControlInput1">
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Guardar cambios</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Modal Seguro desea Eliminar -->
 
 <div class="modal fade" id="modalEliminarCurso" tabindex="-1">
@@ -180,6 +94,9 @@
   </div> 
 </div>
 
+<!-- Modal Seguro desea Eliminar FINAL -->
+
+
 <div class="container">
 
 <table class="table table-striped table-hover">
@@ -200,9 +117,11 @@
         <td><?php echo $curso ->Profesor?></td>
         <td><?php echo $curso ->Fecha?></td>
         <td>
-          <button type="button" data-bs-toggle="modal" data-bs-target="#VerMas" class="w-80 btn btn-warning btn-lg">
-            <i class="bi bi-search"></i>     
+          <a href="<?php echo RUTA_URL ?>/admin/see_curso/<?php echo $curso->Id_Curso ?>">
+          <button type="button" class="w-80 btn btn-warning btn-lg">
+            <i class="bi bi-search"></i>   
           </button>
+          </a>
           <button type="button" onclick="place_id(<?php echo $curso -> Id_Curso ?>)" data-bs-toggle="modal" data-bs-target="#modalEliminarCurso" class="w-80 btn btn-warning btn-lg">
             <i class="bi bi-trash"></i>      
           </button>

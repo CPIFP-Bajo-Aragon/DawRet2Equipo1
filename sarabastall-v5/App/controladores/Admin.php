@@ -69,6 +69,28 @@
             $this->vista("gestion/economia",$this->datos);
         }
 
+        public function see_curso($id_curso){
+
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+                $curso=$_POST;
+    
+                if($this->cursoModelo->mod_curso($curso, $id_curso)){
+                    redireccionar("/admin/see_curso/$id_curso");
+                } else{
+                    echo "¡¡Se ha producido un error!!";
+                }
+    
+            }else{
+                $this->datos["curso"]=$this->cursoModelo->get_curso($id_curso);
+                $this->datos["curso"]->material = $this->cursoModelo->get_material($id_curso);
+    
+                $this->vista("gestion/detalles_curso",$this->datos);
+    
+            }
+
+        }
+
         public function del_curso(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $id_curso = $_POST["id_curso"];

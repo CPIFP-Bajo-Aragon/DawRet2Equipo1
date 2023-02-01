@@ -6,17 +6,20 @@
             $this->db = new Base;
         }
 
+        // EN FUNCIONAMIENTO
         public function get_Curso($id_curso){
             //Devuelve la informacion de un Curso concreto
 
-            $this->db->query("SELECT c.Id_Curso, c.Nombre, p.Nombre, c.Fecha_Impartir FROM CURSO c, PERSONA p
-                                        WHERE c.Id_Curso=:id_curso AND c.Id_Persona = p.Id_Persona");
+            $this->db->query("SELECT Importe, e.Nombre as Especialidad, c.Id_Curso as Id, c.Nombre as Curso, p.Nombre as Profesor, c.Fecha_Impartir as Fecha FROM CURSO c, PERSONA p, ESPECIALIDAD e
+            WHERE c.Id_Persona = p.Id_Persona AND c.Id_Especialidad = e.Id_Especialidad AND c.Id_Curso = :id
+            ORDER BY c.Nombre DESC");
 
-            $this->db->bind(':id_curso', $id_curso);
+            $this->db->bind(':id', $id_curso);
 
             return $this->db->registro();
         }
 
+        // EN FUNCIONAMIENTO
         public function get_Cursos(){
             // Devuelve toda la informacion de los cursos ha insertar en las tablas
 
@@ -79,6 +82,7 @@
 
         }
 
+        // EN FUNCIONAMIENTO
         public function del_Curso($id_curso){
             // Funcion para eliminar un curso
             
@@ -93,19 +97,18 @@
             }
         }
 
-        public function mod_Curso(){
+        public function mod_Curso($curso, $id_curso){
 
-            $this->db->query("UPDATE CURSO SET nombre_as=:nombre_as, dni_as=:dni_as, titulo_as=:titulo_as, 
-            telefono_as=:telefono_as, email_as=:email_as, domicilio_as=:domicilio_as, 
-            descripcion_as=:descripcion_as
-            WHERE id_asesoria=:id_asesoria");
+            $this->db->query("UPDATE CURSO SET Nombre=:nombre_as, Importe=:dni_as, Fecha_Impartir=:titulo_as, 
+            Id_Especialidad=:telefono_as, Id_Movimiento=:email_as
+            WHERE id_curso=:id_curso");
 
-            $this->db->bind(':nombre_as', $datos['nombre_as']);
-            $this->db->bind(':dni_as', $datos['dni_as']);
-            $this->db->bind(':titulo_as', $datos['titulo_as']);
-            $this->db->bind(':telefono_as', $datos['telefono_as']);
-            $this->db->bind(':email_as', $datos['email_as']);
-            $this->db->bind(':domicilio_as', $datos['domicilio_as']);
+            $this->db->bind(':nombre_as', $curso['nombre']);
+            $this->db->bind(':dni_as', $curso['importe']);
+            $this->db->bind(':titulo_as', $curso['fecha']);
+            $this->db->bind(':telefono_as', $curso['especialidad']);
+            $this->db->bind(':email_as', $curso['email_as']);
+            $this->db->bind(':domicilio_as', $curso['domicilio_as']);
             $this->db->bind(':descripcion_as', $datos['descripcion_as']);
             $this->db->bind(':id_asesoria', $id_asesoria);
 
@@ -117,8 +120,42 @@
         
         }
 
+        // EN FUNCIONAMIENTO
+        public function get_Material($id_curso){
+            // Devuelve toda la informacion del Material asociado a un Curso
+
+            $this->db->query("SELECT m.Id_Material as Id, m.Nombre as Nombre, Archivo FROM POSEER p, MATERIAL m
+            WHERE p.Id_Material = m.Id_Material AND p.Id_Curso = :id");
+
+            $this->db->bind(':id', $id_curso);
+
+            return $this->db->registros();
+        }
 
         public function add_Material($datos){
+            // Cambiamos estado asesoria = 2 -Procesando-
+            $this->db->query("UPDATE asesoria SET id_estado=2 WHERE id_asesoria=:id_asesoria");
+
+            $this->db->bind(':id_asesoria', $datos['id_asesoria']);
+            
+            $this->db->execute();
+
+            $this->db->query("INSERT INTO reg_acciones (fecha_reg, accion, automatica, id_asesoria, id_profesor)
+                                        VALUES (NOW(), :accion, 0, :id_asesoria, :id_profesor)");
+            
+            $this->db->bind(':id_asesoria', $datos['id_asesoria']);
+            $this->db->bind(':id_profesor', $datos['id_profesor']);
+            $this->db->bind(':accion', $datos['accion']);
+
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+            
+        }
+
+        public function mod_Material($datos){
             // Cambiamos estado asesoria = 2 -Procesando-
             $this->db->query("UPDATE asesoria SET id_estado=2 WHERE id_asesoria=:id_asesoria");
 
