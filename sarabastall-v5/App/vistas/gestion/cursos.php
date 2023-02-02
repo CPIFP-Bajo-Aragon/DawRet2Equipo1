@@ -12,7 +12,7 @@
     <h1>Cursos</h1>
     
     <?php 
-    print_r($this->datos["CursosTotales"]);
+    print_r($this->datos);
     ?>
 
 <!-- Button trigger modal -->
@@ -44,8 +44,9 @@
             <br>
             <label>Tipo de curso:</label>
             <select>
-                <option value="1">Sanitaria</option>
-                <option value="2">Profesor</option>
+              <?php foreach($datos["especialidad"] as $especialidad): ?>
+                <option value="<?php echo $especialidad->Id ?>"><?php echo $especialidad->Nombre ?></option>
+              <?php endforeach ?>
             </select>
             <br>
             <label>Fecha:</label>

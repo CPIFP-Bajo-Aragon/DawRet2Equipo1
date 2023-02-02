@@ -201,6 +201,14 @@
             
         }
 
+        public function get_Especialidades(){
+            // Devuelve toda la informacion del Material asociado a un Curso
+
+            $this->db->query("SELECT Id_Especialidad as Id, Nombre FROM ESPECIALIDAD");
+
+            return $this->db->registros();
+        }
+
         // Funciones individuales por Especialidad??
         // Consultar
 

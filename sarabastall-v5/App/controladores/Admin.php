@@ -44,6 +44,7 @@
         public function gestionar_cursos(){
             
             $this->datos["CursosTotales"] = $this->cursoModelo->get_cursos();
+            $this->datos["especialidad"] = $this->cursoModelo->get_especialidades();
 
             $this->vista("gestion/cursos",$this->datos);
         }
