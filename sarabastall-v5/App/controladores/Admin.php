@@ -36,7 +36,7 @@
 
         public function gestionar_prestamos(){
 
-            $this->datos["PrestamosTotales"] = $this->prestamosModelo->get_prestamos();
+            $this->datos["PrestamosTotales"] = $this->prestamoModelo->get_prestamos();
             
             $this->vista("gestion/prestamos",$this->datos);
         }
@@ -68,6 +68,27 @@
             
             $this->vista("gestion/economia",$this->datos);
         }
+
+        public function del_curso(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $id_curso = $_POST["id_curso"];
+    
+                if($this->cursoModelo->del_curso($id_curso)){
+                    redireccionar("/admin/gestionar_cursos");
+                }else{
+                    echo "Se ha producido un error";
+                }
+    
+            }else{
+    
+            } 
+        }
+
+
+
+
+
+
 
     }
 

@@ -125,36 +125,63 @@
 
 <!-- Modal ingresos -->
 <div class="modal fade" id="IngresoPrestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Ingresos</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ingresos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
 
-    <div class="mb-3">
-        <label for="Importe" class="form-label">Ingreso:</label>
-        <input type="number" step="1.00" class="form-control" id="Importe" aria-describedby="text" required>
+        <div class="mb-3">
+            <label for="Importe" class="form-label">Ingreso:</label>
+            <input type="number" step="1.00" class="form-control" id="Importe" aria-describedby="text" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Fecha Movimiento:</label>
+            <input type="date" class="form-control" id="exampleFormControlInput1">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Guardar cambios</button>
+        </div>
+      </div>
     </div>
-
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Fecha Movimiento:</label>
-        <input type="date" class="form-control" id="exampleFormControlInput1">
-    </div>
-  
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary">Guardar cambios</button>
   </div>
 </div>
-</div>
-</div>
-</div>
 
+<!-- Modal Seguro desea Eliminar -->
 
+<div class="modal fade" id="modalEliminarCurso" tabindex="-1">
+  <div class="modal-dialog modal-dialog-center"> 
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalCerrarAccionLabel">
+                        ¿Estas seguro que quieres eliminar el curso?
+              </h5>
+          </div>
+
+          <div  class="modal-footer"> 
+              <form method="post" id="formCerrarAccion" action="<?php echo RUTA_URL ?>/admin/del_curso">
+              
+                <input type="hidden" id="id_curso" name="id_curso">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cancelar
+                </button>
+                  
+                <button type="submit" class="btn btn-warning">
+                  Eliminar
+                </button>
+              </form>
+          </div>
+      </div>
+  </div> 
+</div>
 
 <div class="container">
+
 <table class="table table-striped table-hover">
   <thead class="thead-azul">
     <tr>
@@ -173,8 +200,15 @@
         <td><?php echo $curso ->Profesor?></td>
         <td><?php echo $curso ->Fecha?></td>
         <td>
-          <!--Aqui van 2 botones-->
+          <button type="button" data-bs-toggle="modal" data-bs-target="#VerMas" class="w-100 btn btn-warning btn-lg">
+            <i class="bi bi-search"></i>     
+          </button>
+          <button type="button" onclick="place_id(<?php echo $curso -> Id_Curso ?>)" data-bs-toggle="modal" data-bs-target="#modalEliminarCurso" class="w-100 btn btn-warning btn-lg">
+            <i class="bi bi-trash"></i>      
+          </button>
         </td>
+
+        <!-- <?php echo RUTA_URL ?>/asesorias/ver_asesoria/<?php echo $asesoria->id_asesoria ?> -->
 
       </tr>
     <?php endforeach?>
