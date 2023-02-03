@@ -14,6 +14,14 @@
             return true;
         }
     }
+
+    function listElements($array){
+
+        $array = array_chunk($array, 8);
+
+        return $array;
+
+    }
     
 
 ?>

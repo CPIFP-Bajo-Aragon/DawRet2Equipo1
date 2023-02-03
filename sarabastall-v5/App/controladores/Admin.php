@@ -42,9 +42,12 @@
         }
 
         public function gestionar_cursos(){
-            
+
+
+            //$this->datos["pageInfo"] = $_COOKIE["pageInfo"];
             $this->datos["CursosTotales"] = $this->cursoModelo->get_cursos();
-            $this->datos["especialidad"] = $this->cursoModelo->get_especialidades();
+            $this->datos["especialidades"] = $this->cursoModelo->get_especialidades();
+            $this->datos["profesores"] = $this->personaModelo->get_profesores();
 
             $this->vista("gestion/cursos",$this->datos);
         }
@@ -85,6 +88,8 @@
             }else{
                 $this->datos["curso"]=$this->cursoModelo->get_curso($id_curso);
                 $this->datos["curso"]->material = $this->cursoModelo->get_material($id_curso);
+                $this->datos["especialidades"] = $this->cursoModelo->get_especialidades();
+                $this->datos["profesores"] = $this->personaModelo->get_profesores();
     
                 $this->vista("gestion/detalles_curso",$this->datos);
     

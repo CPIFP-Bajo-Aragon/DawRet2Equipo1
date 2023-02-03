@@ -30,6 +30,7 @@
             return $this->db->registros();
         }
 
+        // EN FUNCIONAMIENTO
         public function get_Cursos_Disponibles(){
             // Personalmente intentaria emular la funcionalidad de los Cursos como se hace en el moddle,
             // puesto que con la fecha deja mucho que desear, cuando empieza el curso, cuando acaba, dura un solo dia?
@@ -41,11 +42,12 @@
             return $this->db->registros();
         }
 
-        public function add_Curso($datos, $id_profesor){
+        // EN FUNCIONAMIENTO
+        public function add_Curso($datos){
 
-            $especialidad = 1; // Funcion que devuelve el id de la especialidad elegida
+            $yiff = false;
 
-            if(trim($datos['importe_input']) != 0 || trim($datos['importe_input']) != null){ // Puede que haya que poner '||trim($datos['importe_input']) != null'
+            if($yiff == true){ // Puede que haya que poner '||trim($datos['importe_input']) != null'
                 // Utilizar el modelo Economia para introducir un nuevo movimiento
 
 
@@ -56,21 +58,20 @@
                 $this->db->query("INSERT INTO CURSO (Nombre, Importe, Fecha_Impartir, Id_Persona, Id_Especialidad, Id_Movimiento)
                 VALUES (:nombre, :importe, :fecha, $id_profesor, $especialidad)");
 
-                $this->db->bind(':nombre',trim($datos['nombre_input']));
-                $this->db->bind(':importe',trim($datos['importe_input']));
-                $this->db->bind(':fecha',trim($datos['fecha_input']));
+                $this->db->bind(':nombre',trim($datos['nombre']));
+                $this->db->bind(':importe',trim($datos['importe']));
+                $this->db->bind(':fecha',trim($datos['fecha']));
                 $this->db->bind(':especialidad',trim($datos['especialidad_input']));
 
             } else {
 
                 $this->db->query("INSERT INTO CURSO (Nombre, Importe, Fecha_Impartir, Id_Persona, Id_Especialidad, Id_Movimiento)
-                VALUES (:nombre, :importe, :fecha, :profesor, :especialidad, null)");
+                VALUES (:nombre, null, :fecha, :profesor, :especialidad, null)");
 
-                $this->db->bind(':nombre',trim($datos['nombre_input']));
-                $this->db->bind(':importe',trim($datos['importe_input']));
-                $this->db->bind(':fecha',trim($datos['fecha_input']));
-                $this->db->bind(':profesor', $id_profesor);
-                $this->db->bind(':especialidad', $especialidad);
+                $this->db->bind(':nombre',trim($datos['nombre']));
+                $this->db->bind(':fecha',trim($datos['fecha']));
+                $this->db->bind(':profesor',trim($datos['profesor']) );
+                $this->db->bind(':especialidad',trim($datos['tipo']));
 
             }
 
@@ -99,18 +100,15 @@
 
         public function mod_Curso($curso, $id_curso){
 
-            $this->db->query("UPDATE CURSO SET Nombre=:nombre_as, Importe=:dni_as, Fecha_Impartir=:titulo_as, 
-            Id_Especialidad=:telefono_as, Id_Movimiento=:email_as
-            WHERE id_curso=:id_curso");
+            $this->db->query("UPDATE CURSO SET Nombre=:nombre, Fecha_Impartir=:fecha, Id_Persona= :profesor, Id_Especialidad=:especialidad
+            WHERE Id_Curso=:id_curso");
 
-            $this->db->bind(':nombre_as', $curso['nombre']);
-            $this->db->bind(':dni_as', $curso['importe']);
-            $this->db->bind(':titulo_as', $curso['fecha']);
-            $this->db->bind(':telefono_as', $curso['especialidad']);
-            $this->db->bind(':email_as', $curso['email_as']);
-            $this->db->bind(':domicilio_as', $curso['domicilio_as']);
-            $this->db->bind(':descripcion_as', $datos['descripcion_as']);
-            $this->db->bind(':id_asesoria', $id_asesoria);
+            $this->db->bind(':nombre', $curso['nombre']);
+            $this->db->bind(':profesor', $curso['profesor']);
+            $this->db->bind(':fecha', $curso['fecha']);
+            $this->db->bind(':especialidad', $curso['tipo']);
+            
+            $this->db->bind(':id_curso', $id_curso);
 
             if($this->db->execute()){
             return true;
@@ -201,6 +199,7 @@
             
         }
 
+        // EN FUNCIONAMIENTO
         public function get_Especialidades(){
             // Devuelve toda la informacion del Material asociado a un Curso
 

@@ -125,3 +125,43 @@ function todos(){
 function place_id(Id){
   document.getElementById("Id_Eliminar").setAttribute("value", Id);
 }
+
+// PAGINACION
+
+function siguiente(){
+
+  document.cookie = "page = 1";
+  let ck = getCookie('page');
+
+  document.getElementById("cookies").innerHTML = ck;
+
+   //Este es el que estás ya obteniendo vía JS
+
+}
+
+function anterior(){
+  
+
+  document.cookie = "page = 0"; //Este es el que estás ya obteniendo vía JS
+
+  let ck = getCookie('page');
+
+  document.getElementById("cookies").innerHTML = ck;
+
+}
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}

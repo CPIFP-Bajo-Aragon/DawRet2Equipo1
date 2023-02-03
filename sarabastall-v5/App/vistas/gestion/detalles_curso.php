@@ -57,11 +57,28 @@
                 </div>
                 <div class="mb-3 col-6">
                   <label for="especialidad" class="form-label">Especialidad</label>
-                  <input <?php echo $estadoFormulario ?> type="text" class="form-control" id="especialidad" name="especialidad" value="<?php echo $datos["curso"]->Especialidad?>">
+                  <select <?php echo $estadoFormulario ?> name="tipo">
+                    <?php foreach($datos["especialidades"] as $especialidad): ?>
+                      <?php if($datos["curso"]->Especialidad != $especialidad->Nombre): ?>
+                        <option value="<?php echo $especialidad->Id ?>"><?php echo $especialidad->Nombre ?></option>
+                      <?php else: ?>
+                        <option selected value="<?php echo $especialidad->Id ?>"><?php echo $especialidad->Nombre ?></option>
+                      <?php endif ?>
+
+                    <?php endforeach ?>
+                  </select>
                 </div>
                 <div class="mb-3 col-6">
                   <label for="profesor" class="form-label">Profesor</label>
-                  <input <?php echo $estadoFormulario ?> type="text" class="form-control" id="profesor" name="profesor" value="<?php echo $datos["curso"]->Profesor?>">
+                  <select <?php echo $estadoFormulario ?> name="profesor">
+                    <?php foreach($datos["profesores"] as $profesor): ?>
+                        <?php if($datos["curso"]->Profesor != $profesor->Nombre): ?>
+                          <option value="<?php echo $profesor->Id ?>"><?php echo $profesor->Nombre ?></option>
+                        <?php else: ?>
+                          <option selected value="<?php echo $profesor->Id ?>"><?php echo $profesor->Nombre ?></option>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                  </select>
                 </div>
                 <div class="mb-3 col-6">
                   <label for="importe" class="form-label">Importe</label>
@@ -71,6 +88,7 @@
                   <label for="importe" class="form-label">Fecha de Finalizacion</label>
                   <input <?php echo $estadoFormulario ?> type="text" class="form-control" id="fecha" name="fecha" value="<?php echo $datos["curso"]->Fecha?>">
                 </div> 
+
                 <div class="card-footer d-flex justify-content-end">
                     <span class="card-text">#<?php echo $datos["curso"]->Id?></span>
                 </div>
@@ -94,7 +112,7 @@
                     Desactivar Curso
         </button> -->
         
-    <?php endif ?>
+        <!-- <?php endif ?> -->
 
         </div>
 
