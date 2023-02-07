@@ -106,9 +106,6 @@
         <option id="master" onclick="filtrarRolMaster()">REFUGIO</option>
   </select>
   <br>
-  <button id="admin" onclick="filtrarRolAdmin()">ADMIN</button>
-  <button id="profesor" onclick="filtrarRolProfesor()">PROFESOR</button>
-  <button id="master" onclick="filtrarRolMaster()">MASTER</button>
 </div>
 <table class="table table-striped table-hover">
   <thead class="thead-azul">
