@@ -11,9 +11,9 @@
     define('RUTA_APP', dirname(dirname(__FILE__)));
 
     //Ruta url, Ejemplo: http://localhost/atletismo
-    define('RUTA_URL', 'http://localhost/sarabastall');
+    define('RUTA_URL', 'http://localhost/sarabastall-v5');
 
-    DEFINE('NOMBRE_SITIO', 'Sarabastal');
+    DEFINE('NOMBRE_SITIO', 'sarabastall-v5');
 
     //echo dirname(dirname(__FILE__));
     //echo dirname(__FILE__);
@@ -24,5 +24,5 @@
     define('DB_HOST', 'localhost');
     define('DB_USUARIO', 'root');
     define('DB_PASSWORD', 'Salamence!3');
-    define('DB_NOMBRE', 'Sarabastal');
+    define('DB_NOMBRE', 'Sarabastall3241');
 ?>

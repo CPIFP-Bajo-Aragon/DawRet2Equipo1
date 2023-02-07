@@ -45,23 +45,31 @@
         // EN FUNCIONAMIENTO
         public function add_Curso($datos){
 
-            $yiff = false;
+            
 
-            if($yiff == true){ // Puede que haya que poner '||trim($datos['importe_input']) != null'
+            if($datos['importe']){ // Puede que haya que poner '||trim($datos['importe_input']) != null'
                 // Utilizar el modelo Economia para introducir un nuevo movimiento
 
+                $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Accion, Id_TipoMov)
+                VALUES (NOW(), :texto, :importe, null, 1)");
 
+                $this->db->bind(':texto', "Costeo del Curso: ".trim($datos['nombre']));
+                $this->db->bind(':importe',trim($datos['importe']));
+
+                $this->db->execute();
                 // Consulta o funcion para insertar nuevo movimiento (Si es funcion, devolvera el id del movimineto)
                 $id_movimiento = $this->db-> executeLastId();
 
 
                 $this->db->query("INSERT INTO CURSO (Nombre, Importe, Fecha_Impartir, Id_Persona, Id_Especialidad, Id_Movimiento)
-                VALUES (:nombre, :importe, :fecha, $id_profesor, $especialidad)");
+                VALUES (:nombre, :importe, :fecha, :profesor, :especialidad, :movimiento)");
 
                 $this->db->bind(':nombre',trim($datos['nombre']));
                 $this->db->bind(':importe',trim($datos['importe']));
                 $this->db->bind(':fecha',trim($datos['fecha']));
-                $this->db->bind(':especialidad',trim($datos['especialidad_input']));
+                $this->db->bind(':especialidad',trim($datos['tipo']));
+                $this->db->bind(':profesor',trim($datos['profesor']));
+                $this->db->bind(':movimiento', $id_movimiento);
 
             } else {
 
@@ -98,7 +106,10 @@
             }
         }
 
+        // EN FUNCIONAAMIENTO
         public function mod_Curso($curso, $id_curso){
+
+            // Meditar si un curso creado puede ser modificado para añadir un importe o modificarlo
 
             $this->db->query("UPDATE CURSO SET Nombre=:nombre, Fecha_Impartir=:fecha, Id_Persona= :profesor, Id_Especialidad=:especialidad
             WHERE Id_Curso=:id_curso");
@@ -129,6 +140,7 @@
 
             return $this->db->registros();
         }
+
 
         public function add_Material($datos){
             // Cambiamos estado asesoria = 2 -Procesando-
@@ -176,20 +188,13 @@
             
         }
 
-        public function del_Material($datos){
+        // EN FUNCIONAMIENTO
+        public function del_Material($id_curso, $id_material){
             // Cambiamos estado asesoria = 2 -Procesando-
-            $this->db->query("UPDATE asesoria SET id_estado=2 WHERE id_asesoria=:id_asesoria");
+            $this->db->query("DELETE FROM POSEER WHERE Id_Curso = :curso AND Id_Material = :material");
 
-            $this->db->bind(':id_asesoria', $datos['id_asesoria']);
-            
-            $this->db->execute();
-
-            $this->db->query("INSERT INTO reg_acciones (fecha_reg, accion, automatica, id_asesoria, id_profesor)
-                                        VALUES (NOW(), :accion, 0, :id_asesoria, :id_profesor)");
-            
-            $this->db->bind(':id_asesoria', $datos['id_asesoria']);
-            $this->db->bind(':id_profesor', $datos['id_profesor']);
-            $this->db->bind(':accion', $datos['accion']);
+            $this->db->bind(':curso', $id_curso);
+            $this->db->bind(':material', $id_material);
 
             if($this->db->execute()){
                 return true;

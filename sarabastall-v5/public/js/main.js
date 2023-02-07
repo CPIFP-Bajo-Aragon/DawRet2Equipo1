@@ -128,40 +128,238 @@ function place_id(Id){
 
 // PAGINACION
 
-function siguiente(){
+function go_page(elemen, array){
 
-  document.cookie = "page = 1";
-  let ck = getCookie('page');
+  let activo = document.getElementsByClassName("active")[0];
+  activo.classList.remove("active");
+  elemen.classList.add("active");
 
-  document.getElementById("cookies").innerHTML = ck;
-
-   //Este es el que estás ya obteniendo vía JS
-
-}
-
-function anterior(){
   
 
-  document.cookie = "page = 0"; //Este es el que estás ya obteniendo vía JS
+  page = elemen.name;
 
-  let ck = getCookie('page');
-
-  document.getElementById("cookies").innerHTML = ck;
-
-}
-
-function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
+  if(page != 1){
+    document.getElementById("page_a").classList.remove("disabled");
+  } else {
+    document.getElementById("page_a").classList.add("disabled");
   }
-  return "";
+
+  document.getElementById("page_controller").value = parseInt(page - 1);
+
+  listar_elementos(array);
+
 }
+
+
+function siguiente(max, array){
+  page = document.getElementById("page_controller").value;
+  
+  if(page != max-1){
+    document.getElementById("page_controller").value = parseInt(page + 1);
+    document.getElementById("page_a").classList.add("active");
+  } else {
+    document.getElementById("page_s").classList.remove("active");
+  }
+  listar_elementos(array);
+}
+
+function anterior(array){
+  page = document.getElementById("page_controller").value;
+
+  if(page > 0){
+    document.getElementById("page_controller").value = parseInt(page - 1);
+    document.getElementById("page_s").classList.add("active");
+  } else {
+    document.getElementById("page_a").classList.remove("active");
+  }
+  listar_elementos(array);
+}
+
+
+//Buscador
+function buscar(){
+  let num_cols, display, input, mayusculas, tablaBody, tr, td, i, txtValue;
+  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("buscador"); //hace referencia al id del input del buscador
+  mayusculas = input.value.toUpperCase(); //convierte a mayusculas
+  tablaBody = document.getElementById("tbody"); //Hace referencia al id del tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre todos los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j]; //devuelve la lista de elementos td
+      if(td){
+        txtValue = td.textContent || td.innerText; //Puede ser textContent(Representa el contenido de texto) o innerText (tiene en cuenta el estilo y cambia el estilo de la página)
+        if(txtValue.toUpperCase().indexOf(mayusculas) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}		
+
+
+
+//Filtrar por tipos
+
+
+//Filtrar tipo Prestamos
+function filtrarTipoPendiente(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("pendiente").value = "PENDIENTE"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+function filtrarTipoFinalizado(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("finalizado").value = "FINALIZADO"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+function filtrarTipoBeca1(){
+
+  console.log("Aqui llego");
+
+
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("JRM").value = "JRM"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+function filtrarTipoBeca2(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("CARRERA").value = "CARRERA"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+function filtrarTipoBeca3(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("REFUGIO").value = "REFUGIO"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}
+
+function filtrarRolAdmin(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 8; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("admin").value = "ADMIN"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}
+
+function filtrarRolProfesor(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 8; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("profesor").value = "PROFESOR"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	

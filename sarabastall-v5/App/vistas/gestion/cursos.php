@@ -20,7 +20,6 @@
 +
 </button> -->
 
-
 <!-- Modal -->
 
 <button id="abrirModal">+</button>
@@ -100,7 +99,10 @@
 
 <!-- Modal Seguro desea Eliminar FINAL -->
 
+<input disabled id="page_controller" name="curso" value="0" hidden>
+
 <div class="container">
+
 
   <table class="table table-striped table-hover">
     <thead class="thead-azul">
@@ -112,9 +114,10 @@
       <th scope="col">Detalle</th>
       </tr>
     </thead>
-    <tbody>
-      <?php foreach ($pageLists[0] as $curso): ?>
-        <tr>
+      
+    <tbody id ="contenido_tabla">
+
+        <!-- <tr>
           <th scope="row"><?php echo $curso ->Id_Curso?></th>
           <td><?php echo $curso ->Nombre?></td>
           <td><?php echo $curso ->Profesor?></td>
@@ -130,10 +133,11 @@
             </button>
           </td>
 
-          <!-- <?php echo RUTA_URL ?>/asesorias/ver_asesoria/<?php echo $asesoria->id_asesoria ?> -->
+          <?php echo RUTA_URL ?>/asesorias/ver_asesoria/<?php echo $asesoria->id_asesoria ?> -->
 
-        </tr>
-      <?php endforeach?>
+        <!--</tr> -->
+
+
     </tbody>
   </table>
 
@@ -141,24 +145,32 @@
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
         <?php if(count($datos["CursosTotales"]) > 8):?>
-          <li class="page-item" id="page_a" onclick="anterior()"><a class="page-link">Anterior</a></li>
-          <li class="page-item" id="page_1"><a class="page-link">1</a></li>
+
+          <li class="page-item disabled" id="page_a"><a class="page-link" onclick='anterior(<?php echo json_encode($pageLists)?>)'>Anterior</a></li>
+        
+          <li class="page-item active" id="page_1"><a class="page-link" name="1" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'>1</a></li>
+
           <?php for($i = 1; $i*8 <= count($datos["CursosTotales"]); $i++): ?>
-            <li class="page-item" id="page_<?php echo $i+1 ?>"><a class="page-link"><?php echo $i+1 ?></a></li>
+
+            <li class="page-item" id="page_<?php echo $i+1 ?>"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'><?php echo $i+1 ?></a></li>
+            
           <?php endfor ?>
-          <li class="page-item" id="page_s" onclick="siguiente()"><a class="page-link">Siguiente</a></li>
+          
+          <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente(<?php echo count($pageLists)?>, <?php echo json_encode($pageLists)?>)'>Siguiente</a></li>
+          
         <?php endif ?>
       </ul>
     </nav>
   </div>
 </div>
 
-<p id="cookies"></p>
-
 <br>
 <br>
 <br>
 
+<script>
+  window.onload=listar_elementos(<?php echo json_encode($pageLists)?>);
+</script>
     
 
     
