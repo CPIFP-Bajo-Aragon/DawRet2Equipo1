@@ -8,6 +8,9 @@
         }
         
         public function index($error =''){
+
+            
+            
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                 $this->datos['usuario'] = trim($_POST['usuario']);
@@ -45,6 +48,9 @@
 
 
             }else{
+
+                echo "Hewo";
+                exit();
 
                 if(Sesion::sesionCreada()){  //si ya estamos logueados redireccionamos
                     redireccionar('/');
