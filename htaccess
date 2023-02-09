@@ -1,0 +1,47 @@
+.htaccess Principal
+RewriteEngine On
+RewriteRule ^$ public/ [L] ->^comienzo secuencia, $final de secuencia
+RewriteRule (.*) public/$1 [L] ->sucesion de caracteres dentro de la url en los archivos de la carpeta public
+
+htaccess al lado del index.php
+Realiza url amigables de toda la carpeta public
+<IfModule mod_rewrite.c>
+    Options -Multiviews
+    RewriteEngine On
+    RewriteBase /sarabastall-v5/public/
+    RewriteCond %{REQUEST_FILENAME} !-d ->Prueba si existe el directorio
+    RewriteCond %{REQUEST_FILENAME} !-f ->Comprueba que el fichero exista previamente
+    RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+</IfModule>
+
+htaccess de vistas
+Deshabilita la exploración de directorios
+Options -Indexes
+
+
+
+
+TRADUCIDO A NGINX
+
+Principal
+
+location / {
+  rewrite ^/$ /public/ break;
+  rewrite ^(.*)$ /public/$1 break;
+}
+
+
+al lado de index
+location /sarabastall-v5/public/ {
+  if (!-e $request_filename){
+    rewrite ^/sarabastall-v5/public/(.+)$ /sarabastall-v5/public/index.php?url=$1 break;
+  }
+}
+
+
+vistas
+autoindex off;
+
+autoindex off;
+
+
