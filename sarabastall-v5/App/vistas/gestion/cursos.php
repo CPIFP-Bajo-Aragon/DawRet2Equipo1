@@ -11,6 +11,8 @@
 </nav>
     <h1>Cursos</h1>
 
+    <!-- FILTROS -->
+
     <?php $pageLists = listElements($datos["CursosTotales"]) ?>
 
     <!--Funcion array y pagina que devuelva el nuevo array-->
@@ -123,6 +125,7 @@
           <td><?php echo $curso ->Profesor?></td>
           <td><?php echo $curso ->Fecha?></td>
           <td>
+            <h1>Ha</h1>
             <a href="<?php echo RUTA_URL ?>/admin/see_curso/<?php echo $curso->Id_Curso ?>">
             <button type="button" class="w-80 btn btn-warning btn-lg">
               <i class="bi bi-search"></i>   
@@ -135,7 +138,7 @@
 
           <?php echo RUTA_URL ?>/asesorias/ver_asesoria/<?php echo $asesoria->id_asesoria ?> -->
 
-        <!--</tr> -->
+        
 
 
     </tbody>
@@ -148,15 +151,15 @@
 
           <li class="page-item disabled" id="page_a"><a class="page-link" onclick='anterior(<?php echo json_encode($pageLists)?>)'>Anterior</a></li>
         
-          <li class="page-item active" id="page_1"><a class="page-link" name="1" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'>1</a></li>
+          <li id="page_1" class="page-item"><a class="page-link" name="1" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'>1</a></li>
 
           <?php for($i = 1; $i*8 <= count($datos["CursosTotales"]); $i++): ?>
 
-            <li class="page-item" id="page_<?php echo $i+1 ?>"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'><?php echo $i+1 ?></a></li>
+            <li id="page_<?php echo $i+1 ?>" class="page-item"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'><?php echo $i+1 ?></a></li>
             
           <?php endfor ?>
           
-          <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente(<?php echo count($pageLists)?>, <?php echo json_encode($pageLists)?>)'>Siguiente</a></li>
+          <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente(<?php echo json_encode($pageLists)?>)'>Siguiente</a></li>
           
         <?php endif ?>
       </ul>

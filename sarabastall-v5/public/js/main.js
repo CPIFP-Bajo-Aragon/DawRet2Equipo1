@@ -130,49 +130,38 @@ function place_id(Id){
 
 function go_page(elemen, array){
 
-  let activo = document.getElementsByClassName("active")[0];
-  activo.classList.remove("active");
-  elemen.classList.add("active");
+  page = elemen.name;
+  page = parseInt(page)-1;
+
+  document.getElementById("page_controller").value = page;
 
   
-
-  page = elemen.name;
-
-  if(page != 1){
-    document.getElementById("page_a").classList.remove("disabled");
-  } else {
-    document.getElementById("page_a").classList.add("disabled");
-  }
-
-  document.getElementById("page_controller").value = parseInt(page - 1);
-
   listar_elementos(array);
+  control_paginacion(array.length-1, page);
 
 }
 
 
-function siguiente(max, array){
+function siguiente(array){
   page = document.getElementById("page_controller").value;
+  page = parseInt(page)+1;
   
-  if(page != max-1){
-    document.getElementById("page_controller").value = parseInt(page + 1);
-    document.getElementById("page_a").classList.add("active");
-  } else {
-    document.getElementById("page_s").classList.remove("active");
-  }
+  document.getElementById("page_controller").value = page;
+  
+  
   listar_elementos(array);
+  control_paginacion(array.length-1, page);
 }
 
 function anterior(array){
   page = document.getElementById("page_controller").value;
+  page = parseInt(page)-1;
 
-  if(page > 0){
-    document.getElementById("page_controller").value = parseInt(page - 1);
-    document.getElementById("page_s").classList.add("active");
-  } else {
-    document.getElementById("page_a").classList.remove("active");
-  }
+  document.getElementById("page_controller").value = page;
+  
+  
   listar_elementos(array);
+  control_paginacion(array.length-1, page);
 }
 
 
@@ -251,9 +240,6 @@ function filtrarTipoFinalizado(){
 }	
 
 function filtrarTipoBeca1(){
-
-  console.log("Aqui llego");
-
 
   let num_cols, display, input, tablaBody, tr, td, i, txtValue;
   num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
