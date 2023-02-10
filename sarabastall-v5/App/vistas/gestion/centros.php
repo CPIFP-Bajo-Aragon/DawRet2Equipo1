@@ -11,12 +11,14 @@
 </nav>
     <h1>CENTROS</h1>
     
+    <?php $pageLists = listElements($datos["centros"]) ?>
 
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
+<span class="cerrar">&times;</span>
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">Nuevo Préstamo</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -128,51 +130,56 @@
   <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <a  class="btn btn-primary me-md-2" type="button" href="<?php echo RUTA_URL ?>/sarabastall/addCentro">+</a>
   </div> -->
- <button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button> 
+ <button type="button" id="abrirModal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button> 
 
 
-    <br>
-    <br>
-    <br>
-    <div class="container">
-        <table class="table table-striped table-hover">
-          <thead class="thead-azul">
-            <tr>
-                <th scope="col">Nº Centro</th>
-                <th scope="col">Nombre Centro</th>
-                <th scope="col">Ciudad</th>
-                <th scope="col">Cuantia</th>
-                <th scope="col">Distancia</th>
-                <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-                <?php foreach ($datos["centros"] as $centro):  ?>
+  <br>
+  <br>
+  <br>
+  <input disabled id="page_controller" name="centro" value="0" hidden>
+  <div class="container">
+      <table class="table table-striped table-hover">
+        <thead class="thead-azul">
+          <tr>
+              <th scope="col">Nº Centro</th>
+              <th scope="col">Nombre Centro</th>
+              <th scope="col">Ciudad</th>
+              <th scope="col">Cuantia</th>
+              <th scope="col">Distancia</th>
+              <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="contenido_tabla">
+          
+        </tbody>
+      </table>
 
-                    <th scope="row"><?php echo $centro ->Id_Centro?></th>
-                    <td><?php echo $centro->Nombre?></td>
-                    <td><?php echo $centro->Nombre_Ciudad?></td> 
-                    <td><?php echo $centro->Cuantia?></td>
-                    <td><?php echo $centro->Distancia?></td>
+    <div class="Cursos">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <?php if(count($datos["centros"]) > 8):?>
 
-                    <td>
-                      <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
-                        <i class="bi bi-pencil-square"></i>
-                      </a>
-                      <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
-                          <i class="bi bi-trash"></i>
-                      </a>
-                    </td>
-                <?php endforeach?>
+          <li class="page-item disabled" id="page_a"><a class="page-link" onclick='anterior(<?php echo json_encode($pageLists)?>)'>Anterior</a></li>
+        
+          <li id="page_1" class="page-item"><a class="page-link" name="1" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'>1</a></li>
 
-            </tr>
-          </tbody>
-        </table>
+          <?php for($i = 1; $i*8 <= count($datos["centros"]); $i++): ?>
 
-</div>
+            <li id="page_<?php echo $i+1 ?>" class="page-item"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'><?php echo $i+1 ?></a></li>
+            
+          <?php endfor ?>
+          
+          <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente(<?php echo json_encode($pageLists)?>)'>Siguiente</a></li>
+          
+        <?php endif ?>
+      </ul>
+    </nav>
+    </div>
+  </div>
 
-
+  <script>
+  window.onload=listar_elementos(<?php echo json_encode($pageLists)?>);
+  </script>
     
 
     

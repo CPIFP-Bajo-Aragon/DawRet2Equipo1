@@ -101,6 +101,30 @@
 
 <!-- Modal Seguro desea Eliminar FINAL -->
 
+<!-- BUSCADOR + FILTROS -->
+
+<div class="col-3">
+  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+    <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+  </form>
+
+  <button id="buscador" onclick="buscar()">BUSCAR</button>
+
+  <select name="Tipo">
+    <option id="refresh" value="0"></option>
+    <?php foreach($datos["especialidades"] as $especialidad): ?>
+      <option value="<?php echo $especialidad->Id ?>" onclick="filtrar(this);"><?php echo $especialidad->Nombre ?></option>
+    <?php endforeach ?>
+
+        <!-- <option id="agricultura" onclick="filtrarEspAgricultura()">Agricultura</option>
+        <option id="sanidad" onclick="filtrarEspSanidad()">Sanidad</option>
+        <option id="profesorado" onclick="filtrarEspProfesorado()">Profesorado</option> -->
+  </select>
+  <br>
+</div>
+
+
+
 <input disabled id="page_controller" name="curso" value="0" hidden>
 
 <div class="container">
@@ -110,36 +134,14 @@
     <thead class="thead-azul">
       <tr>
       <th scope="col">Nº Curso</th>
+      <th scope="col">Especialidad</th>
       <th scope="col">Nombre</th>
       <th scope="col">Profesor</th>
       <th scope="col">Fecha</th>
       <th scope="col">Detalle</th>
       </tr>
-    </thead>
-      
+    </thead> 
     <tbody id ="contenido_tabla">
-
-        <!-- <tr>
-          <th scope="row"><?php echo $curso ->Id_Curso?></th>
-          <td><?php echo $curso ->Nombre?></td>
-          <td><?php echo $curso ->Profesor?></td>
-          <td><?php echo $curso ->Fecha?></td>
-          <td>
-            <h1>Ha</h1>
-            <a href="<?php echo RUTA_URL ?>/admin/see_curso/<?php echo $curso->Id_Curso ?>">
-            <button type="button" class="w-80 btn btn-warning btn-lg">
-              <i class="bi bi-search"></i>   
-            </button>
-            </a>
-            <button type="button" onclick="place_id(<?php echo $curso -> Id_Curso ?>)" data-bs-toggle="modal" data-bs-target="#modalEliminarCurso" class="w-80 btn btn-warning btn-lg">
-              <i class="bi bi-trash"></i>      
-            </button>
-          </td>
-
-          <?php echo RUTA_URL ?>/asesorias/ver_asesoria/<?php echo $asesoria->id_asesoria ?> -->
-
-        
-
 
     </tbody>
   </table>
@@ -172,7 +174,12 @@
 <br>
 
 <script>
+
+  const array = <?php json_encode($datos["CursosTotales"]) ?>
+
+
   window.onload=listar_elementos(<?php echo json_encode($pageLists)?>);
+
 </script>
     
 

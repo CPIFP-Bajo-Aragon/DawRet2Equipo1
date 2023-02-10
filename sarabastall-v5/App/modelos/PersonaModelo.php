@@ -19,7 +19,7 @@
 
             $this->db->query("SELECT pers.Id_Persona as Id_Persona, pers.Nombre as Nombre, pers.Apellidos as Apellidos,
             pers.Direccion as Direccion, pers.Fecha_Nacimiento as Fecha_Nacimiento, pers.Telefono as Telefono,
-            pers.Email as Email, pers.Login as Login, pers.Password as Password, r.Nombre_Rol as Nombre_Rol
+            pers.Email as Email, pers.Login as Login, r.Nombre_Rol as Nombre_Rol
             FROM PERSONA pers, ROL r
             WHERE r.Id_Rol = pers.Id_Rol");
 

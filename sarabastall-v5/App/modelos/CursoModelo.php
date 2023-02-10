@@ -23,8 +23,8 @@
         public function get_Cursos(){
             // Devuelve toda la informacion de los cursos ha insertar en las tablas
 
-            $this->db->query("SELECT c.Id_Curso as Id_Curso, c.Nombre as Nombre, p.Nombre as Profesor, c.Fecha_Impartir as Fecha FROM CURSO c, PERSONA p
-            WHERE c.Id_Persona = p.Id_Persona
+            $this->db->query("SELECT c.Id_Curso as Id_Curso, e.Nombre as Especialidad, c.Nombre as Nombre, p.Nombre as Profesor, c.Fecha_Impartir as Fecha FROM CURSO c, PERSONA p, ESPECIALIDAD e
+            WHERE c.Id_Persona = p.Id_Persona AND c.Id_Especialidad = e.Id_Especialidad
             ORDER BY c.Nombre DESC");
 
             return $this->db->registros();

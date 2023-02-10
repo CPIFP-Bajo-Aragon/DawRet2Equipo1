@@ -10,7 +10,7 @@
 </nav>
     <h1>Personas</h1>
 
-    
+    <?php $pageLists = listElements($datos["PersonasTotales"]) ?>
 
 <!-- Modal -->
 
@@ -93,6 +93,7 @@
   </div> 
 </div>
 
+<input disabled id="page_controller" name="persona" value="0" hidden>
 
 <div class="container">
 <div class="col-3">
@@ -122,50 +123,34 @@
     <th scope="col">Detalle</th>
     </tr>
   </thead>
-  <tbody id="tbody">
-    <?php foreach ($datos["PersonasTotales"] as $persona): ?>
-      <tr>
-        <th scope="row"><?php echo $persona ->Id_Persona?></th>
-        <td><?php echo $persona ->Nombre?></td>
-        <td><?php echo $persona ->Apellidos?></td>
-        <td><?php echo $persona ->Direccion?></td>
-        <td><?php echo $persona ->Fecha_Nacimiento?></td>
-        <td><?php echo $persona ->Telefono?></td>
-        <td><?php echo $persona ->Email?></td>
-        <td><?php echo $persona ->Login?></td>
-        <td><?php echo $persona ->Nombre_Rol?></td>
-        <td>
-          <!--Aqui van 2 botones-->
-          <a href="<?php echo RUTA_URL ?>/admin/verPersona/<?php echo $persona->Id_Persona ?>">
-          <button type="button" class="w-80 btn btn-warning btn-lg">
-            <i class="bi bi-pencil-square"></i>
-          </button>
-          <a>
-
-          <a class="btn btn-outline-success btn-sm" href="<?php echo RUTA_URL ?>/admin/verPersona/<?php echo $persona->Id_Persona ?>">
-            <i class="bi bi-pencil-square"></i>
-          </a>
-
-          <button type="button"  onclick="place_id(<?php echo $persona -> Id_Persona ?>)" data-bs-toggle="modal" data-bs-target="#modalEliminarPersona" class="w-80 btn btn-warning btn-lg">
-            <i class="bi bi-trash"></i>      
-          </button>
-        </td>
-
-      </tr>
-    <?php endforeach?>
+  <tbody id="contenido_tabla">
+    
   </tbody>
 </table>
-<div class="paginacion">
-<nav aria-label="Page navigation example">
-<ul class="pagination justify-content-center">
-<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-<li class="page-item"><a class="page-link" href="#">1</a></li>
-<li class="page-item"><a class="page-link" href="#">2</a></li>
-<li class="page-item"><a class="page-link" href="#">3</a></li>
-<li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul>
-</nav>
+
+<div class="Cursos">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <?php if(count($datos["PersonasTotales"]) > 8):?>
+        <li class="page-item disabled" id="page_a"><a class="page-link" onclick='anterior(<?php echo json_encode($pageLists)?>)'>Anterior</a></li>
+      
+        <li id="page_1" class="page-item"><a class="page-link" name="1" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'>1</a></li>
+        <?php for($i = 1; $i*8 <= count($datos["PersonasTotales"]); $i++): ?>
+          <li id="page_<?php echo $i+1 ?>" class="page-item"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'><?php echo $i+1 ?></a></li>
+          
+        <?php endfor ?>
+        
+        <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente(<?php echo json_encode($pageLists)?>)'>Siguiente</a></li>
+        
+      <?php endif ?>
+    </ul>
+  </nav>
 </div>
+
+
+<script>
+  window.onload=listar_elementos(<?php echo json_encode($pageLists)?>);
+</script>
 
 
 </div>

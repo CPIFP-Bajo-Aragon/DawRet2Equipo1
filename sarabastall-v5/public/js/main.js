@@ -24,7 +24,6 @@ window.addEventListener("click",function(event) { //Window es una propiedad que 
   }
 });
 
-
 //Formularios
 
 //Importe negativo
@@ -171,7 +170,7 @@ function buscar(){
   num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
   input = document.getElementById("buscador"); //hace referencia al id del input del buscador
   mayusculas = input.value.toUpperCase(); //convierte a mayusculas
-  tablaBody = document.getElementById("tbody"); //Hace referencia al id del tbody
+  tablaBody = document.getElementById("contenido_tabla"); //Hace referencia al id del tbody
   tr = tablaBody.getElementsByTagName("tr");
 
   for(i=0; i< tr.length; i++){ //recorre todos los tr		
@@ -189,10 +188,44 @@ function buscar(){
   }
 }		
 
+//Refresca para que muestren todos los resultados
+let refresh = document.getElementById('refresh');
+refresh.addEventListener('click', _ => {
+            location.reload();
+});
 
 
-//Filtrar por tipos
+// FUNCION de FILTRADO
+function filtrar(elemen){
 
+  alert(array);
+
+
+  let num_cols, display, tablaBody, tr, td, i, txtValue;
+  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
+  item = elemen.innerHTML; //hace referencia al id del boton
+  tablaBody = document.getElementById("contenido_tabla"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+
+    td = tr[i].getElementsByTagName("td")[num_cols];
+    if(td){
+      txtValue = td.textContent || td.innerText;
+      if(txtValue.indexOf(item) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+        display = "";
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+
+
+// !!!!!!!!!!!!!!!!!!
+// DISTINTAS FUNCIONES DE FILTROS (DEPRECATED)
+// !!!!!!!!!!!!!!!!!!
 
 //Filtrar tipo Prestamos
 function filtrarTipoPendiente(){
@@ -349,3 +382,76 @@ function filtrarRolProfesor(){
     tr[i].style.display = display;
   }
 }	
+
+
+// CURSOS
+
+function filtrarEspAgricultura(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("agricultura").value = "AGRICULTURA"; //hace referencia al id del boton
+  tablaBody = document.getElementById("contenido_tabla"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+function filtrarEspSanidad(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("sanidad").value = "SANITARIA"; //hace referencia al id del boton
+  tablaBody = document.getElementById("contenido_tabla"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}
+
+function filtrarEspProfesorado(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("profesorado").value = "PROFESORADO"; //hace referencia al id del boton
+  tablaBody = document.getElementById("contenido_tabla"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+// !!!!!!!!!!!!!!!!!!
+// FINAL DE DISTINTAS FUNCIONES DE FILTROS (DEPRECATED)
+// !!!!!!!!!!!!!!!!!!
