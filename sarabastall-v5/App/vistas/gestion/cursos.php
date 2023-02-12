@@ -108,17 +108,13 @@
     <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
   </form>
 
-  <button id="buscador" onclick="buscar()">BUSCAR</button>
+  <button id="buscador" onclick="mod_show()">BUSCAR</button>
 
-  <select name="Tipo">
-    <option id="refresh" value="0"></option>
+  <select id="panel_filtro" name="Tipo" onchange="mod_show()">
+  <option id="refresh" value="0" selected></option>
     <?php foreach($datos["especialidades"] as $especialidad): ?>
-      <option value="<?php echo $especialidad->Id ?>" onclick="filtrar(this);"><?php echo $especialidad->Nombre ?></option>
+      <option value="<?php echo $especialidad->Id ?>"><?php echo $especialidad->Nombre ?></option>
     <?php endforeach ?>
-
-        <!-- <option id="agricultura" onclick="filtrarEspAgricultura()">Agricultura</option>
-        <option id="sanidad" onclick="filtrarEspSanidad()">Sanidad</option>
-        <option id="profesorado" onclick="filtrarEspProfesorado()">Profesorado</option> -->
   </select>
   <br>
 </div>
@@ -149,19 +145,19 @@
   <div class="Cursos">
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
-        <?php if(count($datos["CursosTotales"]) > 8):?>
+        <?php if(count($datos["CursosTotales"]) > 4):?>
 
-          <li class="page-item disabled" id="page_a"><a class="page-link" onclick='anterior(<?php echo json_encode($pageLists)?>)'>Anterior</a></li>
+          <li class="page-item disabled" id="page_a"><a class="page-link" onclick='anterior()'>Anterior</a></li>
         
-          <li id="page_1" class="page-item"><a class="page-link" name="1" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'>1</a></li>
+          <li id="page_1" class="page-item"><a class="page-link" name="1" onclick='go_page(this)'>1</a></li>
 
-          <?php for($i = 1; $i*8 <= count($datos["CursosTotales"]); $i++): ?>
+          <?php for($i = 1; $i*4 <= count($datos["CursosTotales"]); $i++): ?>
 
-            <li id="page_<?php echo $i+1 ?>" class="page-item"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'><?php echo $i+1 ?></a></li>
+            <li id="page_<?php echo $i+1 ?>" class="page-item"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this)'><?php echo $i+1 ?></a></li>
             
           <?php endfor ?>
           
-          <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente(<?php echo json_encode($pageLists)?>)'>Siguiente</a></li>
+          <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente()'>Siguiente</a></li>
           
         <?php endif ?>
       </ul>
@@ -175,10 +171,9 @@
 
 <script>
 
-  const array = <?php json_encode($datos["CursosTotales"]) ?>
+  window.onload=caja_fuerte(<?php echo json_encode($datos["CursosTotales"])?>); // Aqui pasamos el array en cuestion recibido por PHP
 
-
-  window.onload=listar_elementos(<?php echo json_encode($pageLists)?>);
+  window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
 
 </script>
     

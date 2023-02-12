@@ -8,14 +8,19 @@ let boton = document.getElementById("abrirModal");
 let span = document.getElementsByClassName("cerrar")[0];
 
 // Cuando el usuario hace click en el botón, se abre la ventana Modal
-boton.addEventListener("click",function() {
-  modal.style.display = "block";
-});
+if (boton){
+  boton.addEventListener("click",function() {
+    modal.style.display = "block";
+  });
+}
 
 // Si el usuario hace click en la x, la ventana se cierra
-span.addEventListener("click",function() {
-  modal.style.display = "none";
-});
+if (span){
+  span.addEventListener("click",function() {
+    modal.style.display = "none";
+  });
+}
+
 
 // Si el usuario hace click fuera de la ventana, se cierra.
 window.addEventListener("click",function(event) { //Window es una propiedad que hace referencia a la ventana actual
@@ -127,331 +132,95 @@ function place_id(Id){
 
 // PAGINACION
 
-function go_page(elemen, array){
+function go_page(elemen){
 
   page = elemen.name;
   page = parseInt(page)-1;
 
   document.getElementById("page_controller").value = page;
-
   
-  listar_elementos(array);
-  control_paginacion(array.length-1, page);
+  listar_elementos();
+  control_paginacion(page);
 
 }
 
 
-function siguiente(array){
+function siguiente(){
   page = document.getElementById("page_controller").value;
   page = parseInt(page)+1;
   
   document.getElementById("page_controller").value = page;
   
-  
-  listar_elementos(array);
-  control_paginacion(array.length-1, page);
+  listar_elementos();
+  control_paginacion(page);
 }
 
-function anterior(array){
+function anterior(){
+
   page = document.getElementById("page_controller").value;
   page = parseInt(page)-1;
 
   document.getElementById("page_controller").value = page;
   
-  
-  listar_elementos(array);
-  control_paginacion(array.length-1, page);
+  listar_elementos();
+  control_paginacion(page);
 }
-
 
 //Buscador
 function buscar(){
-  let num_cols, display, input, mayusculas, tablaBody, tr, td, i, txtValue;
-  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("buscador"); //hace referencia al id del input del buscador
-  mayusculas = input.value.toUpperCase(); //convierte a mayusculas
-  tablaBody = document.getElementById("contenido_tabla"); //Hace referencia al id del tbody
-  tr = tablaBody.getElementsByTagName("tr");
+  search = document.getElementById("buscador").value.toUpperCase(); // Toma el contenido del buscador y lo reescribe en mayusculas para hacer la posterior Comparacion
 
-  for(i=0; i< tr.length; i++){ //recorre todos los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j]; //devuelve la lista de elementos td
-      if(td){
-        txtValue = td.textContent || td.innerText; //Puede ser textContent(Representa el contenido de texto) o innerText (tiene en cuenta el estilo y cambia el estilo de la página)
-        if(txtValue.toUpperCase().indexOf(mayusculas) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
+
+  if (search != ""){ // Comprueba que se este buscando algo (Quizas habria que hacer un trim(), puesto que no he comprobado como lee espacios)
+    for (i = 0; i < arrayMaestro.length; i++){
+      arraySon = Object.values(arrayMaestro[i]);
+      let find = false;
+  
+      for (e = 0; e < arraySon.length; e++){// Contenido de la columna
+        find = false;
+  
+        if (String(arraySon[e]).toUpperCase().indexOf(search) > -1){
+          find = true;
+          break;
         }
       }
+      
+      if (find == false){
+        arrayMaestro.splice(i, parseInt(i)+1);
+        i = i-1;
+      }
+      
     }
-    tr[i].style.display = display;
   }
+
 }		
 
-//Refresca para que muestren todos los resultados
-let refresh = document.getElementById('refresh');
-refresh.addEventListener('click', _ => {
-            location.reload();
-});
-
-
 // FUNCION de FILTRADO
-function filtrar(elemen){
 
-  alert(array);
+function filtrar(){
+  arrayMaestro = []; // Vaciamos el Array Maestro
 
+  // alert(arrayMaestro); Nos aseguramos de que el ArrayMaestro este vacio
+  elemen = document.getElementById("panel_filtro");
+  let filtro = elemen.options[elemen.selectedIndex].text; // Nombre a filtrar
 
-  let num_cols, display, tablaBody, tr, td, i, txtValue;
-  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
-  item = elemen.innerHTML; //hace referencia al id del boton
-  tablaBody = document.getElementById("contenido_tabla"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
+  if (filtro == ""){ // Si no hay filtro seleccionado se toma los datos del array Original
+    arrayMaestro = listado;
+  } else {
+    for (i = 0; i < listado.length; i++){ // Bucle que recorre todos los items guardados en el array Original
 
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-
-    td = tr[i].getElementsByTagName("td")[num_cols];
-    if(td){
-      txtValue = td.textContent || td.innerText;
-      if(txtValue.indexOf(item) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-        display = "";
+      if (Object.values(listado[i])[1] == filtro){ // El 1 indica la columna que esta filtrando, en otras gestiones puede que no sea el 1, en cuyo caso 2 opciones, Moverlo, o indicar la columna por hidden
+        arrayMaestro.push(listado[i]); // Agrega el item que pase el filtro
+        // alert(Object.values(listado[i])); Muestra los items que pasan el filtro
       }
     }
-    tr[i].style.display = display;
   }
+  //alert(arrayMaestro); //Muestra el array resultante del filtro
 }	
 
-
-
-// !!!!!!!!!!!!!!!!!!
-// DISTINTAS FUNCIONES DE FILTROS (DEPRECATED)
-// !!!!!!!!!!!!!!!!!!
-
-//Filtrar tipo Prestamos
-function filtrarTipoPendiente(){
-  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
-  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("pendiente").value = "PENDIENTE"; //hace referencia al id del boton
-  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
-
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j];
-      if(td){
-        txtValue = td.textContent || td.innerText;
-        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
-        }
-      }
-    }
-    tr[i].style.display = display;
-  }
-}	
-
-function filtrarTipoFinalizado(){
-  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
-  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("finalizado").value = "FINALIZADO"; //hace referencia al id del boton
-  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
-
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j];
-      if(td){
-        txtValue = td.textContent || td.innerText;
-        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
-        }
-      }
-    }
-    tr[i].style.display = display;
-  }
-}	
-
-function filtrarTipoBeca1(){
-
-  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
-  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("JRM").value = "JRM"; //hace referencia al id del boton
-  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
-
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j];
-      if(td){
-        txtValue = td.textContent || td.innerText;
-        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
-        }
-      }
-    }
-    tr[i].style.display = display;
-  }
-}	
-
-function filtrarTipoBeca2(){
-  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
-  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("CARRERA").value = "CARRERA"; //hace referencia al id del boton
-  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
-
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j];
-      if(td){
-        txtValue = td.textContent || td.innerText;
-        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
-        }
-      }
-    }
-    tr[i].style.display = display;
-  }
-}	
-
-function filtrarTipoBeca3(){
-  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
-  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("REFUGIO").value = "REFUGIO"; //hace referencia al id del boton
-  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
-
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j];
-      if(td){
-        txtValue = td.textContent || td.innerText;
-        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
-        }
-      }
-    }
-    tr[i].style.display = display;
-  }
+function mod_show(){ // A cualquier cambio en la busqueda se llama a esta funcion
+  filtrar(); // Primero se filtra el array
+  buscar(); // Entonces se compara el resultado 
+  listar_elementos(false); // Por ultimo se paginan los resultados
+  // Se le envia con un parametro falso indicando que no es una ejecucion automatica. La cual se hace al cargar la pagina
 }
-
-function filtrarRolAdmin(){
-  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
-  num_cols = 8; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("admin").value = "ADMIN"; //hace referencia al id del boton
-  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
-
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j];
-      if(td){
-        txtValue = td.textContent || td.innerText;
-        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
-        }
-      }
-    }
-    tr[i].style.display = display;
-  }
-}
-
-function filtrarRolProfesor(){
-  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
-  num_cols = 8; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("profesor").value = "PROFESOR"; //hace referencia al id del boton
-  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
-
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j];
-      if(td){
-        txtValue = td.textContent || td.innerText;
-        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
-        }
-      }
-    }
-    tr[i].style.display = display;
-  }
-}	
-
-
-// CURSOS
-
-function filtrarEspAgricultura(){
-  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
-  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("agricultura").value = "AGRICULTURA"; //hace referencia al id del boton
-  tablaBody = document.getElementById("contenido_tabla"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
-
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j];
-      if(td){
-        txtValue = td.textContent || td.innerText;
-        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
-        }
-      }
-    }
-    tr[i].style.display = display;
-  }
-}	
-
-function filtrarEspSanidad(){
-  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
-  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("sanidad").value = "SANITARIA"; //hace referencia al id del boton
-  tablaBody = document.getElementById("contenido_tabla"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
-
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j];
-      if(td){
-        txtValue = td.textContent || td.innerText;
-        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
-        }
-      }
-    }
-    tr[i].style.display = display;
-  }
-}
-
-function filtrarEspProfesorado(){
-  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
-  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
-  input = document.getElementById("profesorado").value = "PROFESORADO"; //hace referencia al id del boton
-  tablaBody = document.getElementById("contenido_tabla"); //Hace referencia al tbody
-  tr = tablaBody.getElementsByTagName("tr");
-
-  for(i=0; i< tr.length; i++){ //recorre los tr		
-    display = "none";
-    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
-      td = tr[i].getElementsByTagName("td")[j];
-      if(td){
-        txtValue = td.textContent || td.innerText;
-        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
-          display = "";
-        }
-      }
-    }
-    tr[i].style.display = display;
-  }
-}	
-
-// !!!!!!!!!!!!!!!!!!
-// FINAL DE DISTINTAS FUNCIONES DE FILTROS (DEPRECATED)
-// !!!!!!!!!!!!!!!!!!
