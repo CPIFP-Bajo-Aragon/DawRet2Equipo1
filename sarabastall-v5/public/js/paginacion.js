@@ -59,7 +59,7 @@ function listar_elementos(inicial){
                 newBoton = document.createElement("button");
                 newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
                 newA = document.createElement("a");
-                newA.href = 'http://localhost/sarabastall/admin/see_' + item + '/' + arraySon[0];  // Se puede mejorar la Url 
+                newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0];  // Se puede mejorar la Url 
                 newI = document.createElement("i");
                 newI.classList.add("bi", "bi-search");
                 newA.appendChild(newI);
