@@ -11,6 +11,8 @@
 </nav>
     <h1>Cursos</h1>
 
+    <!-- FILTROS -->
+
     <?php $pageLists = listElements($datos["CursosTotales"]) ?>
 
     <!--Funcion array y pagina que devuelva el nuevo array-->
@@ -19,7 +21,6 @@
 <!-- <button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 +
 </button> -->
-
 
 <!-- Modal -->
 
@@ -100,65 +101,81 @@
 
 <!-- Modal Seguro desea Eliminar FINAL -->
 
+<!-- BUSCADOR + FILTROS -->
+
+<div class="col-3">
+  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+    <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+  </form>
+
+  <button id="buscador" onclick="mod_show()">BUSCAR</button>
+
+  <select id="panel_filtro" name="Tipo" onchange="mod_show()">
+  <option id="refresh" value="0" selected></option>
+    <?php foreach($datos["especialidades"] as $especialidad): ?>
+      <option value="<?php echo $especialidad->Id ?>"><?php echo $especialidad->Nombre ?></option>
+    <?php endforeach ?>
+  </select>
+  <br>
+</div>
+
+
+
+<input disabled id="page_controller" name="curso" value="0" hidden>
+
 <div class="container">
+
 
   <table class="table table-striped table-hover">
     <thead class="thead-azul">
       <tr>
       <th scope="col">Nº Curso</th>
+      <th scope="col">Especialidad</th>
       <th scope="col">Nombre</th>
       <th scope="col">Profesor</th>
       <th scope="col">Fecha</th>
       <th scope="col">Detalle</th>
       </tr>
-    </thead>
-    <tbody>
-      <?php foreach ($pageLists[0] as $curso): ?>
-        <tr>
-          <th scope="row"><?php echo $curso ->Id_Curso?></th>
-          <td><?php echo $curso ->Nombre?></td>
-          <td><?php echo $curso ->Profesor?></td>
-          <td><?php echo $curso ->Fecha?></td>
-          <td>
-            <a href="<?php echo RUTA_URL ?>/admin/see_curso/<?php echo $curso->Id_Curso ?>">
-            <button type="button" class="w-80 btn btn-warning btn-lg">
-              <i class="bi bi-search"></i>   
-            </button>
-            </a>
-            <button type="button" onclick="place_id(<?php echo $curso -> Id_Curso ?>)" data-bs-toggle="modal" data-bs-target="#modalEliminarCurso" class="w-80 btn btn-warning btn-lg">
-              <i class="bi bi-trash"></i>      
-            </button>
-          </td>
+    </thead> 
+    <tbody id ="contenido_tabla">
 
-          <!-- <?php echo RUTA_URL ?>/asesorias/ver_asesoria/<?php echo $asesoria->id_asesoria ?> -->
-
-        </tr>
-      <?php endforeach?>
     </tbody>
   </table>
 
   <div class="Cursos">
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
-        <?php if(count($datos["CursosTotales"]) > 8):?>
-          <li class="page-item" id="page_a" onclick="anterior()"><a class="page-link">Anterior</a></li>
-          <li class="page-item" id="page_1"><a class="page-link">1</a></li>
-          <?php for($i = 1; $i*8 <= count($datos["CursosTotales"]); $i++): ?>
-            <li class="page-item" id="page_<?php echo $i+1 ?>"><a class="page-link"><?php echo $i+1 ?></a></li>
+        <?php if(count($datos["CursosTotales"]) > 4):?>
+
+          <li class="page-item disabled" id="page_a"><a class="page-link" onclick='anterior()'>Anterior</a></li>
+        
+          <li id="page_1" class="page-item"><a class="page-link" name="1" onclick='go_page(this)'>1</a></li>
+
+          <?php for($i = 1; $i*4 <= count($datos["CursosTotales"]); $i++): ?>
+
+            <li id="page_<?php echo $i+1 ?>" class="page-item"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this)'><?php echo $i+1 ?></a></li>
+            
           <?php endfor ?>
-          <li class="page-item" id="page_s" onclick="siguiente()"><a class="page-link">Siguiente</a></li>
+          
+          <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente()'>Siguiente</a></li>
+          
         <?php endif ?>
       </ul>
     </nav>
   </div>
 </div>
 
-<p id="cookies"></p>
-
 <br>
 <br>
 <br>
 
+<script>
+
+  window.onload=caja_fuerte(<?php echo json_encode($datos["CursosTotales"])?>); // Aqui pasamos el array en cuestion recibido por PHP
+
+  window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
+
+</script>
     
 
     

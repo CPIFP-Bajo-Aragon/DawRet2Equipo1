@@ -116,17 +116,17 @@
 
         </div>
 
-        <!-- Acciones que tiene dicha asesoria -->
+        <!-- Material que tiene dicho Curso-->
         <div class="col-md-5">
             <?php foreach($datos["curso"]->material as $material): ?>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-subtitle"> <?php echo $material->Nombre ?>:</h5>
-                        <p class="card-text ps-2"> <?php echo $material->Archivo ?></p>
-
-                        <div class="card-footer d-flex justify-content-end">
-                            <span class="card-text">#<?php echo $material->Id?></span>
-                        </div>
+                      <h5 class="card-subtitle"> <?php echo $material->Nombre ?>:</h5>
+                      <p class="card-text ps-2"> <?php echo $material->Archivo ?></p>
+                      <a class="btn btn-danger btn-lg ml-auto" style="float:right" href="<?php echo RUTA_URL?>/admin/del_material/<?php echo $datos['curso']->Id?>/<?php echo $material->Id?>"><i class="bi bi-trash"></i></a>
+                      <div class="card-footer d-flex justify-content-end">
+                        <span class="card-text">#<?php echo $material->Id?></span>
+                      </div>
 
                     </div>
 

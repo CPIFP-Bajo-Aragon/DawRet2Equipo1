@@ -113,6 +113,15 @@
             } 
         }
 
+        public function del_material($id_curso, $id_material){
+            
+            if($this->cursoModelo->del_Material($id_curso, $id_material)){
+                redireccionar("/admin/see_curso/$id_curso");
+            }else{
+                echo "Se ha producido un error";
+            }
+        }
+
         public function add_curso(){
 
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -132,6 +141,65 @@
         }
 
 
+        public function add_persona(){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $persona = $_POST;
+                //   print_r($persona);
+
+                if(!$_POST['nombrePersona'] && !$_POST['apellidosPersona'] && !$_POST['direccionPersona'] && !$_POST['fechaNacimientoPersona'] && !$_POST['telefonoPersona'] && !$_POST['emailPersona'] ){
+                    //  redireccionar('/admin/gestionar_personas');
+                }else{   
+                    if($this->personaModelo->addPersona($persona)){
+                        redireccionar('/admin/gestionar_personas');
+                    }else{
+                        echo "Se ha producido un error";
+                }
+
+                }
+
+            }else{
+                $this->vista("/admin",$this->datos);
+            }
+                
+        }
+
+
+        public function eliminarPersona(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $id_persona = $_POST["id_persona"];
+    
+                if($this->personaModelo->eliminarPersona($id_persona)){
+                    redireccionar("/admin/gestionar_personas");
+                }else{
+                    echo "Se ha producido un error";
+                }
+    
+            }else{
+    
+            } 
+        }
+
+        public function verPersona($id_persona){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $persona = $_POST;
+                // print_r($persona);
+                // exit();
+    
+                if($this->personaModelo->editPersona($persona, $id_persona)){
+                    redireccionar("/admin/verPersona/$id_persona");
+                }else {
+                    echo "Se ha producido un error";
+                }
+                
+            }else{
+                $this->datos["persona"] = $this->personaModelo->getVisualizarPersona($id_persona);
+
+                 //print_r($this->datos["persona"]);
+                $this->vista("gestion/personas/editarPersona",$this->datos);
+            }
+    
+    
+        }
 
 
 

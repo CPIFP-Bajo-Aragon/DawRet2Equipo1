@@ -2,6 +2,7 @@
     // Controlador principal de todos los controladores
     // Se encarga de cargar los modelos y las vistas
 
+    #[AllowDynamicProperties]
     class Controlador{
 
         protected $datos = [];

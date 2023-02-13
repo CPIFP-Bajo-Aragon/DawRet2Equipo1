@@ -8,14 +8,19 @@ let boton = document.getElementById("abrirModal");
 let span = document.getElementsByClassName("cerrar")[0];
 
 // Cuando el usuario hace click en el botón, se abre la ventana Modal
-boton.addEventListener("click",function() {
-  modal.style.display = "block";
-});
+if (boton){
+  boton.addEventListener("click",function() {
+    modal.style.display = "block";
+  });
+}
 
 // Si el usuario hace click en la x, la ventana se cierra
-span.addEventListener("click",function() {
-  modal.style.display = "none";
-});
+if (span){
+  span.addEventListener("click",function() {
+    modal.style.display = "none";
+  });
+}
+
 
 // Si el usuario hace click fuera de la ventana, se cierra.
 window.addEventListener("click",function(event) { //Window es una propiedad que hace referencia a la ventana actual
@@ -23,7 +28,6 @@ window.addEventListener("click",function(event) { //Window es una propiedad que 
     modal.style.display = "none";
   }
 });
-
 
 //Formularios
 
@@ -128,40 +132,95 @@ function place_id(Id){
 
 // PAGINACION
 
+function go_page(elemen){
+
+  page = elemen.name;
+  page = parseInt(page)-1;
+
+  document.getElementById("page_controller").value = page;
+  
+  listar_elementos();
+  control_paginacion(page);
+
+}
+
+
 function siguiente(){
-
-  document.cookie = "page = 1";
-  let ck = getCookie('page');
-
-  document.getElementById("cookies").innerHTML = ck;
-
-   //Este es el que estás ya obteniendo vía JS
-
+  page = document.getElementById("page_controller").value;
+  page = parseInt(page)+1;
+  
+  document.getElementById("page_controller").value = page;
+  
+  listar_elementos();
+  control_paginacion(page);
 }
 
 function anterior(){
+
+  page = document.getElementById("page_controller").value;
+  page = parseInt(page)-1;
+
+  document.getElementById("page_controller").value = page;
   
-
-  document.cookie = "page = 0"; //Este es el que estás ya obteniendo vía JS
-
-  let ck = getCookie('page');
-
-  document.getElementById("cookies").innerHTML = ck;
-
+  listar_elementos();
+  control_paginacion(page);
 }
 
-function getCookie(cname) {
-  let name = cname + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
+//Buscador
+function buscar(){
+  search = document.getElementById("buscador").value.toUpperCase(); // Toma el contenido del buscador y lo reescribe en mayusculas para hacer la posterior Comparacion
+
+
+  if (search != ""){ // Comprueba que se este buscando algo (Quizas habria que hacer un trim(), puesto que no he comprobado como lee espacios)
+    for (i = 0; i < arrayMaestro.length; i++){
+      arraySon = Object.values(arrayMaestro[i]);
+      let find = false;
+  
+      for (e = 0; e < arraySon.length; e++){// Contenido de la columna
+        find = false;
+  
+        if (String(arraySon[e]).toUpperCase().indexOf(search) > -1){
+          find = true;
+          break;
+        }
+      }
+      
+      if (find == false){
+        arrayMaestro.splice(i, parseInt(i)+1);
+        i = i-1;
+      }
+      
     }
   }
-  return "";
+
+}		
+
+// FUNCION de FILTRADO
+
+function filtrar(){
+  arrayMaestro = []; // Vaciamos el Array Maestro
+
+  // alert(arrayMaestro); Nos aseguramos de que el ArrayMaestro este vacio
+  elemen = document.getElementById("panel_filtro");
+  let filtro = elemen.options[elemen.selectedIndex].text; // Nombre a filtrar
+
+  if (filtro == ""){ // Si no hay filtro seleccionado se toma los datos del array Original
+    arrayMaestro = listado;
+  } else {
+    for (i = 0; i < listado.length; i++){ // Bucle que recorre todos los items guardados en el array Original
+
+      if (Object.values(listado[i])[1] == filtro){ // El 1 indica la columna que esta filtrando, en otras gestiones puede que no sea el 1, en cuyo caso 2 opciones, Moverlo, o indicar la columna por hidden
+        arrayMaestro.push(listado[i]); // Agrega el item que pase el filtro
+        // alert(Object.values(listado[i])); Muestra los items que pasan el filtro
+      }
+    }
+  }
+  //alert(arrayMaestro); //Muestra el array resultante del filtro
+}	
+
+function mod_show(){ // A cualquier cambio en la busqueda se llama a esta funcion
+  filtrar(); // Primero se filtra el array
+  buscar(); // Entonces se compara el resultado 
+  listar_elementos(false); // Por ultimo se paginan los resultados
+  // Se le envia con un parametro falso indicando que no es una ejecucion automatica. La cual se hace al cargar la pagina
 }
