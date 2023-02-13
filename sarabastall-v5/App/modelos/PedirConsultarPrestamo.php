@@ -1,5 +1,5 @@
 <?php
-    class PrestamoModelo{
+    class PedirConsultarPrestamo{
         private $db;
 
         public function __construct(){
@@ -18,8 +18,8 @@
         }
 
         public function addPrestamo($datos){
-            $this->db->query("INSERT INTO PRESTAMO (Concepto, Importe, Observaciones, Fecha_Inicio, Id_Persona, Id_TipoPrestamo, Id_Estado)
-                VALUES (:concepto, :importe, :observaciones, :fecha_inicio, :Id_Persona, :Id_TipoPrestamo, :Id_Estado)");
+            $this->db->query("INSERT INTO PRESTAMO (Concepto, Importe, Observaciones, Fecha_Inicio, Id_Persona, Id_TipoPrestamo)
+                VALUES (:concepto, :importe, :observaciones, :fecha_inicio, :Id_Persona, :Id_TipoPrestamo)");
 
                 $this->db->bind(':concepto',trim($datos['concepto']));
                 $this->db->bind(':importe',trim($datos['importe']));
@@ -27,7 +27,6 @@
                 $this->db->bind(':fecha_inicio',trim($datos['fecha_inicio']));
                 $this->db->bind(':Id_Persona',trim($datos['Id_Persona']));
                 $this->db->bind(':Id_TipoPrestamo',trim($datos['Id_TipoPrestamo']));
-                $this->db->bind(':Id_Estado',trim($datos['Id_Estado']));
                 
                
             if($this->db->execute()){
@@ -38,20 +37,15 @@
             
         }
 
+
         public function getpersonaPrestamo(){
             $this->db->query("SELECT p.Id_Persona as Id_Persona, p.Nombre as Nombre FROM PERSONA p");
 
             return $this->db->registros();
         }
-
+        
         public function gettipoPrestamo(){
             $this->db->query("SELECT * FROM TIPO_PRESTAMO");
-
-            return $this->db->registros();
-        }
-
-        public function getestado(){
-            $this->db->query("SELECT * FROM ESTADO");
 
             return $this->db->registros();
         }

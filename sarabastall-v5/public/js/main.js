@@ -118,10 +118,226 @@ function todos(){
   importeNoNegativo();
 }
 
-
-
-// Funciones Auxiliares Gestion Cursos
-
-function place_id(Id_Curso){
-  document.getElementById("id_curso").setAttribute("value", Id_Curso);
+//Aviso de eliminar
+function place_id(Id){
+  document.getElementById("Id_Eliminar").setAttribute("value", Id);
 }
+
+//Ordenar alfabeticamente registros
+
+
+//Refresca para que muestren todos los resultados
+let refresh = document.getElementById('refresh');
+refresh.addEventListener('click', _ => {
+            location.reload();
+});
+
+
+
+//Buscador
+function buscar(){
+  let num_cols, display, input, mayusculas, tablaBody, tr, td, i, txtValue;
+  num_cols = 8; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("buscador"); //hace referencia al id del input del buscador
+  mayusculas = input.value.toUpperCase(); //convierte a mayusculas
+  tablaBody = document.getElementById("tbody"); //Hace referencia al id del tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre todos los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j]; //devuelve la lista de elementos td
+      if(td){
+        txtValue = td.textContent || td.innerText; //Puede ser textContent(Representa el contenido de texto) o innerText (tiene en cuenta el estilo y cambia el estilo de la página)
+        if(txtValue.toUpperCase().indexOf(mayusculas) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}		
+
+//Filtrar por tipos
+
+
+//Filtrar tipo Prestamos
+function filtrarTipoPendiente(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("pendiente").value = "PENDIENTE"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+function filtrarTipoFinalizado(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 5; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("finalizado").value = "FINALIZADO"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+function filtrarTipoBeca1(){
+
+  console.log("Aqui llego");
+
+
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("JRM").value = "JRM"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+function filtrarTipoBeca2(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("CARRERA").value = "CARRERA"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
+
+function filtrarTipoBeca3(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 1; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("REFUGIO").value = "REFUGIO"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}
+
+function filtrarRolAdmin(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 8; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("admin").value = "ADMIN"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}
+
+function filtrarRolProfesor(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 8; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("profesor").value = "PROFESOR"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}
+
+function filtrarRolMaster(){
+  let num_cols, display, input, tablaBody, tr, td, i, txtValue;
+  num_cols = 8; //Numero de fila en la que busca, la primera columna es la 0
+  input = document.getElementById("master").value = "MASTER"; //hace referencia al id del boton
+  tablaBody = document.getElementById("tbody"); //Hace referencia al tbody
+  tr = tablaBody.getElementsByTagName("tr");
+
+  for(i=0; i< tr.length; i++){ //recorre los tr		
+    display = "none";
+    for(j=0; j < num_cols; j++){ //recorre las columnas hasta num_cols
+      td = tr[i].getElementsByTagName("td")[j];
+      if(td){
+        txtValue = td.textContent || td.innerText;
+        if(txtValue.toUpperCase().indexOf(input) > -1){ //Si el texto en mayusculas concuerda, lo muestra
+          display = "";
+        }
+      }
+    }
+    tr[i].style.display = display;
+  }
+}	
