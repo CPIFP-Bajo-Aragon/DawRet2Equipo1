@@ -10,8 +10,6 @@
     </ol>
 </nav>
     <h1>CENTROS</h1>
-    
-    <?php $pageLists = listElements($datos["centros"]) ?>
 
 
 <!-- Modal -->
@@ -130,12 +128,32 @@
   <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <a  class="btn btn-primary me-md-2" type="button" href="<?php echo RUTA_URL ?>/sarabastall/addCentro">+</a>
   </div> -->
+
+  <div class="col-3">
+    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+      <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+    </form>
+
+    <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
+
+    <select id="panel_filtro" name="Tipo" onchange="mod_show()">
+    <option id="refresh" value="0" selected></option>
+      <?php foreach($datos["ciudades"] as $ciudad): ?>
+        <option value="<?php echo $ciudad->Id ?>"><?php echo $ciudad->Nombre ?></option>
+      <?php endforeach ?>
+    </select>
+    <br>
+  </div>
+
+
+
  <button type="button" id="abrirModal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button> 
 
 
   <br>
   <br>
   <br>
+
   <input disabled id="page_controller" name="centro" value="0" hidden>
   <div class="container">
       <table class="table table-striped table-hover">
@@ -154,32 +172,22 @@
         </tbody>
       </table>
 
-    <div class="Cursos">
+    <div class="Centros">
     <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <?php if(count($datos["centros"]) > 8):?>
-
-          <li class="page-item disabled" id="page_a"><a class="page-link" onclick='anterior(<?php echo json_encode($pageLists)?>)'>Anterior</a></li>
+      <ul id="page_panel" class="pagination justify-content-center">
         
-          <li id="page_1" class="page-item"><a class="page-link" name="1" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'>1</a></li>
-
-          <?php for($i = 1; $i*8 <= count($datos["centros"]); $i++): ?>
-
-            <li id="page_<?php echo $i+1 ?>" class="page-item"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'><?php echo $i+1 ?></a></li>
-            
-          <?php endfor ?>
-          
-          <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente(<?php echo json_encode($pageLists)?>)'>Siguiente</a></li>
-          
-        <?php endif ?>
       </ul>
     </nav>
     </div>
   </div>
 
   <script>
-  window.onload=listar_elementos(<?php echo json_encode($pageLists)?>);
-  </script>
+
+  window.onload=caja_fuerte(<?php echo json_encode($datos["centros"])?>); // Aqui pasamos el array en cuestion recibido por PHP
+
+  window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
+
+</script>
     
 
     

@@ -30,6 +30,7 @@
         public function gestionar_centros(){
 
             $this->datos["centros"] = $this->centroModelo->get_centros();
+            $this->datos["ciudades"] = $this->centroModelo->get_ciudades();
 
             $this->vista("gestion/centros",$this->datos);
         }
@@ -37,6 +38,12 @@
         public function gestionar_prestamos(){
 
             $this->datos["PrestamosTotales"] = $this->prestamoModelo->get_prestamos();
+
+            $this->datos["nombrepersona"] = $this->prestamoModelo->getpersonaPrestamo();
+
+            $this->datos["tipoprestamo"] = $this->prestamoModelo->gettipoPrestamo();
+
+            $this->datos["estado"] = $this->prestamoModelo->getestado();
             
             $this->vista("gestion/prestamos",$this->datos);
         }
@@ -55,6 +62,7 @@
         public function gestionar_personas(){
 
             $this->datos["PersonasTotales"] = $this->personaModelo->get_personas();
+            $this->datos["roles"] = $this->personaModelo->get_roles();
             
             $this->vista("gestion/personas",$this->datos);
         }
@@ -62,7 +70,13 @@
         public function gestionar_becas(){
 
             $this->datos["BecasTotales"] = $this->becaModelo->get_becas();
-            
+
+            $this->datos["nombrealumno"] = $this->becaModelo->getalumnoBeca();
+
+            $this->datos["tipobeca"] = $this->becaModelo->getTipoBeca();
+
+            $this->datos["centros"] = $this->becaModelo->getCentro();
+
             $this->vista("gestion/becas",$this->datos);
         }
 
@@ -73,6 +87,8 @@
             $this->vista("gestion/economia",$this->datos);
         }
 
+
+        //Gestión cursos
         public function see_curso($id_curso){
 
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -140,6 +156,7 @@
 
         }
 
+        //Gestión Personas
 
         public function add_persona(){
             if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -201,7 +218,75 @@
     
         }
 
+        // Gestion Becas
 
+        public function add_beca(){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $beca = $_POST;
+                   print_r($beca);
+
+                if(!$_POST['Importe'] && !$_POST['Fecha_Beca'] && !$_POST['Nota_Media']){
+                    //  redireccionar('/admin/gestionar_personas');
+                }else{   
+                    if($this->becaModelo->addBeca($beca)){
+                        redireccionar('/admin/gestionar_becas');
+                    }else{
+                        echo "Se ha producido un error";
+                }
+
+                }
+
+            }else{
+                $this->vista("/admin",$this->datos);
+            }
+                
+        }
+
+        // Gestion Prestamos
+
+        public function add_prestamo(){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $prestamo = $_POST;
+                   print_r($prestamo);
+
+                if(!$_POST['concepto'] && !$_POST['importe'] && !$_POST['estado'] && !$_POST['fecha_inicio'] && !$_POST['Id_Persona'] && !$_POST['Id_TipoPrestamo']){
+                    //  redireccionar('/admin/gestionar_personas');
+                }else{   
+                    if($this->prestamoModelo->addPrestamo($prestamo)){
+                        redireccionar('/admin/gestionar_prestamos');
+                    }else{
+                        echo "Se ha producido un error";
+                }
+
+                }
+
+            }else{
+                $this->vista("/admin",$this->datos);
+            }
+                
+        }
+
+        public function pedir_prestamo(){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $prestamo = $_POST;
+                   print_r($prestamo);
+
+                if(!$_POST['concepto'] && !$_POST['importe'] && !$_POST['fecha_inicio'] && !$_POST['Id_Persona'] && !$_POST['Id_TipoPrestamo']){
+                    //  redireccionar('/admin/gestionar_personas');
+                }else{   
+                    if($this->pedirConsultarPrestamo->addPrestamo($prestamo)){
+                        redireccionar('/admin/gestionar_economia');
+                    }else{
+                        echo "Se ha producido un error";
+                }
+
+                }
+
+            }else{
+                $this->vista("/admin",$this->datos);
+            }
+                
+        }
 
     }
 

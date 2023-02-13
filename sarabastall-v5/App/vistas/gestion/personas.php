@@ -9,9 +9,6 @@
     </ol>
 </nav>
     <h1>Personas</h1>
-
-    <?php $pageLists = listElements($datos["PersonasTotales"]) ?>
-
 <!-- Modal -->
 
 <button id="abrirModal">+</button>
@@ -96,22 +93,32 @@
 <input disabled id="page_controller" name="persona" value="0" hidden>
 
 <div class="container">
+
 <div class="col-3">
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-      <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
-    </form>
-  <button id="buscador" onclick="buscar()">BUSCAR</button>
-  <select name="Tipo">
-        <option id="admin" onclick="filtrarRolAdmin()">Administrador</option>
-        <option id="profesor" onclick="filtrarRolProfesor()">Profesor</option>
-        <option id="master" onclick="filtrarRolMaster()">Master</option>
+  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+    <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+  </form>
+
+  <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
+
+  <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+  <option id="refresh" value="0" selected></option>
+    <?php foreach($datos["roles"] as $rol): ?>
+      <option value="<?php echo $rol->Id ?>"><?php echo $rol->Nombre ?></option>
+    <?php endforeach ?>
   </select>
   <br>
 </div>
+
+
+<input disabled id="page_controller" name="persona" value="0" hidden>
+
+
 <table class="table table-striped table-hover">
   <thead class="thead-azul">
     <tr>
     <th scope="col">Nº</th>
+    <th scope="col">Tipo Rol</th>
     <th scope="col">Nombre</th>
     <th scope="col">Apellidos</th>
     <th scope="col">Direccion</th>
@@ -119,7 +126,6 @@
     <th scope="col">Telefono</th>
     <th scope="col">Email</th>
     <th scope="col">Usuario</th>
-    <th scope="col">Tipo Rol</th>
     <th scope="col">Detalle</th>
     </tr>
   </thead>
@@ -130,26 +136,16 @@
 
 <div class="Cursos">
   <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      <?php if(count($datos["PersonasTotales"]) > 8):?>
-        <li class="page-item disabled" id="page_a"><a class="page-link" onclick='anterior(<?php echo json_encode($pageLists)?>)'>Anterior</a></li>
+    <ul id="page_panel" class="pagination justify-content-center">
       
-        <li id="page_1" class="page-item"><a class="page-link" name="1" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'>1</a></li>
-        <?php for($i = 1; $i*8 <= count($datos["PersonasTotales"]); $i++): ?>
-          <li id="page_<?php echo $i+1 ?>" class="page-item"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this, <?php echo json_encode($pageLists)?>)'><?php echo $i+1 ?></a></li>
-          
-        <?php endfor ?>
-        
-        <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente(<?php echo json_encode($pageLists)?>)'>Siguiente</a></li>
-        
-      <?php endif ?>
     </ul>
   </nav>
 </div>
 
 
 <script>
-  window.onload=listar_elementos(<?php echo json_encode($pageLists)?>);
+  window.onload=caja_fuerte(<?php echo json_encode($datos["PersonasTotales"])?>);
+  window.onload=listar_elementos(true);
 </script>
 
 

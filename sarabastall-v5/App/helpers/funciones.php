@@ -14,14 +14,6 @@
             return true;
         }
     }
-
-    function listElements($array){
-
-        $array = array_chunk($array, 4);
-
-        return $array;
-
-    }
     
 
 ?>

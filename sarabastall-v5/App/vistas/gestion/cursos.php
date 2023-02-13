@@ -13,8 +13,6 @@
 
     <!-- FILTROS -->
 
-    <?php $pageLists = listElements($datos["CursosTotales"]) ?>
-
     <!--Funcion array y pagina que devuelva el nuevo array-->
     
 <!-- Button trigger modal -->
@@ -108,7 +106,7 @@
     <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
   </form>
 
-  <button id="buscador" onclick="mod_show()">BUSCAR</button>
+  <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
 
   <select id="panel_filtro" name="Tipo" onchange="mod_show()">
   <option id="refresh" value="0" selected></option>
@@ -124,7 +122,6 @@
 <input disabled id="page_controller" name="curso" value="0" hidden>
 
 <div class="container">
-
 
   <table class="table table-striped table-hover">
     <thead class="thead-azul">
@@ -144,22 +141,8 @@
 
   <div class="Cursos">
     <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <?php if(count($datos["CursosTotales"]) > 4):?>
-
-          <li class="page-item disabled" id="page_a"><a class="page-link" onclick='anterior()'>Anterior</a></li>
-        
-          <li id="page_1" class="page-item"><a class="page-link" name="1" onclick='go_page(this)'>1</a></li>
-
-          <?php for($i = 1; $i*4 <= count($datos["CursosTotales"]); $i++): ?>
-
-            <li id="page_<?php echo $i+1 ?>" class="page-item"><a class="page-link" name="<?php echo $i+1 ?>" onclick='go_page(this)'><?php echo $i+1 ?></a></li>
-            
-          <?php endfor ?>
+      <ul id="page_panel" class="pagination justify-content-center">
           
-          <li class="page-item" id="page_s"><a class="page-link" onclick='siguiente()'>Siguiente</a></li>
-          
-        <?php endif ?>
       </ul>
     </nav>
   </div>

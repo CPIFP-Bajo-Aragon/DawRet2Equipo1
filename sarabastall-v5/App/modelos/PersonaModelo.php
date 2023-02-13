@@ -8,6 +8,12 @@
 
         //Funciones de Persona
 
+        public function get_roles(){
+            $this->db->query("SELECT Id_Rol as Id, Nombre_Rol as Nombre FROM ROL");
+
+            return $this->db->registros();
+        }
+
         public function get_profesores(){
             $this->db->query("SELECT p.Id_Persona as Id, Nombre FROM PERSONA p, PROFESOR t
             WHERE p.Id_Persona = t.Id_Persona");
@@ -17,9 +23,9 @@
 
         public function get_personas(){
 
-            $this->db->query("SELECT pers.Id_Persona as Id_Persona, pers.Nombre as Nombre, pers.Apellidos as Apellidos,
+            $this->db->query("SELECT pers.Id_Persona as Id_Persona, r.Nombre_Rol as Nombre_Rol, pers.Nombre as Nombre, pers.Apellidos as Apellidos,
             pers.Direccion as Direccion, pers.Fecha_Nacimiento as Fecha_Nacimiento, pers.Telefono as Telefono,
-            pers.Email as Email, pers.Login as Login, r.Nombre_Rol as Nombre_Rol
+            pers.Email as Email, pers.Login as Login
             FROM PERSONA pers, ROL r
             WHERE r.Id_Rol = pers.Id_Rol");
 

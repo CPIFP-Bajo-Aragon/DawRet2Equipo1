@@ -140,7 +140,7 @@ function go_page(elemen){
   document.getElementById("page_controller").value = page;
   
   listar_elementos();
-  control_paginacion(page);
+  control_paginacion();
 
 }
 
@@ -152,7 +152,7 @@ function siguiente(){
   document.getElementById("page_controller").value = page;
   
   listar_elementos();
-  control_paginacion(page);
+  control_paginacion();
 }
 
 function anterior(){
@@ -163,13 +163,14 @@ function anterior(){
   document.getElementById("page_controller").value = page;
   
   listar_elementos();
-  control_paginacion(page);
+  control_paginacion();
 }
 
 //Buscador
 function buscar(){
   search = document.getElementById("buscador").value.toUpperCase(); // Toma el contenido del buscador y lo reescribe en mayusculas para hacer la posterior Comparacion
 
+  //alert(search);
 
   if (search != ""){ // Comprueba que se este buscando algo (Quizas habria que hacer un trim(), puesto que no he comprobado como lee espacios)
     for (i = 0; i < arrayMaestro.length; i++){
@@ -203,6 +204,7 @@ function filtrar(){
   // alert(arrayMaestro); Nos aseguramos de que el ArrayMaestro este vacio
   elemen = document.getElementById("panel_filtro");
   let filtro = elemen.options[elemen.selectedIndex].text; // Nombre a filtrar
+  //alert(filtro);
 
   if (filtro == ""){ // Si no hay filtro seleccionado se toma los datos del array Original
     arrayMaestro = listado;
@@ -211,7 +213,7 @@ function filtrar(){
 
       if (Object.values(listado[i])[1] == filtro){ // El 1 indica la columna que esta filtrando, en otras gestiones puede que no sea el 1, en cuyo caso 2 opciones, Moverlo, o indicar la columna por hidden
         arrayMaestro.push(listado[i]); // Agrega el item que pase el filtro
-        // alert(Object.values(listado[i])); Muestra los items que pasan el filtro
+        //alert(Object.values(listado[i])); Muestra los items que pasan el filtro
       }
     }
   }
@@ -221,6 +223,7 @@ function filtrar(){
 function mod_show(){ // A cualquier cambio en la busqueda se llama a esta funcion
   filtrar(); // Primero se filtra el array
   buscar(); // Entonces se compara el resultado 
+  page_maker();
   listar_elementos(false); // Por ultimo se paginan los resultados
   // Se le envia con un parametro falso indicando que no es una ejecucion automatica. La cual se hace al cargar la pagina
 }

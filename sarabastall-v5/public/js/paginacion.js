@@ -87,15 +87,68 @@ function listar_elementos(inicial){
         document.getElementById("contenido_tabla").appendChild(newTr);
       
     }
+
+    if (inicial){
+      page_maker();
+    }
+
   
 }
 
-function control_paginacion(page){
+function page_maker() {
+  max = parseInt(arrayMaestro.length/nItems); 
+  
+  document.getElementById("page_panel").innerHTML ="";
 
-  max = parseInt(listado.length/nItems);  // Probablemente haya que cambiar Listado por el array que salga tras filtros y busqueda IMPORTANTE
-  // Correcto, ademas hay que reformular como se generan los elementos html de paginacion, probablemente lo mejor sea crear la estructura por javascript
+  let newLi = document.createElement("li");
+  let newA = document.createElement("a");
 
-    // Desabilitar Siguiente
+  if (max > 0){
+    newLi.classList.add("page-item");
+    newLi.id = "page_a";
+    newA.classList.add("page-link");
+    newA.setAttribute("onclick", 'anterior()');
+    newA.innerText = "Anterior";
+    newLi.appendChild(newA);
+    document.getElementById("page_panel").appendChild(newLi);
+
+    // Creamos Paginas
+    for(i = 0; i <= max; i++){ // PROBLEMAS FUTUROS CON GO_PAGE ESPERADOS
+      newLi = document.createElement("li");
+      newA = document.createElement("a");
+      newLi.classList.add("page-item");
+      newA.classList.add("page-link");
+      newA.setAttribute("name", parseInt(i)+1);
+      newA.setAttribute("onclick", 'go_page(this)');
+      newA.innerText = parseInt(i)+1;
+      newLi.appendChild(newA);
+      document.getElementById("page_panel").appendChild(newLi);
+
+    }
+
+    newLi = document.createElement("li");
+    newA = document.createElement("a");
+    newLi.classList.add("page-item");
+    newLi.id = "page_s";
+    newA.classList.add("page-link");
+    newA.setAttribute("onclick", 'siguiente()');
+    newA.innerText = "Siguiente";
+    newLi.appendChild(newA);
+    document.getElementById("page_panel").appendChild(newLi);
+
+  }
+
+  document.getElementById("page_controller").value = "0";
+  control_paginacion();
+}
+
+function control_paginacion(){
+
+  max = parseInt(arrayMaestro.length/nItems);
+  page = document.getElementById("page_controller").value;
+  
+  // Desabilitar Siguiente
+  if (max != 0){
     if(page == max){
       document.getElementById("page_s").classList.add("disabled");
     } else {
@@ -109,3 +162,5 @@ function control_paginacion(page){
       document.getElementById("page_a").classList.remove("disabled");
     }
   }
+  
+}
