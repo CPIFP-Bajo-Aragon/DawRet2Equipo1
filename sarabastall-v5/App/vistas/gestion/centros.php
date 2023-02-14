@@ -122,12 +122,38 @@
 </div>
 </div>
 
+<!-- Modal Seguro desea Eliminar -->
+
+<div class="modal fade" id="modalEliminarcentro" tabindex="-1">
+  <div class="modal-dialog modal-dialog-center"> 
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalCerrarAccionLabel">
+                        ¿Estas seguro que quieres eliminar el centro?
+              </h5>
+          </div>
+
+          <div  class="modal-footer"> 
+              <form method="post" id="formCerrarAccion" action="<?php echo RUTA_URL ?>/admin/del_centro">
+              
+                <input type="hidden" id="Id_Eliminar" name="id_centro">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cancelar
+                </button>
+                  
+                <button type="submit" class="btn btn-warning">
+                  Eliminar
+                </button>
+              </form>
+          </div>
+      </div>
+  </div> 
+</div>
+
+
+
 
 <div id="container">
-  <!-- Boton para añadir nuevos centros -->
-  <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a  class="btn btn-primary me-md-2" type="button" href="<?php echo RUTA_URL ?>/sarabastall/addCentro">+</a>
-  </div> -->
 
   <div class="col-3">
     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -160,8 +186,8 @@
         <thead class="thead-azul">
           <tr>
               <th scope="col">Nº Centro</th>
-              <th scope="col">Nombre Centro</th>
               <th scope="col">Ciudad</th>
+              <th scope="col">Nombre Centro</th>
               <th scope="col">Cuantia</th>
               <th scope="col">Distancia</th>
               <th scope="col">Acciones</th>
@@ -179,7 +205,12 @@
       </ul>
     </nav>
     </div>
+
+    <h2 id="nomaches"></h2>
+
   </div>
+
+
 
   <script>
 

@@ -71,7 +71,7 @@
 
 <!-- Modal Seguro desea Eliminar -->
 
-<div class="modal fade" id="modalEliminarCurso" tabindex="-1">
+<div class="modal fade" id="modalEliminarcurso" tabindex="-1">
   <div class="modal-dialog modal-dialog-center"> 
       <div class="modal-content">
           <div class="modal-header">

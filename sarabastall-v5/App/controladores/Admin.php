@@ -44,6 +44,7 @@
             $this->datos["tipoprestamo"] = $this->prestamoModelo->gettipoPrestamo();
 
             $this->datos["estado"] = $this->prestamoModelo->getestado();
+            $this->datos["estados"] = $this->prestamoModelo->get_estados();
             
             $this->vista("gestion/prestamos",$this->datos);
         }
@@ -73,6 +74,7 @@
 
             $this->datos["nombrealumno"] = $this->becaModelo->getalumnoBeca();
 
+            $this->datos["tipos"] = $this->becaModelo->get_tipos();
             $this->datos["tipobeca"] = $this->becaModelo->getTipoBeca();
 
             $this->datos["centros"] = $this->becaModelo->getCentro();
@@ -81,11 +83,31 @@
         }
 
         public function gestionar_economia(){
-
-            $this->datos["MovimientosTotales"] = $this->economiaModelo->get_movimientos();
             
-            $this->vista("gestion/economia",$this->datos);
+           $this->datos["MovimientosTotales"] = $this->economiaModelo->get_movimientos();
+           $this->datos["tipoBeca"] = $this->economiaModelo->get_tipoBeca();
+           $this->datos["tipos_movimiento"] = $this->economiaModelo->get_tipos_movimiento();
+           $this->vista("gestion/economia",$this->datos);
         }
+
+        //Gestion Economia
+        public function add_movimiento(){
+
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+                $movimiento = $_POST;
+    
+                if($this->economiaModelo->add_movimiento($movimiento)){
+                    redireccionar("/admin/gestionar_economia");
+                }else{
+                    echo "Se ha producido un error";
+                }
+    
+            }else{
+    
+            } 
+        }
+
 
 
         //Gestión cursos
@@ -156,6 +178,56 @@
 
         }
 
+        // Gestion Centro
+
+        public function del_centro(){  
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $Id_Centro = $_POST["Id_Centro"];
+
+                if($this->centroModelo->del_centro($Id_Centro)){
+                    redireccionar("/admin/gestionar_centros");
+                }else{
+                    echo "Se ha producido un error";
+                }
+            }   
+        }
+
+        public function see_Centro($Id_Centro){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $centro=$_POST;
+
+                if($this->centroModelo->editCentro($centro, $Id_Centro)){
+                    redireccionar("/admin/verCentro/$Id_Centro");
+                }else{
+                    echo "¡Se ha producido un error!";
+                }
+
+            }else{
+                $this->datos["centro"] = $this->centroModelo->getVisualizarCentro($Id_Centro);
+
+                $this->vista("gestion/ver_centro", $this->datos);
+            }
+        }
+
+        public function add_centro(){
+
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+                $centro = $_POST;
+    
+                if($this->centroModelo->add_centro($centro)){
+                    redireccionar("/admin/gestionar_centros");
+                }else{
+                    echo "Se ha producido un error";
+                }
+    
+            }else{
+    
+            } 
+
+        }
+
+
         //Gestión Personas
 
         public function add_persona(){
@@ -181,7 +253,7 @@
         }
 
 
-        public function eliminarPersona(){
+        public function del_persona(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $id_persona = $_POST["id_persona"];
     
@@ -196,7 +268,7 @@
             } 
         }
 
-        public function verPersona($id_persona){
+        public function see_persona($id_persona){
             if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $persona = $_POST;
                 // print_r($persona);

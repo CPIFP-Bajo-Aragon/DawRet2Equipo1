@@ -9,7 +9,7 @@
         //Funciones de Beca
 
         public function get_becas(){
-            $this->db->query("SELECT be.Id_Beca, ti.Tipo_Beca, alum.Tutor_Legal, pers.Nombre, be.Importe, be.Fecha_Beca, be.Observaciones FROM BECA be, TIPO_BECA ti, ALUMNO alum, PERSONA pers
+            $this->db->query("SELECT be.Id_Beca, ti.Tipo_Beca, alum.Tutor_Legal, pers.Nombre, be.Importe, be.Fecha_Beca FROM BECA be, TIPO_BECA ti, ALUMNO alum, PERSONA pers
                                 WHERE ti.Id_Tipo_Beca=be.Id_Tipo_Beca AND alum.Id_Persona=be.Id_Persona AND pers.Id_Persona=be.Id_Persona");
 
             return $this->db->registros();
@@ -49,6 +49,12 @@
 
         public function getTipoBeca(){
             $this->db->query("SELECT * FROM TIPO_BECA");
+
+            return $this->db->registros();
+        }
+
+        public function get_tipos(){
+            $this->db->query("SELECT Id_Tipo_Beca as Id, Tipo_Beca as Nombre FROM TIPO_BECA");
 
             return $this->db->registros();
         }

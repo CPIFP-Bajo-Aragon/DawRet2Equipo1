@@ -18,7 +18,7 @@ class Inicio extends Controlador{
         //$this->datos["usuarioSesion"]->id_rol = obtenerRol($this->datos["usuarioSesion"]->roles);
 
 
-        $this->datos["rolesPermitidos"] = [1, 2, 3];
+        $this->datos["rolesPermitidos"] = [1, 2, 3, 4, 5];
 
         // if(!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, $this->datos["rolesPermitidos"])){
         //     echo "No tienes privilegios";

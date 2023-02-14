@@ -53,9 +53,14 @@
         public function getestado(){
             $this->db->query("SELECT * FROM ESTADO");
 
-            return $this->db->registros();
+            return $this->db->registro();
         }
 
+        public function get_estados(){
+            $this->db->query("SELECT Id_Estado as Id, Nombre as Nombre FROM ESTADO");
+
+            return $this->db->registros();
+        }
 
     }
 

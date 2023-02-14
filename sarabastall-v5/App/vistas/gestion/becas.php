@@ -141,20 +141,27 @@
 </div>
 
 
+  
 
+
+<input disabled id="page_controller" name="beca" value="0" hidden>
 <div class="container">
 <div class="col-3">
     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-      <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search" onkeyup="buscar()">
+      <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
     </form>
-    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="Tipo">
-      <option selected id="refresh">Tipos de Beca</option>
-      <option id="JRM" onclick="filtrarTipoBeca1()">JRM</option>
-      <option id="CARRERA" onclick="filtrarTipoBeca2()">CARRERA</option>
-      <option id="REFUGIO" onclick="filtrarTipoBeca3()">REFUGIO</option>
+
+    <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
+
+    <select id="panel_filtro" name="Tipo" onchange="mod_show()">
+    <option id="refresh" value="0" selected></option>
+      <?php foreach($datos["tipos"] as $tipo): ?>
+        <option value="<?php echo $tipo->Id ?>"><?php echo $tipo->Nombre ?></option>
+      <?php endforeach ?>
     </select>
+    <br>
   </div>
-  <br>
+
 <table class="table table-striped table-hover">
   <thead class="thead-azul">
     <tr>
@@ -167,39 +174,14 @@
     <th scope="col">Detalle</th>
     </tr>
   </thead>
-  <tbody id="tbody">
-  <?php foreach ($datos["BecasTotales"] as $becas): ?>
-    <tr>
-      <th scope="row"><?php echo $becas ->Id_Beca?></th>
-      <td><?php echo $becas ->Tipo_Beca?></td>
-      <td><?php echo $becas ->Nombre?></td>
-      <td><?php echo $becas ->Tutor_Legal?></td>
-      <td><?php echo $becas ->Importe?></td>
-      <td><?php echo $becas ->Fecha_Beca?></td>
-      <td>
-          
-          <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
-            <i class="bi bi-search"></i>
-          </a>
-         
-          <button type="button" class="w-80 btn btn-warning btn-lg">
-            <i class="bi bi-search"></i>
-          </button>        
-          
-      </td>
-    </tr>
-    <tr>
-    <?php endforeach?>
+  <tbody id="contenido_tabla">
+  
   </tbody>
 </table>
 <div class="Centros">
 <nav aria-label="Page navigation example">
-<ul class="pagination justify-content-center">
-<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-<li class="page-item"><a class="page-link" href="#">1</a></li>
-<li class="page-item"><a class="page-link" href="#">2</a></li>
-<li class="page-item"><a class="page-link" href="#">3</a></li>
-<li class="page-item"><a class="page-link" href="#">Next</a></li>
+<ul id="page_panel" class="pagination justify-content-center">
+
 </ul>
 </nav>
 </div>

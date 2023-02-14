@@ -163,77 +163,47 @@
 </div>
 </div>
 
+  
 
 
+<input disabled id="page_controller" name="prestamo" value="0" hidden>  
 <div class="container">
-  <div class="col-3">
+<div class="col-3">
     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-      <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search" onkeyup="buscar()">
+      <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
     </form>
-    <select name="Tipo">
-        <option id="pendiente" value="Pendiente" onclick="filtrarTipoPendiente()">Pendiente</option>
-        <option id="finalizado" value="Finalizado" onclick="filtrarTipoFinalizado()">Finalizado</option>
+
+    <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
+
+    <select id="panel_filtro" name="Tipo" onchange="mod_show()">
+    <option id="refresh" value="0" selected></option>
+      <?php foreach($datos["estados"] as $estado): ?>
+        <option value="<?php echo $estado->Id ?>"><?php echo $estado->Nombre ?></option>
+      <?php endforeach ?>
     </select>
+    <br>
   </div>
-  <br>
+  
 <table class="table table-striped table-hover">
   <thead class="thead-azul">
     <tr>
     <th scope="col">Nº Préstamo</th>
+    <th scope="col">Estado</th>
     <th scope="col">Tipo</th>
     <th scope="col">Nombre Persona</th>
     <th scope="col">Fecha</th>
     <th scope="col">Cantidad</th>
-    <th scope="col">Estado</th>
     <th scope="col">Acciones</th>
     </tr>
   </thead>
-  <tbody id="tbody">
-  <?php foreach ($datos["PrestamosTotales"] as $prestamo): ?>
-      <tr>
-        <th scope="row"><?php echo $prestamo ->Id_Prestamo?></th>
-        <td><?php echo $prestamo ->NombreTipo?></td>
-        <td><?php echo $prestamo ->NombrePers?></td>
-        <td><?php echo $prestamo ->Fecha_Inicio?></td>
-        <td><?php echo $prestamo ->Importe?></td>
-        <td>
-          <?php if($prestamo->Id_Estado == 1): ?>
-            <strong class="text-success"><?php echo $prestamo ->NombreEst
-          ?>
-          <?php elseif($prestamo->Id_Estado == 2): ?>
-            <strong class="text-danger"><?php echo $prestamo ->NombreEst?>
-          <?php endif ?>
-          
-        </td>
-        <td>
-          <!--Aqui van 2 botones-->
-          <a href="#">
-          <button type="button" class="w-80 btn btn-warning btn-lg">
-            <i class="bi bi-search"></i>
-          </button>
-          <a>
-
-          <a href="#">
-          <button type="button" class="w-80 btn btn-warning btn-lg">
-            <i class="bi bi-cash-coin"></i>
-          </button>
-          <a>
-
-          
-        </td>
-
-      </tr>
-    <?php endforeach?>
+  <tbody id="contenido_tabla">
+  
   </tbody>
 </table>
 <div class="Centros">
 <nav aria-label="Page navigation example">
-<ul class="pagination justify-content-center">
-<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-<li class="page-item"><a class="page-link" href="#">1</a></li>
-<li class="page-item"><a class="page-link" href="#">2</a></li>
-<li class="page-item"><a class="page-link" href="#">3</a></li>
-<li class="page-item"><a class="page-link" href="#">Next</a></li>
+<ul id="page_panel" class="pagination justify-content-center">
+
 </ul>
 </nav>
 </div>

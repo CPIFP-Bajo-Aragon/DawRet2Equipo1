@@ -50,19 +50,20 @@
             if($datos['importe']){ // Puede que haya que poner '||trim($datos['importe_input']) != null'
                 // Utilizar el modelo Economia para introducir un nuevo movimiento
 
-                $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Accion, Id_TipoMov)
-                VALUES (NOW(), :texto, :importe, null, 1)");
+                $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov)
+                VALUES (NOW(), :texto, :importe, 1)");
 
                 $this->db->bind(':texto', "Costeo del Curso: ".trim($datos['nombre']));
                 $this->db->bind(':importe',trim($datos['importe']));
 
                 $this->db->execute();
                 // Consulta o funcion para insertar nuevo movimiento (Si es funcion, devolvera el id del movimineto)
-                $id_movimiento = $this->db-> executeLastId();
+                $id_movimiento = $this->db->executeLastId();
+                
 
 
-                $this->db->query("INSERT INTO CURSO (Nombre, Importe, Fecha_Impartir, Id_Persona, Id_Especialidad, Id_Movimiento)
-                VALUES (:nombre, :importe, :fecha, :profesor, :especialidad, :movimiento)");
+                $this->db->query("INSERT INTO CURSO (Nombre, Importe, Fecha_Impartir, Id_Persona, Id_Especialidad, Id_Movimiento, Id_Estado)
+                VALUES (:nombre, :importe, :fecha, :profesor, :especialidad, :movimiento, 3)");
 
                 $this->db->bind(':nombre',trim($datos['nombre']));
                 $this->db->bind(':importe',trim($datos['importe']));
@@ -73,8 +74,8 @@
 
             } else {
 
-                $this->db->query("INSERT INTO CURSO (Nombre, Importe, Fecha_Impartir, Id_Persona, Id_Especialidad, Id_Movimiento)
-                VALUES (:nombre, null, :fecha, :profesor, :especialidad, null)");
+                $this->db->query("INSERT INTO CURSO (Nombre, Importe, Fecha_Impartir, Id_Persona, Id_Especialidad, Id_Movimiento, Id_estado)
+                VALUES (:nombre, null, :fecha, :profesor, :especialidad, null, 3)");
 
                 $this->db->bind(':nombre',trim($datos['nombre']));
                 $this->db->bind(':fecha',trim($datos['fecha']));
