@@ -1,5 +1,5 @@
 <?php
-    class Admin extends Controlador{
+    class Trabajador extends Controlador{
 
         public function __construct(){
 
@@ -7,9 +7,10 @@
 
             //$this->datos["usuarioSesion"] = $this->asesoriaModelo->getPersona(1);
             $this->pedirConsultarPrestamo = $this->modelo('PedirConsultarPrestamo');
+            $this->cursoModelo = $this->modelo('CursoModelo');
 
 
-            $this->datos["rolesPermitidos"] = [1];
+            $this->datos["rolesPermitidos"] = [2];
 
             if(!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, $this->datos["rolesPermitidos"])){
                 exit();
@@ -19,23 +20,35 @@
         
         public function index(){
 
-            $this->vista("menu",$this->datos);
+            $this->vista("menuTrabajador",$this->datos);
 
         }
 
-        public function gestionar_economia(){
-
-            // $this->datos["prestamos"] = $this->prestamoModelo->get_prestamos();
-
-            $this->datos["PrestamosTotales"] = $this->pedirConsultarPrestamo->get_prestamos();
+        public function solicitar_prestamo(){
 
             $this->datos["tipoprestamo"] = $this->pedirConsultarPrestamo->gettipoPrestamo();
 
-            $this->datos["nombrepersona"] = $this->prestamoModelo->getpersonaPrestamo();
+            $this->datos["nombrepersona"] = $this->pedirConsultarPrestamo->getpersonaPrestamo();
 
 
             $this->vista("gestion/prestamos/pedirPrestamo",$this->datos);
         }
+
+        public function ver_prestamos(){
+
+            $this->datos["PrestamosTotales"] = $this->pedirConsultarPrestamo->get_prestamos();
+
+            $this->vista("gestion/prestamos/consultarPrestamo",$this->datos);
+
+        }
+
+        public function ver_cursos(){
+            
+            $this->datos["CursosTotales"] = $this->cursoModelo->get_cursos();
+
+            $this->vista("gestion/cursos",$this->datos);
+        }
+
 
         public function pedir_prestamo(){
             if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -46,7 +59,7 @@
                     //  redireccionar('/admin/gestionar_personas');
                 }else{   
                     if($this->pedirConsultarPrestamo->addPrestamo($prestamo)){
-                        redireccionar('/admin/gestionar_economia');
+                        redireccionar('/trabajador/solicitar_prestamo');
                     }else{
                         echo "Se ha producido un error";
                 }
@@ -54,7 +67,7 @@
                 }
 
             }else{
-                $this->vista("/admin",$this->datos);
+                $this->vista("/trabajador",$this->datos);
             }
                 
         }

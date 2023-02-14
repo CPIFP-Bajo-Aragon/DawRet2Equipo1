@@ -15,6 +15,8 @@
             $this->pedirConsultarPrestamo = $this->modelo('PedirConsultarPrestamo');
 
 
+
+
             $this->datos["rolesPermitidos"] = [1];
 
             if(!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, $this->datos["rolesPermitidos"])){
@@ -90,6 +92,14 @@
 
 
             $this->vista("gestion/prestamos/pedirPrestamo",$this->datos);
+        }
+
+        public function consultar_prestamos(){
+            
+            $this->datos["PrestamosTotales"] = $this->pedirConsultarPrestamo->get_prestamos();
+
+            $this->vista("gestion/prestamos/consultarPrestamo",$this->datos);
+
         }
 
 

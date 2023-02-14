@@ -25,16 +25,20 @@
                             redireccionar("/admin");
                             break;
                         case 2:
-                            print_r("Otro Rol N 1");
-                            redireccionar("/el controlador del rol 1");
+                            print_r("trabajador");
+                            redireccionar("/trabajador");
                             break;
                         case 3:
-                            print_r("Otro Rol N 2");
-                            redireccionar("/el controlador del rol 2");
+                            print_r("Default");
+                            redireccionar("/defecto");
                             break;
                         case 4:
-                            print_r("Otro Rol N 3");
-                            redireccionar("/el controlador del rol 4");
+                            print_r("master");
+                            redireccionar("/master");
+                            break;
+                        case 5:
+                            print_r("profesor");
+                            redireccionar("/profesor");
                             break;
                     }
 

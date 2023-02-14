@@ -12,7 +12,7 @@
     
 
 <div class="container">
-<form method="post" action="<?php echo RUTA_URL ?>/trabajador/pedir_prestamo">
+<form method="post" action="<?php echo RUTA_URL ?>/defecto/pedir_prestamo">
 
   <div class="row">
     <div class="col-3">

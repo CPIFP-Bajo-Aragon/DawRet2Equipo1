@@ -11,10 +11,7 @@
 </nav>
     <h1>Cursos</h1>
     
-    <?php 
-    print_r($this->datos["CursosTotales"]);
-    ?>
-
+    
 <!-- Button trigger modal -->
 <!-- <button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 +
