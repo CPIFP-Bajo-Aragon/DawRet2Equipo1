@@ -36,7 +36,7 @@
 
                 <label>Beca relacionada</label>
                 <select name="selectBeca">
-                    <option  id="enBlanco" value="" cheked></option>
+                    <option id="enBlanco" value="null" cheked></option>
                     <?php foreach($datos['tipoBeca'] as $tipoBeca): ?>
                         <option value="<?php echo $tipoBeca->Id_Beca ?>"><?php echo "Id Beca: " ?><?php echo $tipoBeca->Id_Beca ?><?php echo " - " ?><?php echo "Importe: "?><?php echo $tipoBeca->Importe ?></option>
                     <?php endforeach ?>

@@ -26,43 +26,48 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
   <div class="modal-body">
-
+  <form method="post" action="<?php echo RUTA_URL ?>/admin/add_prestamo">
     <div class="mb-3">
       <label for="NombreText" class="form-label">Nombre:</label>
-      <input type="text" class="form-control" id="text" aria-describedby="text">
-      <div id="textoAlumno" class="form-text">Introduce el nombre de una persona ya existente.</div>
+      <select name="Id_Persona">
+        <?php foreach($datos["nombrepersona"] as $prestamoNombrePersona): ?>
+          <option value="<?php echo $prestamoNombrePersona->Id_Persona ?>"><?php echo $prestamoNombrePersona->Nombre?></option>
+        <?php endforeach?>
+      </select>
     </div>
 
     <div class="mb-3">
       <label for="Concepto" class="form-label">Concepto:</label>
-      <input type="text" class="form-control" id="text" aria-describedby="text">
+      <input type="text" class="form-control" id="concepto" name="concepto" aria-describedby="text">
     </div>
 
     <label for="NombreText" class="form-label">Tipo de Préstamo:</label>
-    <select class="form-select" aria-label="Default select example">
-        <option value="1">Agricultura</option>
-        <option value="2">Otros</option>
+    <select name="Id_TipoPrestamo">
+      <?php foreach($datos["tipoprestamo"] as $tipoPrestamo): ?>
+        <option value="<?php echo $tipoPrestamo->Id_TipoPrestamo ?>"><?php echo $tipoPrestamo->Nombre?></option>
+        <?php endforeach?>
     </select>
 
     <label for="NombreText" class="form-label">Estado:</label>
-    <select class="form-select" aria-label="Default select example">
-        <option value="1">En proceso</option>
-        <option value="2">Pagado</option>
+    <select name="Id_Estado">
+      <?php foreach($datos["estado"] as $estado): ?>
+        <option value="<?php echo $estado->Id_Estado ?>"><?php echo $estado->Nombre?></option>
+        <?php endforeach?>
     </select>
     
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Fecha Inicio:</label>
-        <input type="date" class="form-control" id="exampleFormControlInput1">
+        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
     </div>
     
     <div class="mb-3">
         <label for="Importe" class="form-label">Importe:</label>
-        <input type="number" step="1.00" class="form-control" id="Importe" aria-describedby="text" required>
+        <input type="number" step="1.00" class="form-control" id="importe" name="importe" aria-describedby="text" required>
     </div>
     
     <br>
     <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        <textarea class="form-control" placeholder="Leave a comment here" id="observaciones" name="observaciones"></textarea>
         <label for="floatingTextarea">Observaciones</label>
     </div>
 
@@ -70,7 +75,9 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
     <button type="button" class="btn btn-primary">Guardar cambios</button>
+    <input type="submit" value="Entrar">
   </div>
+  </form>
 </div>
 </div>
 </div>
@@ -159,11 +166,21 @@
 
 
 <div class="container">
+  <div class="col-3">
+    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+      <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search" onkeyup="buscar()">
+    </form>
+    <select name="Tipo">
+        <option id="pendiente" value="Pendiente" onclick="filtrarTipoPendiente()">Pendiente</option>
+        <option id="finalizado" value="Finalizado" onclick="filtrarTipoFinalizado()">Finalizado</option>
+    </select>
+  </div>
+  <br>
 <table class="table table-striped table-hover">
   <thead class="thead-azul">
     <tr>
     <th scope="col">Nº Préstamo</th>
-    <th scope="col">Tipo Beca</th>
+    <th scope="col">Tipo</th>
     <th scope="col">Nombre Persona</th>
     <th scope="col">Fecha</th>
     <th scope="col">Cantidad</th>
@@ -171,102 +188,43 @@
     <th scope="col">Acciones</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Agricultura</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>
+  <tbody id="tbody">
+  <?php foreach ($datos["PrestamosTotales"] as $prestamo): ?>
+      <tr>
+        <th scope="row"><?php echo $prestamo ->Id_Prestamo?></th>
+        <td><?php echo $prestamo ->NombreTipo?></td>
+        <td><?php echo $prestamo ->NombrePers?></td>
+        <td><?php echo $prestamo ->Fecha_Inicio?></td>
+        <td><?php echo $prestamo ->Importe?></td>
+        <td>
+          <?php if($prestamo->Id_Estado == 1): ?>
+            <strong class="text-success"><?php echo $prestamo ->NombreEst
+          ?>
+          <?php elseif($prestamo->Id_Estado == 2): ?>
+            <strong class="text-danger"><?php echo $prestamo ->NombreEst?>
+          <?php endif ?>
           
-          <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
+        </td>
+        <td>
+          <!--Aqui van 2 botones-->
+          <a href="#">
+          <button type="button" class="w-80 btn btn-warning btn-lg">
             <i class="bi bi-search"></i>
-          </a>
+          </button>
+          <a>
 
-          <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#IngresoPrestamo">
+          <a href="#">
+          <button type="button" class="w-80 btn btn-warning btn-lg">
             <i class="bi bi-cash-coin"></i>
-          </a>
-          
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Agricultura</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>
-          
-          
-          <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
-            <i class="bi bi-search"></i>
-          </a>
-          
-          <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#IngresoPrestamo">
-            <i class="bi bi-cash-coin"></i>
-          </a>
-
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Agricultura</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>
-          
-          <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
-            <i class="bi bi-search"></i>
-          </a>
-
-          <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#IngresoPrestamo">
-            <i class="bi bi-cash-coin"></i>
-          </a>
-
-      </td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td>Agricultura</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>
-          
-          <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#VerMas">
-            <i class="bi bi-search"></i>
-          </a>
+          </button>
+          <a>
 
           
-          <a class="btn btn-link-primary" href="#" data-bs-toggle="modal" data-bs-target="#IngresoPrestamo">
-            <i class="bi bi-cash-coin"></i>
-          </a>
+        </td>
 
-      </td>
-    </tr>
+      </tr>
+    <?php endforeach?>
   </tbody>
 </table>
-<div class="Centros">
-<nav aria-label="Page navigation example">
-<ul class="pagination justify-content-center">
-<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-<li class="page-item"><a class="page-link" href="#">1</a></li>
-<li class="page-item"><a class="page-link" href="#">2</a></li>
-<li class="page-item"><a class="page-link" href="#">3</a></li>
-<li class="page-item"><a class="page-link" href="#">Next</a></li>
-</ul>
-</nav>
-</div>
-</div>
 
-
-    
-
-    
 <?php require_once RUTA_APP.'/vistas/inc/footer.php'?>

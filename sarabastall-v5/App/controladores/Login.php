@@ -34,7 +34,7 @@
                             break;
                         case 4:
                             print_r("Otro Rol N 3");
-                            redireccionar("/el controlador del rol 4");
+                            redireccionar("/master");
                             break;
                     }
 

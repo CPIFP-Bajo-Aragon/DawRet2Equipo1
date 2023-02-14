@@ -33,7 +33,6 @@
     </div>
 
     <a id="acceder_sesion" class="btn btn-primary me-md-2" type="button" href="<?php echo RUTA_URL ?>/login">ACCEDER</a>
-    <!-- <button id="acceder_sesion" type="button" class="btn btn-outline btn-sm ml-auto" href="">ACCEDER</button> -->
 
 </div>
 

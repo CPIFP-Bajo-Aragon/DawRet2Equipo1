@@ -30,30 +30,28 @@
         //Si se selecciona una beca vacia, que en la base de datos se añada como null
         public function add_movimiento($datos){
             print_r($datos);
-    
-            if($datos["selectBeca"]==""){
-               
-                $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov, Id_Beca) VALUES (:Fecha, :Procedencia, :Cantidad, :Id_TipoMov)");
+            
+            if($datos["selectBeca"]== "null"){
+                $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov) VALUES (:Fecha, :Procedencia, :Cantidad, :Id_TipoMov)");
 
                 $this->db->bind(':Fecha',trim($datos['fecha']));
                 $this->db->bind(':Procedencia', trim($datos['concepto']));
                 $this->db->bind(':Cantidad',trim($datos['cuantia']));
                 $this->db->bind(':Id_TipoMov', trim($datos['selectMovimiento']));
-                // $this->db->bind(':Id_Beca', trim($datos['selectBeca']));
-   
+
                 if($this->db->execute()){
                     return true;
                 }else{
                     return false;
                 }
-             }else{
-                $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov, Id_Beca) VALUES (:Fecha, :Procedencia, :Cantidad, :Id_TipoMov, :Id_Beca");
+            }else{
+                $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov, Id_Beca) VALUES (:Fecha, :Procedencia, :Cantidad, :Id_TipoMov, :Id_Beca)");
 
                 $this->db->bind(':Fecha',trim($datos['fecha']));
                 $this->db->bind(':Procedencia', trim($datos['concepto']));
                 $this->db->bind(':Cantidad',trim($datos['cuantia']));
                 $this->db->bind(':Id_TipoMov', trim($datos['selectMovimiento']));
-                 $this->db->bind(':Id_Beca', trim($datos['selectBeca']));
+                $this->db->bind(':Id_Beca', trim($datos['selectBeca']));
    
                 if($this->db->execute()){
                     return true;
@@ -61,10 +59,7 @@
                     return false;
                 }
             }
-
-           
-        
+                
         }
-
     }
 ?>
