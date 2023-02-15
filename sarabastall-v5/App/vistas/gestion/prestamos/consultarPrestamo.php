@@ -36,7 +36,7 @@
     </tr>
   </thead>
   <tbody id="tbody">
-  <?php foreach ($datos["PrestamosTotales"] as $prestamo): ?>
+  <?php foreach ($datos["prestamos"] as $prestamo): ?>
       <tr>
         <th scope="row"><?php echo $prestamo ->Id_Prestamo?></th>
         <td><?php echo $prestamo ->NombreTipo?></td>

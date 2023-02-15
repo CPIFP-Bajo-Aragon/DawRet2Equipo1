@@ -19,18 +19,15 @@
         
         public function index(){
 
+            $this->datos["CursosTotales"] = $this->cursoModelo->get_cursos();
+
             $this->vista("gestion/cursos",$this->datos);
 
         }
 
         
 
-        public function gestionar_cursos(){
-            
-            $this->datos["CursosTotales"] = $this->cursoModelo->get_cursos();
-
-            $this->vista("gestion/cursos",$this->datos);
-        }
+       
 
     }
 

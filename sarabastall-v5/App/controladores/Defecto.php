@@ -34,7 +34,10 @@
 
         public function ver_prestamos(){
 
-            $this->datos["PrestamosTotales"] = $this->pedirConsultarPrestamo->get_prestamos();
+            $id = $this->datos["usuarioSesion"]->Id_Persona;
+
+
+            $this->datos["prestamos"] = $this->pedirConsultarPrestamo->get_prestamos_usuario($id);
 
             $this->vista("gestion/prestamos/consultarPrestamo",$this->datos);
 
@@ -49,7 +52,7 @@
                 if(!$_POST['concepto'] && !$_POST['importe'] && !$_POST['fecha_inicio'] && !$_POST['Id_Persona'] && !$_POST['Id_TipoPrestamo']){
                     //  redireccionar('/admin/gestionar_personas');
                 }else{   
-                    if($this->pedirConsultarPrestamo->addPrestamo($prestamo)){
+                    if($this->pedirConsultarPrestamo->addPrestamoNombre($prestamo, $this->datos["usuarioSesion"]->Id_Persona)){
                         redireccionar('/defecto/solicitar_prestamo');
                     }else{
                         echo "Se ha producido un error";

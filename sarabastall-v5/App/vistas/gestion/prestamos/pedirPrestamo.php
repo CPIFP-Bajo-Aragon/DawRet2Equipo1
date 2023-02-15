@@ -15,18 +15,8 @@
 <form method="post" action="<?php echo RUTA_URL ?>/trabajador/pedir_prestamo">
 
   <div class="row">
-    <div class="col-3">
-    <div class="mb-3">
-      <label for="NombreText" class="form-label">Nombre:</label>
-        <select name="Id_Persona">
-        <?php foreach($datos["nombrepersona"] as $prestamoNombrePersona): ?>
-          <option value="<?php echo $prestamoNombrePersona->Id_Persona ?>"><?php echo $prestamoNombrePersona->Nombre?></option>
-          <?php endforeach?>
-        </select>
-    </div>
-    </div>
 
-    <div class="col-9">
+    <div class="col-12">
     <div class="mb-3">
       <label for="Concepto" class="form-label">Concepto:</label>
       <input type="text" class="form-control" id="concepto" name="concepto" aria-describedby="text">
