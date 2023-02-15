@@ -101,6 +101,8 @@
       </nav>
     </div>
 
+    <h2 id="nomaches"></h2>
+
     <script>
       window.onload=caja_fuerte(<?php echo json_encode($datos["MovimientosTotales"])?>);
       window.onload=listar_elementos(true);

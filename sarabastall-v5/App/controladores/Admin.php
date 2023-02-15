@@ -118,7 +118,7 @@
                 $curso=$_POST;
     
                 if($this->cursoModelo->mod_curso($curso, $id_curso)){
-                    redireccionar("/admin/see_curso/$id_curso");
+                    redireccionar("/admin/ver_curso/$id_curso");
                 } else{
                     echo "¡¡Se ha producido un error!!";
                 }
@@ -129,7 +129,7 @@
                 $this->datos["especialidades"] = $this->cursoModelo->get_especialidades();
                 $this->datos["profesores"] = $this->personaModelo->get_profesores();
     
-                $this->vista("gestion/detalles_curso",$this->datos);
+                $this->vista("gestion/ver_curso",$this->datos);
     
             }
 
@@ -154,7 +154,7 @@
         public function del_material($id_curso, $id_material){
             
             if($this->cursoModelo->del_Material($id_curso, $id_material)){
-                redireccionar("/admin/see_curso/$id_curso");
+                redireccionar("/admin/ver_curso/$id_curso");
             }else{
                 echo "Se ha producido un error";
             }
@@ -182,7 +182,7 @@
 
         public function del_centro(){  
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $Id_Centro = $_POST["Id_Centro"];
+                $Id_Centro = $_POST["id_centro"];
 
                 if($this->centroModelo->del_centro($Id_Centro)){
                     redireccionar("/admin/gestionar_centros");
@@ -192,12 +192,12 @@
             }   
         }
 
-        public function see_Centro($Id_Centro){
+        public function see_centro($Id_Centro){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $centro=$_POST;
 
                 if($this->centroModelo->editCentro($centro, $Id_Centro)){
-                    redireccionar("/admin/verCentro/$Id_Centro");
+                    redireccionar("/admin/ver_centro/$Id_Centro");
                 }else{
                     echo "¡Se ha producido un error!";
                 }
@@ -216,6 +216,24 @@
                 $centro = $_POST;
     
                 if($this->centroModelo->add_centro($centro)){
+                    redireccionar("/admin/gestionar_centros");
+                }else{
+                    echo "Se ha producido un error";
+                }
+    
+            }else{
+    
+            } 
+
+        }
+
+        public function add_ciudad(){
+
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+                $ciudad = $_POST;
+    
+                if($this->centroModelo->add_ciudad($ciudad)){
                     redireccionar("/admin/gestionar_centros");
                 }else{
                     echo "Se ha producido un error";
@@ -271,11 +289,9 @@
         public function see_persona($id_persona){
             if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $persona = $_POST;
-                // print_r($persona);
-                // exit();
     
                 if($this->personaModelo->editPersona($persona, $id_persona)){
-                    redireccionar("/admin/verPersona/$id_persona");
+                    redireccionar("/admin/ver_persona/$id_persona");
                 }else {
                     echo "Se ha producido un error";
                 }
@@ -284,7 +300,7 @@
                 $this->datos["persona"] = $this->personaModelo->getVisualizarPersona($id_persona);
 
                  //print_r($this->datos["persona"]);
-                $this->vista("gestion/personas/editarPersona",$this->datos);
+                $this->vista("gestion/ver_persona",$this->datos);
             }
     
     

@@ -72,7 +72,7 @@ function listar_elementos(inicial){
                     newBoton = document.createElement("button");
                     newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
                     newA = document.createElement("a");
-                    newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0];  // Se puede mejorar la Url 
+                    newA.href = 'http://localhost/sarabastall/admin/see_' + item + '/' + arraySon[0];  // Se puede mejorar la Url 
                     newI = document.createElement("i");
                     newI.classList.add("bi", "bi-pencil-square");
                     newA.appendChild(newI);
@@ -115,14 +115,14 @@ function listar_elementos(inicial){
 }
 
 function page_maker() {
-  max = Math.trunc(arrayMaestro.length/nItems);
+  max = parseInt(arrayMaestro.length%nItems) + 1;
   
   document.getElementById("page_panel").innerHTML ="";
 
   let newLi = document.createElement("li");
   let newA = document.createElement("a");
 
-  if ((max >= 1)&&(arrayMaestro.length%nItems != 0)){
+  if ((max > 1)&&(arrayMaestro.length > nItems)){
     newLi.classList.add("page-item");
     newLi.id = "page_a";
     newA.classList.add("page-link");
@@ -132,14 +132,14 @@ function page_maker() {
     document.getElementById("page_panel").appendChild(newLi);
 
     // Creamos Paginas
-    for(i = 0; i <= max; i++){ // PROBLEMAS FUTUROS CON GO_PAGE ESPERADOS
+    for(i = 1; i <= max; i++){ // PROBLEMAS FUTUROS CON GO_PAGE ESPERADOS
       newLi = document.createElement("li");
       newA = document.createElement("a");
       newLi.classList.add("page-item");
       newA.classList.add("page-link");
-      newA.setAttribute("name", parseInt(i)+1);
+      newA.setAttribute("name", i);
       newA.setAttribute("onclick", 'go_page(this)');
-      newA.innerText = parseInt(i)+1;
+      newA.innerText = i;
       newLi.appendChild(newA);
       document.getElementById("page_panel").appendChild(newLi);
 
@@ -163,12 +163,12 @@ function page_maker() {
 
 function control_paginacion(){
 
-  max = parseInt(arrayMaestro.length/nItems);
+  max = parseInt(arrayMaestro.length%nItems) + 1;
   page = document.getElementById("page_controller").value;
   
   // Desabilitar Siguiente
-  if (max != 0){
-    if(page == max){
+  if ((max > 1)&&(arrayMaestro.length > nItems)){
+    if(page == max-1){
       document.getElementById("page_s").classList.add("disabled");
     } else {
       document.getElementById("page_s").classList.remove("disabled");

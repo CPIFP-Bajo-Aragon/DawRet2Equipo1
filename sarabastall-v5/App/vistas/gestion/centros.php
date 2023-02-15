@@ -11,116 +11,56 @@
 </nav>
     <h1>CENTROS</h1>
 
+    <button id="botonCiudad">Añadir Nueva Ciudad</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<span class="cerrar">&times;</span>
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Nuevo Préstamo</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
 
-    <div class="mb-3">
-      <label for="NombreText" class="form-label">Nombre:</label>
-      <input type="text" class="form-control" id="text" aria-describedby="text">
-      <div id="textoAlumno" class="form-text">Introduce el nombre de una persona ya existente.</div>
-    </div>
+<!-- Ventana modal para insertar un nuevo centro -->
+<div id="ventanaModal" class="modalJS">
+    <div class="contenido-modal">
+        <span class="cerrar">&times;</span>
+        <h4 class="tituloModal">Crear nuevo centro</h4>
+        <br>
+        <hr>
+        <form method="post" action="<?php echo RUTA_URL ?>/admin/add_centro">
+            <label>Nombre Centro:</label>
+            <input type="text" id="nombreCentro" name="nombreCentro">
+            <p id="ErrorNombre"></p>
 
-    <div class="mb-3">
-      <label for="Concepto" class="form-label">Concepto:</label>
-      <input type="text" class="form-control" id="text" aria-describedby="text">
-    </div>
+            <label>Ciudad:</label>
+            <select name="selectNombre">
+              <?php foreach($datos["ciudades"] as $ciudad): ?>
+                <option value="<?php echo $ciudad->Id ?>"><?php echo $ciudad->Nombre?></option>
+              <?php endforeach ?>
+            </select>
 
-    <label for="NombreText" class="form-label">Tipo de Préstamo:</label>
-    <select class="form-select" aria-label="Default select example">
-        <option value="1">Agricultura</option>
-        <option value="2">Otros</option>
-    </select>
+            <label>Cuantia:</label>
+            <input type="number" step="any" id="cuantia" name="cuantia"> 
+            <p id="ErrorCuantia"></p>
 
-    <label for="NombreText" class="form-label">Estado:</label>
-    <select class="form-select" aria-label="Default select example">
-        <option value="1">En proceso</option>
-        <option value="2">Pagado</option>
-    </select>
-    
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Fecha Inicio:</label>
-        <input type="date" class="form-control" id="exampleFormControlInput1">
-    </div>
-    
-    <div class="mb-3">
-        <label for="Importe" class="form-label">Importe:</label>
-        <input type="number" step="1.00" class="form-control" id="Importe" aria-describedby="text" required>
-    </div>
-    
-    <br>
-    <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-        <label for="floatingTextarea">Observaciones</label>
-    </div>
+            <input type="submit" value="Insertar" onclick="todos()">
+        </form>
 
     </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary">Guardar cambios</button>
-  </div>
-</div>
-</div>
-</div>
 </div>
 
-<!-- Modal Ver Mas -->
-<div class="modal fade" id="VerMas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Ingresos</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
+<!-- Ventana modal para añadir nuevas ciudades -->
+<div id="MODAlciudad" class="modalJS">
+      <div class="contenidoModal">
+          <span class="cerrar">&times;</span>
+          <h4 class="titulo">Crear nuevas ciudades</h4>
+          <br>
+          <br>
+          <form method="post" action="<?php echo RUTA_URL ?>/admin/add_ciudad">
+              <label>Nombre Ciudad:</label>
+              <input type="text" id="Nombre_Ciudad" name="Nombre_Ciudad">
 
-  <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Ingreso realizado</h5>
-        <small class="text-muted">25/09/2022</small>
+              <label>Distancia:</label>
+              <input type="number" step="any" id="Distancia" name="Distancia">
+
+              <input type="submit" value="Agregar" onclick="todos()">
+          </form>
       </div>
-      <p class="Ingreso">230</p>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Ingreso realizado</h5>
-        <small class="text-muted">26/09/2022</small>
-      </div>
-      <p class="Ingreso">150</p>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Ingreso realizado</h5>
-        <small class="text-muted">28/09/2022</small>
-      </div>
-      <p class="Ingreso">70</p>
-    </a>
   </div>
-    
-    <br>
-    <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-        <label for="floatingTextarea">Observaciones</label>
-    </div>
-
-    </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary">Guardar cambios</button>
-  </div>
-</div>
-</div>
-</div>
-</div>
 
 <!-- Modal Seguro desea Eliminar -->
 
@@ -149,8 +89,6 @@
       </div>
   </div> 
 </div>
-
-
 
 
 <div id="container">
@@ -182,37 +120,40 @@
 
   <input disabled id="page_controller" name="centro" value="0" hidden>
   <div class="container">
-      <table class="table table-striped table-hover">
-        <thead class="thead-azul">
-          <tr>
-              <th scope="col">Nº Centro</th>
-              <th scope="col">Ciudad</th>
-              <th scope="col">Nombre Centro</th>
-              <th scope="col">Cuantia</th>
-              <th scope="col">Distancia</th>
-              <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="contenido_tabla">
+    <table class="table table-striped table-hover">
+      <thead class="thead-azul">
+        <tr>
+          <th scope="col">Nº Centro</th>
+          <th scope="col">Ciudad</th>
+          <th scope="col">Nombre Centro</th>
+          <th scope="col">Cuantia</th>
+          <th scope="col">Distancia</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="contenido_tabla">
           
-        </tbody>
-      </table>
+      </tbody>
+    </table>
 
     <div class="Centros">
-    <nav aria-label="Page navigation example">
-      <ul id="page_panel" class="pagination justify-content-center">
-        
-      </ul>
-    </nav>
+      <nav aria-label="Page navigation example">
+        <ul id="page_panel" class="pagination justify-content-center">
+          
+        </ul>
+      </nav>
     </div>
 
     <h2 id="nomaches"></h2>
 
   </div>
 
+  <br>
+  <br>
+  <br>
+  
 
-
-  <script>
+<script>
 
   window.onload=caja_fuerte(<?php echo json_encode($datos["centros"])?>); // Aqui pasamos el array en cuestion recibido por PHP
 

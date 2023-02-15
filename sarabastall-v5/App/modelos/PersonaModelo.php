@@ -27,15 +27,15 @@
             pers.Direccion as Direccion, pers.Fecha_Nacimiento as Fecha_Nacimiento, pers.Telefono as Telefono,
             pers.Email as Email, pers.Login as Login
             FROM PERSONA pers, ROL r
-            WHERE r.Id_Rol = pers.Id_Rol");
+            WHERE r.Id_Rol = pers.Id_Rol AND pers.Id_Estado != 3");
 
             return $this->db->registros();
 
         }
 
         public function addPersona($datos){
-            $this->db->query("INSERT INTO PERSONA (Nombre, Apellidos, Direccion, Fecha_Nacimiento, Telefono, Email)
-                VALUES (:nombrePersona, :apellidosPersona, :direccionPersona, :fechaNacimientoPersona, :telefonoPersona, :emailPersona)");
+            $this->db->query("INSERT INTO PERSONA (Nombre, Apellidos, Direccion, Fecha_Nacimiento, Telefono, Email, Id_Rol, Id_Estado)
+                VALUES (:nombrePersona, :apellidosPersona, :direccionPersona, :fechaNacimientoPersona, :telefonoPersona, :emailPersona, 5, 2)"); // CAMBIAR El ROL Por el que sea No Log
 
                 $this->db->bind(':nombrePersona',trim($datos['nombrePersona']));
                 $this->db->bind(':apellidosPersona',trim($datos['apellidosPersona']));
@@ -56,16 +56,16 @@
 
         public function eliminarPersona($id_persona){
             // Funcion para eliminar un curso
+            $this->db->query("UPDATE PERSONA SET Id_Estado= 3 WHERE Id_Persona=:Id_Persona");
             
-            $this->db->query("DELETE FROM PERSONA WHERE Id_Persona = :id_persona");
-            
-            $this->db->bind(':id_persona', $id_persona);
+            $this->db->bind(':Id_Persona', $id_persona);
 
             if($this->db->execute()){
-                return true; // OBSERVACION; Puede que borrar un curso no sea buena idea si eso conlleva eliminar los movimientos asociados.
+                return true;
             }else{
                 return false;
             }
+            
         }
 
         public function getVisualizarPersona($id_persona){

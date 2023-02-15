@@ -11,6 +11,8 @@
     <h1>Personas</h1>
 <!-- Modal -->
 
+
+
 <button id="abrirModal">+</button>
 
 
@@ -47,15 +49,13 @@
             <input type="text" id="emailPersona" name="emailPersona">
             <p id="ErrorFecha"></p>
             <br>
-            <br>
-            <!-- <label>Login:</label>
-            <input type="text" id="loginPersona" name="loginPersona">
-            <p id="ErrorFecha"></p> -->
             <hr>
-            <input class="boton" value="Guardar Cambios" type="button" onclick="importeNoNegativo()">
-            <input type="submit" value="Entrar" onclick="todos()">
-            <div class="col-10">
-                <button type="submit" class="w-100 btn btn-success btn-lg">Guardar</button>
+            <!--<input class="boton" value="Guardar Cambios" type="button" onclick="importeNoNegativo()">-->
+            
+            <div class="">
+                <button type="submit" value="Entrar" class="w-100 btn btn-success btn-lg" onclick="todos()">
+                  Añadir
+                </button>
             </div>
         </form>
 
@@ -64,7 +64,7 @@
 
 <!-- Modal Seguro desea Eliminar -->
 
-<div class="modal fade" id="modalEliminarPersona" tabindex="-1">
+<div class="modal fade" id="modalEliminarpersona" tabindex="-1">
   <div class="modal-dialog modal-dialog-center"> 
       <div class="modal-content">
           <div class="modal-header">
@@ -74,7 +74,7 @@
           </div>
 
           <div  class="modal-footer"> 
-              <form method="post" id="formCerrarAccion" action="<?php echo RUTA_URL ?>/admin/eliminarPersona">
+              <form method="post" id="formCerrarAccion" action="<?php echo RUTA_URL ?>/admin/del_persona">
               <input type="hidden" id="Id_Eliminar" name="id_persona">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                   Cancelar
@@ -142,6 +142,7 @@
   </nav>
 </div>
 
+<h2 id="nomaches"></h2>
 
 <script>
   window.onload=caja_fuerte(<?php echo json_encode($datos["PersonasTotales"])?>);
@@ -150,5 +151,9 @@
 
 
 </div>
+
+<br>
+<br>
+<br>
 
 <?php require_once RUTA_APP.'/vistas/inc/footer.php'?>

@@ -209,4 +209,119 @@ table{
       box-shadow: 0 1px 1px  #95c0fe inset, 0 0 8px  #95c0fe;
       outline: 0 none;
   }
+
+  /* MODAL NUEVA CIUDAD */
+.contenidoModal{
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 10px;
+    width: 25%;
+}
+
+#modalCiudad{
+    float: center;
+    background-color: #0d6efd;
+    color: #FFFFFF;
+    padding-top: 0.35em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    padding-bottom: 0.75em;
+}
+
+.cerrarVentana{
+    float: right;
+}
+
+input[type=text], [type=date], [type=number], select {
+    font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.titulo{
+    float:left;
+}
+
+.button{
+    background-color: #0d6efd;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+}
+
+#botonCiudad{
+    float:right;
+    background-color: #0d6efd;
+    color:white;
+    border-radius: 5px;
+    padding-top:0.35em;
+    padding-left:0.75em;
+    padding-right:0.75em;
+    padding-bottom:0.35em;
+}
+
+input:focus, input[type]:focus, select:focus {
+    border-color: #95c0fe;
+    box-shadow: 0 1px 1px  #95c0fe inset, 0 0 8px  #95c0fe;
+    outline: 0 none;
+}
+
+/* MODAL NUEVOS MOVIMIENTOS */
+.modalJS { 
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 30px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    
+}
+
+.content {
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 10px;
+    width: 25%;
+}
+  
+.salir{
+    float:right;
+}
+  
+input[type=text], [type=date], [type=number], select {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+  
+.title{
+    float:left;
+}
+
+#insert{
+    float:right;
+    background-color: #0d6efd;
+    color:white;
+    border-radius: 5px;
+    padding-top:0.35em;
+    padding-left:0.75em;
+    padding-right:0.75em;
+    padding-bottom:0.35em;
+}
   

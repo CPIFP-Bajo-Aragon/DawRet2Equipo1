@@ -29,6 +29,42 @@ window.addEventListener("click",function(event) { //Window es una propiedad que 
   }
 });
 
+
+//Ventana modal para añadir NUEVAS CIUDADES
+let modalC = document.getElementById("MODAlciudad");
+
+// Botón que abre el modal
+let btn = document.getElementById("botonCiudad");
+
+// Hace referencia al span que tiene la X que cierra la ventana
+let span2 = document.getElementsByClassName("cerrar")[1];
+
+// Cuando el usuario hace click en el botón, se abre la ventana Modal
+if (btn){
+  btn.addEventListener("click",function() {
+    
+    modalC.style.display = "block";
+  });
+}
+
+// Si el usuario hace click en la x, la ventana se cierra
+
+if (span2){
+  span2.addEventListener("click",function() {
+    modalC.style.display = "none";
+  });
+}
+
+// Si el usuario hace click fuera de la ventana, se cierra.
+window.addEventListener("click",function(event) { //Window es una propiedad que hace referencia a la ventana actual
+  if (event.target == modalC) {
+    modalC.style.display = "none";
+  }
+});
+
+
+
+
 //Formularios
 
 //Importe negativo
@@ -124,7 +160,7 @@ function todos(){
 
 
 
-// Funciones Auxiliares Gestion Cursos
+// Funciones Auxiliares Gestion
 
 function place_id(Id){
   document.getElementById("Id_Eliminar").setAttribute("value", Id);
@@ -213,7 +249,7 @@ function filtrar(){
 
       if (Object.values(listado[i])[1] == filtro){ // El 1 indica la columna que esta filtrando, en otras gestiones puede que no sea el 1, en cuyo caso 2 opciones, Moverlo, o indicar la columna por hidden
         arrayMaestro.push(listado[i]); // Agrega el item que pase el filtro
-        //alert(Object.values(listado[i])); Muestra los items que pasan el filtro
+        //alert(Object.values(listado[i])); //Muestra los items que pasan el filtro
       }
     }
   }
