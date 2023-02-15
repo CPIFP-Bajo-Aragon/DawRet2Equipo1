@@ -94,7 +94,7 @@
 </div>
 
 
-<div class="container">
+<div class="container" id="contenedor">
 <div class="col-3">
     <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
       <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
@@ -114,14 +114,20 @@
   <br>
   
 </div>
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover" id="TablaOrden">
   <thead class="thead-azul">
     <tr>
     <th scope="col">Nº</th>
     <th scope="col">Nombre</th>
     <th scope="col">Apellidos</th>
     <th scope="col">Direccion</th>
-    <th scope="col">Fecha Nacimiento</th>
+    <th scope="col">Fecha Nacimiento
+
+    <button type="button" name="ordenard" id="ordenar" value="Ordenar por Fecha" onclick="ordenaras()">ASCENDENTE</button>
+
+    <button type="button" name="ordenard" id="ordenar" value="Ordenar por Fecha" onclick="ordendes()">DESCENDENTE</button>
+
+    </th>
     <th scope="col">Telefono</th>
     <th scope="col">Email</th>
     <th scope="col">Usuario</th>
@@ -174,7 +180,12 @@
 </nav>
 </div>
 
+<script>
+const datosTabla=<?php echo json_encode($persona)?>;
+</script>
 
 </div>
+
+
 
 <?php require_once RUTA_APP.'/vistas/inc/footer.php'?>

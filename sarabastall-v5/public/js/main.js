@@ -341,3 +341,110 @@ function filtrarRolMaster(){
     tr[i].style.display = display;
   }
 }	
+
+function ordenaras(){
+  
+  //cuando llamamos a la funcion le decimos a la tabla que tenemos que se ponga en display none
+  const ocul=document.getElementById("TablaOrden").style = 'display: none;';
+
+  //ordenamos la tabla con la funcion sort los parametros a y b nos indicaran que fecha es mayor o menor
+  const d= datosTabla.sort((a, b) => new Date(a.Fecha_Nacimiento).getTime() > new Date(b.Fecha_Nacimiento).getTime());
+
+  //creamos la tabla con javascript
+  const contenedor = document.getElementById("contenedor");
+    
+  const tabla = document.createElement("table");
+  tabla.setAttribute('id', 'TablaOrden');
+
+  let tr = document.createElement("tr");
+
+ 
+    //array para poner en th y no tener que escribir tanto codigo
+  const array = [
+    {nombre: "Nº"},
+    {nombre: "Nombre"},
+    {nombre: "Apellidos"},
+    {nombre: "Direccion"},
+    {nombre: "Fecha de Nacimiento"},
+    {nombre: "Telefono"},
+    {nombre: "Email"},
+    {nombre: "Usuario"},
+    {nombre: "Tipo_Rol"},
+  ];
+  //recorremos array y le ponemos cada una a una columna
+  for (let i = 0; i < array.length; i++) {
+    let th = document.createElement("th");
+    let thText = document.createTextNode(array[i].nombre);
+    
+    th.appendChild(thText);
+    tr.appendChild(th);
+
+    
+  }
+
+  //recorremos el array con todos los datos y llenamos la tabla
+   d.forEach((e) => {
+
+    tabla.appendChild(tr);
+
+    tr = document.createElement("tr");
+    
+    td = document.createElement("td");
+
+    //le damos al boton que hemos creado la funciones correspondientes
+    button.onclick=function () {
+      verinfocliente(e.Id_Persona);
+      window.modal.showModal();
+    };
+    //button.appendChild(Text);
+    td.appendChild(button);
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    tdText = document.createTextNode(e.Nombre);
+    td.appendChild(tdText);
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    tdText = document.createTextNode(e.Apellidos);
+    td.appendChild(tdText);
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    tdText = document.createTextNode(e.Direccion);
+    td.appendChild(tdText);
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    tdText = document.createTextNode(e.Fecha_Nacimiento);
+    td.appendChild(tdText);
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    tdText = document.createTextNode(e.Telefono);
+    td.appendChild(tdText);
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    tdText = document.createTextNode(e.Email);
+    td.appendChild(tdText);
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    tdText = document.createTextNode(e.Login);
+    td.appendChild(tdText);
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    tdText = document.createTextNode(e.Nombre_Rol);
+    td.appendChild(tdText);
+    tr.appendChild(td);
+
+    tabla.appendChild(tr);
+
+    
+  });
+
+  contenedor.appendChild(tabla);
+
+}
