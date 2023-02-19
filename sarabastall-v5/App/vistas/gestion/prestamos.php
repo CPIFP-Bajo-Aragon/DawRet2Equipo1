@@ -50,8 +50,8 @@
 
     <label for="NombreText" class="form-label">Estado:</label>
     <select name="Id_Estado">
-      <?php foreach($datos["estado"] as $estado): ?>
-        <option value="<?php echo $estado->Id_Estado ?>"><?php echo $estado->Nombre?></option>
+      <?php foreach($datos["estados"] as $estado): ?>
+        <option value="<?php echo $estado->Id ?>"><?php echo $estado->Nombre?></option>
         <?php endforeach?>
     </select>
     
@@ -74,8 +74,7 @@
     </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary">Guardar cambios</button>
-    <input type="submit" value="Entrar">
+    <button type="submit" class="btn btn-primary">Añadir Prestamo</button>
   </div>
   </form>
 </div>
@@ -135,7 +134,7 @@
 
 
 <!-- Modal ingresos -->
-<div class="modal fade" id="IngresoPrestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEliminarprestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
   <div class="modal-header">
@@ -144,6 +143,8 @@
   </div>
   <div class="modal-body">
 
+  <!-- Añadir Formulario y funcion de crear Abono, y Movimiento -->
+        
     <div class="mb-3">
         <label for="Importe" class="form-label">Ingreso:</label>
         <input type="number" step="1.00" class="form-control" id="Importe" aria-describedby="text" required>
@@ -200,6 +201,9 @@
   
   </tbody>
 </table>
+
+<h2 id="nomaches"></h2>
+
 <div class="Centros">
 <nav aria-label="Page navigation example">
 <ul id="page_panel" class="pagination justify-content-center">
@@ -209,7 +213,7 @@
 </div>
 </div>
 
-<h2 id="nomaches"></h2>
+
 
 
 <script>

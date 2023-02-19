@@ -42,7 +42,7 @@
             $this->datos["nombrepersona"] = $this->prestamoModelo->getpersonaPrestamo();
 
             $this->datos["tipoprestamo"] = $this->prestamoModelo->gettipoPrestamo();
-
+            
             $this->datos["estado"] = $this->prestamoModelo->getestado();
             $this->datos["estados"] = $this->prestamoModelo->get_estados();
             

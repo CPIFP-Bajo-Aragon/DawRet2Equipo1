@@ -63,7 +63,20 @@ function listar_elementos(inicial){
                 switch(item){
                   case "movimiento":
                     break;
-                  case "":
+                  case "prestamo":
+                    newTd = document.createElement("td");
+                    newBoton = document.createElement("button");
+                    newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
+                    newBoton.setAttribute("onclick", 'place_id(' + arraySon[0]+ ')');
+                    newBoton.setAttribute("data-bs-toggle", "modal");
+                    newBoton.setAttribute("data-bs-target", "#modalEliminar" + item);
+
+
+                    newI = document.createElement("i");
+                    newI.classList.add("fa", "fa-share-square");
+
+                    newBoton.appendChild(newI);
+                    newTd.appendChild(newBoton);
                     break;
                   case "":
                     break;

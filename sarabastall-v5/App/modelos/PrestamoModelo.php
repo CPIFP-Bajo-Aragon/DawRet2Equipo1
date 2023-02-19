@@ -8,8 +8,9 @@
 
         //Funciones de Prestamo
 
+        
         public function get_prestamos(){
-            $this->db->query("SELECT p.Id_Prestamo, p.Concepto, p.Importe, est.Id_Estado, est.Nombre as NombreEst, p.Fecha_Inicio, pers.Nombre as NombrePers, tipo.Nombre as NombreTipo 
+            $this->db->query("SELECT p.Id_Prestamo, est.Nombre as NombreEst, tipo.Nombre as NombreTipo, pers.Nombre as NombrePers, p.Fecha_Inicio, p.Importe
                                 FROM PRESTAMO p, PERSONA pers, TIPO_PRESTAMO tipo, ESTADO est
                             WHERE pers.Id_Persona=p.Id_Persona AND tipo.Id_TipoPrestamo=p.Id_TipoPrestamo AND est.Id_Estado=p.Id_Estado");
 
@@ -18,14 +19,27 @@
         }
 
         public function addPrestamo($datos){
-            $this->db->query("INSERT INTO PRESTAMO (Concepto, Importe, Observaciones, Fecha_Inicio, Id_Persona, Id_TipoPrestamo, Id_Estado)
-                VALUES (:concepto, :importe, :observaciones, :fecha_inicio, :Id_Persona, :Id_TipoPrestamo, :Id_Estado)");
+
+
+            $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov)
+                VALUES (NOW(), :texto, :importe, 1)");
+
+                $this->db->bind(':texto', "Prestamo Concedido a: #".trim($datos['Id_Persona']));
+                $this->db->bind(':importe',trim($datos['importe']));
+
+            $this->db->execute();
+            // Consulta o funcion para insertar nuevo movimiento (Si es funcion, devolvera el id del movimineto)
+            $id_movimiento = $this->db->executeLastId();
+
+
+            $this->db->query("INSERT INTO PRESTAMO (Concepto, Importe, Observaciones, Fecha_Inicio, Id_Persona, Id_TipoPrestamo, Id_Movimiento, Id_Estado)
+                VALUES (:concepto, :importe, :observaciones, NOW(), :Id_Persona, :Id_TipoPrestamo, :movimiento, :Id_Estado)");
 
                 $this->db->bind(':concepto',trim($datos['concepto']));
                 $this->db->bind(':importe',trim($datos['importe']));
                 $this->db->bind(':observaciones',trim($datos['observaciones']));
-                $this->db->bind(':fecha_inicio',trim($datos['fecha_inicio']));
                 $this->db->bind(':Id_Persona',trim($datos['Id_Persona']));
+                $this->db->bind(':movimiento',$id_movimiento);
                 $this->db->bind(':Id_TipoPrestamo',trim($datos['Id_TipoPrestamo']));
                 $this->db->bind(':Id_Estado',trim($datos['Id_Estado']));
                 

@@ -110,6 +110,10 @@
 
 </div>
 
+<br>
+<br>
+<br>
+
 
 
 <?php require_once RUTA_APP.'/vistas/inc/footer.php'?>
