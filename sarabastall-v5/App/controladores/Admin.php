@@ -71,17 +71,17 @@
 
 
         //PARA LA GESTION DEL CENTRO
-        public function del_centro(){  
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $Id_Centro = $_POST["Id_Centro"];
+        // public function del_centro(){  
+        //     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        //         $Id_Centro = $_POST["Id_Centro"];
 
-                if($this->centroModelo->del_centro($Id_Centro)){
-                    redireccionar("/admin/gestionar_centros");
-                }else{
-                    echo "Se ha producido un error";
-                }
-            }   
-        }
+        //         if($this->centroModelo->del_centro($Id_Centro)){
+        //             redireccionar("/admin/gestionar_centros");
+        //         }else{
+        //             echo "Se ha producido un error";
+        //         }
+        //     }   
+        // }
 
         public function verCentro($Id_Centro){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){

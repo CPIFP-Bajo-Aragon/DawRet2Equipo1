@@ -59,28 +59,6 @@
     </div>
 </div>
 
-
-<!-- Modal para  confirmar que elimina un registro de la tabla-->
-<div class="modal fade" id="modalEliminarCentro" tabindex="-1">
-  <div class="modal-dialog modal-dialog-center"> 
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="modalCerrarAccionLabel">
-                  ¿Seguro qué desea eliminar el centro?
-              </h5>
-          </div>
-
-          <div  class="modal-footer"> 
-              <form method="post" id="formCerrarAccion" action="<?php echo RUTA_URL ?>/admin/del_centro">
-                <input type="hidden" id="Id_Eliminar" name="Id_Centro">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-warning">Eliminar</button>
-              </form>
-          </div>
-      </div>
-  </div> 
-</div>
-
 <!-- Contenedor principal con la tabla -->
 <div id="container">
     <button id="abrirModal">+</button>
@@ -118,9 +96,6 @@
                           <i class="bi bi-pencil-square"></i>
                         </button>
                       </a>
-                      <button type="button" onclick="place_id(<?php echo $centro->Id_Centro ?>)" data-bs-toggle="modal" data-bs-target="#modalEliminarCentro" class="w-80 btn btn-warning btn-lg">
-                          <i class="bi bi-trash"></i>
-                      </button>
                     </td>
             </tr>
             <?php endforeach?>

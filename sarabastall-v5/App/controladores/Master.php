@@ -116,21 +116,18 @@
         public function pedir_prestamo(){
             if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $prestamo = $_POST;
-                   print_r($prestamo);
 
                 if(!$_POST['concepto'] && !$_POST['importe'] && !$_POST['fecha_inicio'] && !$_POST['Id_Persona'] && !$_POST['Id_TipoPrestamo']){
-                    //  redireccionar('/admin/gestionar_personas');
+                     redireccionar('/master/gestionar_personas');
                 }else{   
                     if($this->pedirConsultarPrestamo->addPrestamo($prestamo)){
-                        redireccionar('/defecto/solicitar_prestamo');
+                        redireccionar('/master/solicitar_prestamo');
                     }else{
                         echo "Se ha producido un error";
+                    }
                 }
-
-                }
-
             }else{
-                $this->vista("/defecto",$this->datos);
+                $this->vista("/master",$this->datos);
             }
                 
         }

@@ -28,33 +28,27 @@
             <label>Nombre:</label>
             <input type="text" id="nombrePersona" name="nombrePersona">
             <p id="ErrorNombre"></p>
-            <br>
+
             <label>Apellidos:</label>
             <input type="text" id="apellidosPersona" name="apellidosPersona">
             <p id="ErrorProfesor"></p>
-            <br>
-            <br>
+
             <label>Direccion:</label>
             <input type="text" id="direccionPersona" name="direccionPersona">
             <p id="ErrorProfesor"></p>
-            <br>
+
             <label>Fecha Nacimiento:</label>
             <input type="date" id="fechaNacimientoPersona" name="fechaNacimientoPersona">
             <p id="ErrorFecha"></p>
-            <br>
+
             <label>Telefono:</label>
             <input type="text" id="telefonoPersona" name="telefonoPersona">
             <p id="ErrorImporte"></p>
-            <br>
+
             <label>Email:</label>
             <input type="text" id="emailPersona" name="emailPersona">
             <p id="ErrorFecha"></p>
-            <br>
-            <br>
-            <!-- <label>Login:</label>
-            <input type="text" id="loginPersona" name="loginPersona">
-            <p id="ErrorFecha"></p> -->
-            <hr>
+
             <input class="boton" value="Guardar Cambios" type="button" onclick="importeNoNegativo()">
             <input type="submit" value="Entrar" onclick="todos()">
             <div class="col-10">

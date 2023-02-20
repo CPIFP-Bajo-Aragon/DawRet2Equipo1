@@ -9,7 +9,7 @@
         //Funciones de Movimientos
 
         public function get_movimientos(){
-            $this->db->query("SELECT m.Id_Movimiento as Id_Movimiento, m.Procedencia as Procedencia, m.Fecha as Fecha, m.Cantidad as Cantidad, 
+            $this->db->query("SELECT m.Id_Movimiento as Id_Movimiento, tm.Id_TipoMov as Id_TipoMov, m.Procedencia as Procedencia, m.Fecha as Fecha, m.Cantidad as Cantidad, 
                                 tm.Nombre_TipoMov as Nombre_TipoMov, m.Id_Beca as Id_Beca FROM MOVIMIENTO m, TIPO_MOVIMIENTO tm
                                 WHERE m.Id_TipoMov = tm.Id_TipoMov");
             return $this->db->registros();

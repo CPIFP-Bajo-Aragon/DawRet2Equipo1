@@ -62,7 +62,6 @@
                     <th scope="col">Concepto</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Cantidad</th>
-                    <th scope="col">Tipo Movimiento</th>
                     <th scope="col">Id Beca</th>
                 </tr>
             </thead>
@@ -72,8 +71,17 @@
                         <th scope="row"><?php echo $movimiento->Id_Movimiento?></th>
                         <td><?php echo $movimiento->Procedencia?></td>
                         <td> <?php echo formatFecha($movimiento->Fecha)?></td>
-                        <td><?php echo $movimiento->Cantidad?></td>
-                        <td><?php echo $movimiento->Nombre_TipoMov?></td>
+                        <td>
+                            <?php if($movimiento->Id_TipoMov == 1): ?>
+                                <strong class="text-success"><?php echo $movimiento->Cantidad?>
+
+                            <?php endif ?>
+
+                           <?php if($movimiento->Id_TipoMov == 2): ?>
+                                <strong class="text-danger"><?php echo "-"?> <?php echo $movimiento->Cantidad?>
+                            <?php endif ?>
+                        </td>
+
                         <td><?php echo $movimiento->Id_Beca?></td>
                     </tr>
                 <?php endforeach?>

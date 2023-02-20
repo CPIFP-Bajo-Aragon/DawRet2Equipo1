@@ -17,17 +17,17 @@
         }
 
 
-        public function del_centro($Id_Centro){
-            $this->db->query("DELETE FROM CENTRO WHERE Id_Centro = :Id_Centro");
+        // public function del_centro($Id_Centro){
+        //     $this->db->query("DELETE FROM CENTRO WHERE Id_Centro = :Id_Centro");
 
-            $this->db->bind(':Id_Centro', $Id_Centro);
+        //     $this->db->bind(':Id_Centro', $Id_Centro);
 
-            if($this->db->execute()){
-                return true;
-            }else{
-                return false;
-            }
-        }
+        //     if($this->db->execute()){
+        //         return true;
+        //     }else{
+        //         return false;
+        //     }
+        // }
 
         public function add_centro($datos){
             $this->db->query("INSERT INTO CENTRO (Nombre, Cuantia, Id_Ciudad) VALUES (:Nombre, :Cuantia, :Id_Ciudad)");
