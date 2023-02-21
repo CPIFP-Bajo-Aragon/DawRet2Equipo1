@@ -19,9 +19,7 @@
 </head>
 <body>
 
- 
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light ">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="<?php echo RUTA_URL?>/public/img/logo-fundacion-sarabastal.png" width="290" height="58" class="d-inline-block align-text-top">

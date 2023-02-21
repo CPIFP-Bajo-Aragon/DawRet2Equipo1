@@ -1,7 +1,7 @@
 
 #menuFondo{
-    height: 100vh;
-    background-image: linear-gradient(rgba(49, 49, 49, 0.5),rgba( 49, 49, 49, 0.5)), url("../img/hushe.jpeg");
+    height: 90vh;
+    background-image: linear-gradient(rgba(40, 40, 40, 0.5),rgba( 40, 40, 40, 0.9)), url("../img/hushe.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -61,17 +61,17 @@ h5{
     font-size: 16px;
     font-family: Montserrat;
     font-weight: bold;
-    margin-left: 90%;
-    margin-top: 5%;
+    margin-left: 85%;
+    padding-top: 0.5%;
 }
 
 .titulosPrincipales{
-    margin-top: 6%;
+    margin-top: 2%;
+    margin-bottom: 1%;
 }
 
 .titulo1{
-
-    color: #b84b30;
+    color: #d65636;
     font-size: 50px;
     font-family: Montserrat;
 }
@@ -87,9 +87,17 @@ h5{
    padding-right: 30%;
     font-weight: bold;
     font-family: Josefin Sans;
-    color: #ffffff;
-    text-align: center;
+    color: #fff5f5;
+    text-align: justify;
     font-size: 18px;
+}
+
+#div_asociacion_fundacion{
+    margin-left: 7%;
+}
+
+#div_asociacion_fundacion u{
+    font-size: 20px;
 }
 
 /*Css de las paginas de Gestion Admin*/
@@ -112,7 +120,6 @@ table{
 }
   
 .table-hover tbody tr:hover {
-    /* background-color: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)); */
     background-color: #7598fd;
     color: #FFFFFF;
 }

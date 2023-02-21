@@ -5,7 +5,7 @@
 <div class="container">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Menu</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/master/indice">Menu</a></li>
         <li class="breadcrumb-item active" aria-current="page">Gestion Préstamos</li>
     </ol>
 </nav>
@@ -82,7 +82,7 @@
 </div>
 
 <!-- Modal Ver Mas -->
-<div class="modal fade" id="VerMas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="VerMas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
   <div class="modal-header">
@@ -129,7 +129,7 @@
 </div>
 </div>
 </div>
-</div>
+</div> -->
 
 
 <!-- Modal ingresos -->
@@ -180,7 +180,7 @@
     <th scope="col">Nº Préstamo</th>
     <th scope="col">Tipo</th>
     <th scope="col">Nombre Persona</th>
-    <th scope="col">Fecha</th>
+    <!-- <th scope="col">Fecha</th> -->
     <th scope="col">Cantidad</th>
     <th scope="col">Estado</th>
     <th scope="col">Acciones</th>
@@ -189,11 +189,11 @@
   <tbody id="tbody">
   <?php foreach ($datos["PrestamosTotales"] as $prestamo): ?>
       <tr>
-        <th scope="row"><?php echo $prestamo ->Id_Prestamo?></th>
-        <td><?php echo $prestamo ->NombreTipo?></td>
-        <td><?php echo $prestamo ->NombrePers?></td>
-        <td><?php echo $prestamo ->Fecha_Inicio?></td>
-        <td><?php echo $prestamo ->Importe?></td>
+        <th scope="row"><?php echo $prestamo->Id_Prestamo?></th>
+        <td><?php echo $prestamo->NombreTipo?></td>
+        <td><?php echo $prestamo->NombrePers?></td>
+        <td><?php echo $prestamo->Fecha_Inicio?></td>
+        <td><?php echo $prestamo->Importe?></td>
         <td>
           <?php if($prestamo->Id_Estado == 1): ?>
             <strong class="text-success"><?php echo $prestamo ->NombreEst

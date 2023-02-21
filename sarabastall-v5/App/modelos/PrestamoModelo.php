@@ -6,8 +6,6 @@
             $this->db = new Base;
         }
 
-        //Funciones de Prestamo
-
         public function get_prestamos(){
             $this->db->query("SELECT p.Id_Prestamo, p.Concepto, p.Importe, est.Id_Estado, est.Nombre as NombreEst, p.Fecha_Inicio, pers.Nombre as NombrePers, tipo.Nombre as NombreTipo 
                                 FROM PRESTAMO p, PERSONA pers, TIPO_PRESTAMO tipo, ESTADO est
@@ -18,6 +16,17 @@
         }
 
         public function addPrestamo($datos){
+
+            $this->db->query("INSERT INTO MOVIMIENTO (Fecha Inicio, Fecha Concedido, Procedencia, Cantidad, Id_TipoMov)
+            VALUES (NOW(), :concepto, :importe, 1)");
+
+            $this->db->bind(':concepto', "Prestamo Concedido a: #".trim($datos['Id_Persona']));
+            $this->db->bind(':importe',trim($datos['importe']));
+
+            $this->db->execute();
+
+            $id_movimiento = $this->db->executeLastId();
+
             $this->db->query("INSERT INTO PRESTAMO (Concepto, Importe, Observaciones, Fecha_Inicio, Id_Persona, Id_TipoPrestamo, Id_Estado)
                 VALUES (:concepto, :importe, :observaciones, :fecha_inicio, :Id_Persona, :Id_TipoPrestamo, :Id_Estado)");
 

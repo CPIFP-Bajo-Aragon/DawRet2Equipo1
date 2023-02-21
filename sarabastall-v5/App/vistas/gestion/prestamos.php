@@ -59,7 +59,7 @@
         <label for="exampleFormControlInput1" class="form-label">Fecha Inicio:</label>
         <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
     </div>
-    
+  
     <div class="mb-3">
         <label for="Importe" class="form-label">Importe:</label>
         <input type="number" step="1.00" class="form-control" id="importe" name="importe" aria-describedby="text" required>
@@ -192,19 +192,25 @@
   <?php foreach ($datos["PrestamosTotales"] as $prestamo): ?>
       <tr>
         <th scope="row"><?php echo $prestamo ->Id_Prestamo?></th>
-        <td><?php echo $prestamo ->NombreTipo?></td>
-        <td><?php echo $prestamo ->NombrePers?></td>
-        <td><?php echo $prestamo ->Fecha_Inicio?></td>
-        <td><?php echo $prestamo ->Importe?></td>
+        <td><?php echo $prestamo->NombreTipo?></td>
+        <td><?php echo $prestamo->NombrePers?></td>
+        <td><?php echo $prestamo->Fecha_Inicio?></td>
+        <td><?php echo $prestamo->Importe?></td>
         <td>
+          <!-- En espera a que sea aceptado -->
           <?php if($prestamo->Id_Estado == 1): ?>
-            <strong class="text-success"><?php echo $prestamo ->NombreEst
+            <strong class="text-danger"><?php echo $prestamo ->NombreEst
           ?>
+          <!-- Finalizado, se ha pagado al completo -->
           <?php elseif($prestamo->Id_Estado == 2): ?>
-            <strong class="text-danger"><?php echo $prestamo ->NombreEst?>
+            <strong class="text-success"><?php echo $prestamo ->NombreEst?>
+
+            <!-- Esta en proceso de pago -->
+          <?php else: ?>
+            <strong class="text-warning"><?php echo $prestamo ->NombreEst?>
           <?php endif ?>
-          
         </td>
+
         <td>
           <!--Aqui van 2 botones-->
           <a href="#">
