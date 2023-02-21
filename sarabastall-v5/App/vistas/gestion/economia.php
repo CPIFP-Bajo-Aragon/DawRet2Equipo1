@@ -81,7 +81,7 @@
                     <th scope="col">Nº Movimiento</th>
                     <th scope="col">Tipo Movimiento</th>
                     <th scope="col">Concepto</th>
-                    <th scope="col">Fecha</th>
+                    <th scope="col">Fecha <button type="button" name="3" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Id Beca</th>
                 </tr>

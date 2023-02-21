@@ -164,6 +164,61 @@
 </div>
 </div>
 
+<!-- Modal Aprobar Estado-->
+
+<div class="modal fade" id="modalAprobarEstado" tabindex="-1">
+  <div class="modal-dialog modal-dialog-center"> 
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalCerrarAccionLabel">
+                        ¿Estas seguro que quieres aprobar el prestamo?
+              </h5>
+          </div>
+
+          <div  class="modal-footer"> 
+              <form method="post" id="formCerrarAccion" action="<?php echo RUTA_URL ?>/admin/aprobarEstado">
+              <input type="hidden" id="Id_Aceptar" name="id_prestamoA">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cancelar
+                </button>
+                  
+                <button type="submit" class="btn btn-warning">
+                  Aprobar
+                </button>
+              </form>
+              
+          </div>
+      </div>
+  </div> 
+</div>
+
+<!-- Modal Rechazar Estado-->
+
+<div class="modal fade" id="modalRechazarEstado" tabindex="-1">
+  <div class="modal-dialog modal-dialog-center"> 
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalCerrarAccionLabel">
+                        ¿Estas seguro que quieres rechazar el prestamo?
+              </h5>
+          </div>
+
+          <div  class="modal-footer"> 
+              <form method="post" id="formCerrarAccion" action="<?php echo RUTA_URL ?>/admin/rechazarEstado">
+              <input type="hidden" id="Id_Rechazar" name="id_prestamo">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Cancelar
+                </button>
+                  
+                <button type="submit" class="btn btn-warning">
+                  Rechazar
+                </button>
+              </form>
+              
+          </div>
+      </div>
+  </div> 
+</div>
   
 
 
@@ -192,7 +247,7 @@
     <th scope="col">Estado</th>
     <th scope="col">Tipo</th>
     <th scope="col">Nombre Persona</th>
-    <th scope="col">Fecha</th>
+    <th scope="col">Fecha <button type="button" name="4" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
     <th scope="col">Cantidad</th>
     <th scope="col">Acciones</th>
     </tr>
@@ -212,6 +267,14 @@
 </nav>
 </div>
 </div>
+
+<!-- <button type="button"  onclick="place_id(<?php echo $prestamo -> Id_Prestamo ?>)" data-bs-toggle="modal" data-bs-target="#modalRechazarEstado" class="w-80 btn btn-warning btn-lg">
+            <i class="bi bi-hand-thumbs-down-fill"></i>
+          </button>
+
+          <button type="button"  onclick="place_idAceptar(<?php echo $prestamo -> Id_Prestamo ?>)" data-bs-toggle="modal" data-bs-target="#modalAprobarEstado" class="w-80 btn btn-warning btn-lg">
+            <i class="bi bi-hand-thumbs-up-fill"></i>    
+          </button> -->
 
 
 

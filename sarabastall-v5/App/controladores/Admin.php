@@ -376,6 +376,37 @@
                 
         }
 
+        public function aprobarEstado(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $id_prestamo = $_POST["id_prestamoA"];
+    
+                if($this->prestamoModelo->aprobarEstado($id_prestamo)){
+                    redireccionar("/admin/gestionar_prestamos");
+                }else{
+                    echo "Se ha producido un error";
+                }
+    
+            }else{
+    
+            } 
+        }
+
+
+        public function rechazarEstado(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $id_prestamo = $_POST["id_prestamo"];
+    
+                if($this->prestamoModelo->rechazarEstado($id_prestamo)){
+                    redireccionar("/admin/gestionar_prestamos");
+                }else{
+                    echo "Se ha producido un error";
+                }
+    
+            }else{
+    
+            } 
+        }
+
     }
 
 ?>

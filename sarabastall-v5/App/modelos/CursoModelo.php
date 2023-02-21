@@ -51,7 +51,7 @@
                 // Utilizar el modelo Economia para introducir un nuevo movimiento
 
                 $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov)
-                VALUES (NOW(), :texto, :importe, 1)");
+                VALUES (NOW(), :texto, :importe, 2)");
 
                 $this->db->bind(':texto', "Costeo del Curso: ".trim($datos['nombre']));
                 $this->db->bind(':importe',trim($datos['importe']));

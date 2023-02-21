@@ -166,6 +166,14 @@ function place_id(Id){
   document.getElementById("Id_Eliminar").setAttribute("value", Id);
 }
 
+function place_idAceptar(Id){
+  document.getElementById("Id_Aceptar").setAttribute("value", Id);
+}
+
+function place_idRechazar(Id){
+  document.getElementById("Id_Rechazar").setAttribute("value", Id);
+}
+
 // PAGINACION
 
 function go_page(elemen){
@@ -232,6 +240,57 @@ function buscar(){
 
 }		
 
+
+function ordenaras(flag){
+
+  orden = flag.value;
+  colum = flag.name;
+
+  if (orden == "1"){
+    flag.value = "0";
+    alert("DESCENDENTE(Z->A)");
+  } else {
+    flag.value = "1";
+    alert("ASCENDENTE(A->Z)");
+  }
+
+  arrayOrden = [];
+
+  for (i = 0; i < arrayMaestro.length; i++){
+    if (i == 0){
+      arrayOrden.push(arrayMaestro[i]);
+    } else {
+      arraySon = Object.values(arrayMaestro[i]);
+      
+      for (e = 0; e < arrayOrden.length; e++){
+        arrayComparacion = Object.values(arrayOrden[e]); 
+        comparacion = [arrayComparacion[colum], arraySon[colum]];
+        resultado = comparacion.sort((a, b) => a < b);
+
+        if (resultado[0] == arraySon[colum]){
+          
+          arrayOrden.splice(e, 0, arrayMaestro[i]); // El 0 es una instruccion que indica Insertar, si fuese un 1 entonces Reemplaza. La e indica el index el el que interactuar
+          break;
+        } else {
+          
+          if (e == arrayOrden.length-1){
+            arrayOrden.push(arrayMaestro[i]);
+            
+            e = e+1;
+          }
+        }
+      }
+    }
+  }
+  if (orden == "0"){
+    arrayOrden = arrayOrden.reverse();
+  }
+
+  arrayMaestro = arrayOrden;
+
+  // Obtener de alguna forma Columna Comparada 
+
+}
 // FUNCION de FILTRADO
 
 function filtrar(){
@@ -256,9 +315,12 @@ function filtrar(){
   //alert(arrayMaestro); //Muestra el array resultante del filtro
 }	
 
-function mod_show(){ // A cualquier cambio en la busqueda se llama a esta funcion
+function mod_show(flag = false){ // A cualquier cambio en la busqueda se llama a esta funcion
   filtrar(); // Primero se filtra el array
   buscar(); // Entonces se compara el resultado 
+  if (flag != false){
+    ordenaras(flag);
+  }
   page_maker();
   listar_elementos(false); // Por ultimo se paginan los resultados
   // Se le envia con un parametro falso indicando que no es una ejecucion automatica. La cual se hace al cargar la pagina

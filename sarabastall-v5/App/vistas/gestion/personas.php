@@ -119,7 +119,7 @@
     <tr>
     <th scope="col">Nº</th>
     <th scope="col">Tipo Rol</th>
-    <th scope="col">Nombre</th>
+    <th scope="col">Nombre <button type="button" name="2" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
     <th scope="col">Apellidos</th>
     <th scope="col">Direccion</th>
     <th scope="col">Fecha Nacimiento</th>

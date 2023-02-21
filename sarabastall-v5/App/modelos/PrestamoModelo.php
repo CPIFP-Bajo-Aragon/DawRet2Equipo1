@@ -22,7 +22,7 @@
 
 
             $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov)
-                VALUES (NOW(), :texto, :importe, 1)");
+                VALUES (NOW(), :texto, :importe, 2)");
 
                 $this->db->bind(':texto', "Prestamo Concedido a: #".trim($datos['Id_Persona']));
                 $this->db->bind(':importe',trim($datos['importe']));
@@ -74,6 +74,32 @@
             $this->db->query("SELECT Id_Estado as Id, Nombre as Nombre FROM ESTADO");
 
             return $this->db->registros();
+        }
+
+        public function aprobarEstado($id_prestamo){
+            $this->db->query("UPDATE PRESTAMO SET Id_Estado='5' WHERE Id_Prestamo=:id_prestamoA");
+
+            $this->db->bind(':id_prestamoA', $id_prestamo);
+
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+
+        public function rechazarEstado($id_prestamo){
+            $this->db->query("UPDATE PRESTAMO SET Id_Estado='6' WHERE Id_Prestamo=:id_prestamo");
+
+            $this->db->bind(':id_prestamo', $id_prestamo);
+
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+
         }
 
     }

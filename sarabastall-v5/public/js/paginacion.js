@@ -55,10 +55,56 @@ function listar_elementos(inicial){
 
             
             if(z != arraySon.length){
-                newTd = document.createElement("td");
-                textoTd = document.createTextNode(arraySon[z]);
-                newTd.appendChild(textoTd);
-               
+
+              newTd = document.createElement("td");
+
+              if (z == 1){
+                switch(item){
+                  case "prestamo":
+  
+                    switch(arraySon[1]){
+                      case "Pendiente":
+                        newTd.classList.add("gris");
+                        break;
+                      case "Aprobado":
+                        newTd.classList.add("verde");
+                        break;
+                      case "Rechazado":
+                        newTd.classList.add("rojo");
+                        break;  
+                      default:
+                        newTd.classList.add("negro");
+                        break;
+                    }
+                    break;
+  
+                  default:
+                  break;
+                }
+              }
+
+              if (z == 4){
+                switch(item){
+                  case "movimiento":
+  
+                    switch(arraySon[1]){
+                      case "Ingreso":
+                        newTd.classList.add("verde");
+                        break; 
+                      default:
+                        newTd.classList.add("rojo");
+                        break;
+                    }
+                    break;
+  
+                  default:
+                  break;
+                }
+              }
+              
+              textoTd = document.createTextNode(arraySon[z]);
+              newTd.appendChild(textoTd);
+
             } else{
                 switch(item){
                   case "movimiento":
@@ -77,6 +123,38 @@ function listar_elementos(inicial){
 
                     newBoton.appendChild(newI);
                     newTd.appendChild(newBoton);
+
+                    // Boton Aprobar
+
+                    newBoton = document.createElement("button");
+                    newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
+                    newBoton.setAttribute("onclick", 'place_idAceptar(' + arraySon[0]+ ')');
+                    newBoton.setAttribute("data-bs-toggle", "modal");
+                    newBoton.setAttribute("data-bs-target", "#modalAprobarEstado");
+
+
+                    newI = document.createElement("i");
+                    newI.classList.add("bi", "bi-hand-thumbs-up-fill");
+
+                    newBoton.appendChild(newI);
+                    newTd.appendChild(newBoton);
+
+                    // Boton Rechazar
+
+                    newBoton = document.createElement("button");
+                    newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
+                    newBoton.setAttribute("onclick", 'place_idRechazar(' + arraySon[0]+ ')');
+                    newBoton.setAttribute("data-bs-toggle", "modal");
+                    newBoton.setAttribute("data-bs-target", "#modalRechazarEstado");
+
+
+                    newI = document.createElement("i");
+                    newI.classList.add("bi", "bi-hand-thumbs-down-fill");
+
+                    newBoton.appendChild(newI);
+                    newTd.appendChild(newBoton);
+
+                    
                     break;
                   case "":
                     break;
@@ -85,7 +163,7 @@ function listar_elementos(inicial){
                     newBoton = document.createElement("button");
                     newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
                     newA = document.createElement("a");
-                    newA.href = 'http://localhost/sarabastall/admin/see_' + item + '/' + arraySon[0];  // Se puede mejorar la Url 
+                    newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0];  // Se puede mejorar la Url 
                     newI = document.createElement("i");
                     newI.classList.add("bi", "bi-pencil-square");
                     newA.appendChild(newI);
@@ -128,7 +206,15 @@ function listar_elementos(inicial){
 }
 
 function page_maker() {
-  max = parseInt(arrayMaestro.length%nItems) + 1;
+
+  max = arrayMaestro.length%nItems;
+  if (max == 0){
+    max = Math.trunc(arrayMaestro.length/nItems);
+  } else {
+    max = Math.trunc(arrayMaestro.length/nItems)+1;
+  }
+
+  
   
   document.getElementById("page_panel").innerHTML ="";
 
@@ -176,7 +262,13 @@ function page_maker() {
 
 function control_paginacion(){
 
-  max = parseInt(arrayMaestro.length%nItems) + 1;
+  max = arrayMaestro.length%nItems;
+  if (max == 0){
+    max = Math.trunc(arrayMaestro.length/nItems);
+  } else {
+    max = Math.trunc(arrayMaestro.length/nItems)+1;
+  }
+
   page = document.getElementById("page_controller").value;
   
   // Desabilitar Siguiente

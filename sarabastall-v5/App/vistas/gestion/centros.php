@@ -123,11 +123,11 @@
     <table class="table table-striped table-hover">
       <thead class="thead-azul">
         <tr>
-          <th scope="col">Nº Centro</th>
-          <th scope="col">Ciudad</th>
-          <th scope="col">Nombre Centro</th>
-          <th scope="col">Cuantia</th>
-          <th scope="col">Distancia</th>
+          <th scope="col">Nº Centro <button type="button" name="0" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
+          <th scope="col">Ciudad <button type="button" name="1" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
+          <th scope="col">Nombre Centro <button type="button" name="2" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
+          <th scope="col">Cuantia <button type="button" name="3" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
+          <th scope="col">Distancia <button type="button" name="4" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>

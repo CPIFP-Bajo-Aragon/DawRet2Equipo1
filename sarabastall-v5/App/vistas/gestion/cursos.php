@@ -130,7 +130,7 @@
       <th scope="col">Especialidad</th>
       <th scope="col">Nombre</th>
       <th scope="col">Profesor</th>
-      <th scope="col">Fecha</th>
+      <th scope="col">Fecha <button type="button" name="4" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
       <th scope="col">Detalle</th>
       </tr>
     </thead> 

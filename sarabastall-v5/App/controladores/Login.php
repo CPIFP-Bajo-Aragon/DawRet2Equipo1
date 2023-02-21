@@ -25,8 +25,8 @@
                             redireccionar("/admin");
                             break;
                         case 2:
-                            print_r("Otro Rol N 1");
-                            redireccionar("/el controlador del rol 1");
+                            print_r("trabajador");
+                            redireccionar("/trabajador");
                             break;
                         case 3:
                             print_r("Otro Rol N 2");

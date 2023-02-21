@@ -11,7 +11,7 @@
         public function get_centros(){
 
             $this->db->query("SELECT cen.Id_Centro as Id_Centro, ciu.Nombre_Ciudad as Nombre_Ciudad, cen.Nombre as Nombre,  cen.Cuantia as Cuantia, ciu.Distancia as Distancia FROM CENTRO cen, CIUDAD ciu
-                WHERE ciu.Id_Ciudad = cen.Id_Ciudad AND cen.Id_Estado != 3");
+                WHERE ciu.Id_Ciudad = cen.Id_Ciudad AND cen.Id_Estado != 4");
 
             return $this->db->registros();
         }
@@ -19,7 +19,7 @@
 
         public function del_centro($Id_Centro){
 
-            $this->db->query("UPDATE CENTRO SET Id_Estado= 3 WHERE Id_Centro=:Id_Centro");
+            $this->db->query("UPDATE CENTRO SET Id_Estado= 4 WHERE Id_Centro=:Id_Centro");
             
             $this->db->bind(':Id_Centro', $Id_Centro);
 
@@ -31,7 +31,7 @@
         }
 
         public function add_centro($datos){
-            $this->db->query("INSERT INTO CENTRO (Nombre, Cuantia, Id_Ciudad, Id_Estado) VALUES (:Nombre, :Cuantia, :Id_Ciudad, 2)");
+            $this->db->query("INSERT INTO CENTRO (Nombre, Cuantia, Id_Ciudad, Id_Estado) VALUES (:Nombre, :Cuantia, :Id_Ciudad, 3)");
 
             $this->db->bind(':Nombre',trim($datos['nombreCentro']));
             $this->db->bind(':Cuantia',trim($datos['cuantia']));

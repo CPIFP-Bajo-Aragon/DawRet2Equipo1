@@ -324,4 +324,21 @@ input[type=text], [type=date], [type=number], select {
     padding-right:0.75em;
     padding-bottom:0.35em;
 }
+
+/*Colorines en los Prestamos y economia*/
   
+.verde {
+    color: green;
+}
+
+.gris {
+    color: #656565;
+}
+
+.rojo {
+    color: red;
+}
+
+.negro {
+    color:#000000;
+}

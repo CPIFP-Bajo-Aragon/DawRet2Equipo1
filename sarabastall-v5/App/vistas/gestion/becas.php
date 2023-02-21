@@ -170,7 +170,7 @@
     <th scope="col">Alumno</th>
     <th scope="col">Tutor</th>
     <th scope="col">Cuantía(€)</th>
-    <th scope="col">Fecha</th>
+    <th scope="col">Fecha <button type="button" name="5" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
     <th scope="col">Detalle</th>
     </tr>
   </thead>
