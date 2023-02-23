@@ -84,7 +84,51 @@
                   Eliminar
                 </button>
               </form>
+          </div>
+      </div>
+  </div> 
+</div>
+
+<!-- Modal Crear Usuario-->
+
+<div class="modal fade" id="modalNewUser" tabindex="-1">
+  <div class="modal-dialog modal-dialog-center"> 
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modalCerrarNewUserLabel">
+                        Añadir Usuario
+              </h5>
+          </div>
+
+          <div class="modal-footer"> 
+            <form method="post" id="formCerrarAccion" action="<?php echo RUTA_URL ?>/admin/new_usuario">
               
+              <label for="Importe" class="form-label">Usuario</label>
+              <input type="text" class="form-control" name="usuario" aria-describedby="text" required>
+              
+              
+              <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
+              <input type="taxt" class="form-control" name="clave" required>
+              
+              <label for="exampleFormControlInput1" class="form-label">Rol</label>
+              <select name="rol" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <?php foreach($datos["roles"] as $rol): ?>
+                  <?php if ($rol->Id != 6): ?>
+                    <option value="<?php echo $rol->Id ?>"><?php echo $rol->Nombre ?></option>
+                  <?php endif ?>
+                <?php endforeach ?>
+              </select>
+
+
+              <input type="hidden" id="Id_User" name="id_user">
+              <br>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-success">
+                Crear
+              </button>
+            </form>
           </div>
       </div>
   </div> 
@@ -95,9 +139,7 @@
 <div class="container">
 
 <div class="col-3">
-  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-    <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
-  </form>
+  <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
 
   <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
 

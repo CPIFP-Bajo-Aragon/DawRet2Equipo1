@@ -55,10 +55,28 @@
         }
 
         public function eliminarPersona($id_persona){
-            // Funcion para eliminar un curso
+            // Funcion para eliminar una persona
             $this->db->query("UPDATE PERSONA SET Id_Estado= 4 WHERE Id_Persona=:Id_Persona");
             
             $this->db->bind(':Id_Persona', $id_persona);
+
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+            
+        }
+
+        public function new_usuario($datos){
+            // Funcion para asignar un usuario
+
+            $this->db->query("UPDATE PERSONA SET Login= :user, `Password`= SHA2(':clave', 256), Id_Rol = :rol WHERE Id_Persona=:Id"); // SHA2 da error
+            
+            $this->db->bind(':user', $datos["usuario"]);
+            $this->db->bind(':clave', $datos["clave"]);
+            $this->db->bind(':rol', $datos["rol"]);
+            $this->db->bind(':Id', $datos["id_user"]);
 
             if($this->db->execute()){
                 return true;

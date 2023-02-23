@@ -1,3 +1,4 @@
+
 // Ventana modal
 let modal = document.getElementById("ventanaModal");
 
@@ -174,6 +175,10 @@ function place_idRechazar(Id){
   document.getElementById("Id_Rechazar").setAttribute("value", Id);
 }
 
+function place_idUser(Id){
+  document.getElementById("Id_User").setAttribute("value", Id);
+}
+
 // PAGINACION
 
 function go_page(elemen){
@@ -231,7 +236,7 @@ function buscar(){
       }
       
       if (find == false){
-        arrayMaestro.splice(i, parseInt(i)+1);
+        arrayMaestro.splice(i, 1);
         i = i-1;
       }
       
@@ -248,10 +253,8 @@ function ordenaras(flag){
 
   if (orden == "1"){
     flag.value = "0";
-    alert("DESCENDENTE(Z->A)");
   } else {
     flag.value = "1";
-    alert("ASCENDENTE(A->Z)");
   }
 
   arrayOrden = [];
@@ -302,13 +305,13 @@ function filtrar(){
   //alert(filtro);
 
   if (filtro == ""){ // Si no hay filtro seleccionado se toma los datos del array Original
-    arrayMaestro = listado;
+    arrayMaestro = listado.slice();
   } else {
     for (i = 0; i < listado.length; i++){ // Bucle que recorre todos los items guardados en el array Original
 
       if (Object.values(listado[i])[1] == filtro){ // El 1 indica la columna que esta filtrando, en otras gestiones puede que no sea el 1, en cuyo caso 2 opciones, Moverlo, o indicar la columna por hidden
         arrayMaestro.push(listado[i]); // Agrega el item que pase el filtro
-        //alert(Object.values(listado[i])); //Muestra los items que pasan el filtro
+        // alert(Object.values(listado[i])); //Muestra los items que pasan el filtro
       }
     }
   }

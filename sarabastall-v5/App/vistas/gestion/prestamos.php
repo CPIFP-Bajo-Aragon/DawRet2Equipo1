@@ -48,12 +48,12 @@
         <?php endforeach?>
     </select>
 
-    <label for="NombreText" class="form-label">Estado:</label>
+    <!-- <label for="NombreText" class="form-label">Estado:</label>
     <select name="Id_Estado">
       <?php foreach($datos["estados"] as $estado): ?>
         <option value="<?php echo $estado->Id ?>"><?php echo $estado->Nombre?></option>
         <?php endforeach?>
-    </select>
+    </select> -->
     
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Fecha Inicio:</label>
@@ -225,9 +225,9 @@
 <input disabled id="page_controller" name="prestamo" value="0" hidden>  
 <div class="container">
 <div class="col-3">
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-      <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
-    </form>
+    
+    <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search" >
+    
 
     <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
 

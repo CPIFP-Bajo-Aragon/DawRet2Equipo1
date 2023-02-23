@@ -3,8 +3,8 @@
 } */
 
 #menuFondo{
-    height: 100vh;
-    background-image: linear-gradient(rgba(49, 49, 49, 0.5),rgba( 49, 49, 49, 0.5)), url("../img/hushe.jpeg");
+    height: 90vh;
+    background-image: linear-gradient(rgba(40, 40, 40, 0.5),rgba( 40, 40, 40, 0.9)), url("../img/hushe.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -67,13 +67,24 @@ h5{
     margin-top: 5%;
 }
 
+
+
+
+#div_asociacion_fundacion{
+    margin-left: 7%;
+}
+
+#div_asociacion_fundacion u{
+    font-size: 20px;
+}
+
 .titulosPrincipales{
-    margin-top: 6%;
+    margin-top: 2%;
+    margin-bottom: 1%;
 }
 
 .titulo1{
-
-    color: #b84b30;
+    color: #d65636;
     font-size: 50px;
     font-family: Montserrat;
 }
@@ -85,12 +96,12 @@ h5{
 }
 
 .contenido{
-   padding-left: 30%;
-   padding-right: 30%;
+    padding-left: 30%;
+    padding-right: 30%;
     font-weight: bold;
     font-family: Josefin Sans;
-    color: #ffffff;
-    text-align: center;
+    color: #fff5f5;
+    text-align: justify;
     font-size: 18px;
 }
 
@@ -341,4 +352,16 @@ input[type=text], [type=date], [type=number], select {
 
 .negro {
     color:#000000;
+}
+
+/*Css botones Ordenacion*/
+
+th button {
+    background: none;
+    border: 0;
+    color: inherit;
+}
+
+th button:hover {
+    color: #e0da2d;
 }

@@ -7,7 +7,6 @@
         }
 
         //Funciones de Prestamo
-
         
         public function get_prestamos(){
             $this->db->query("SELECT p.Id_Prestamo, est.Nombre as NombreEst, tipo.Nombre as NombreTipo, pers.Nombre as NombrePers, p.Fecha_Inicio, p.Importe
@@ -20,20 +19,8 @@
 
         public function addPrestamo($datos){
 
-
-            $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov)
-                VALUES (NOW(), :texto, :importe, 2)");
-
-                $this->db->bind(':texto', "Prestamo Concedido a: #".trim($datos['Id_Persona']));
-                $this->db->bind(':importe',trim($datos['importe']));
-
-            $this->db->execute();
-            // Consulta o funcion para insertar nuevo movimiento (Si es funcion, devolvera el id del movimineto)
-            $id_movimiento = $this->db->executeLastId();
-
-
             $this->db->query("INSERT INTO PRESTAMO (Concepto, Importe, Observaciones, Fecha_Inicio, Id_Persona, Id_TipoPrestamo, Id_Movimiento, Id_Estado)
-                VALUES (:concepto, :importe, :observaciones, NOW(), :Id_Persona, :Id_TipoPrestamo, :movimiento, :Id_Estado)");
+                VALUES (:concepto, :importe, :observaciones, NOW(), :Id_Persona, :Id_TipoPrestamo, :movimiento, 1)");
 
                 $this->db->bind(':concepto',trim($datos['concepto']));
                 $this->db->bind(':importe',trim($datos['importe']));
@@ -41,8 +28,6 @@
                 $this->db->bind(':Id_Persona',trim($datos['Id_Persona']));
                 $this->db->bind(':movimiento',$id_movimiento);
                 $this->db->bind(':Id_TipoPrestamo',trim($datos['Id_TipoPrestamo']));
-                $this->db->bind(':Id_Estado',trim($datos['Id_Estado']));
-                
                
             if($this->db->execute()){
                 return true;
@@ -71,12 +56,24 @@
         }
 
         public function get_estados(){
-            $this->db->query("SELECT Id_Estado as Id, Nombre as Nombre FROM ESTADO");
+            $this->db->query("SELECT Id_Estado as Id, Nombre as Nombre FROM ESTADO WHERE Id_Estado != 3 AND Id_Estado != 4");
 
             return $this->db->registros();
         }
 
         public function aprobarEstado($id_prestamo){
+
+
+            // $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov)
+            //     VALUES (NOW(), :texto, :importe, 2)");
+
+            //     $this->db->bind(':texto', "Prestamo Concedido a: #".trim($datos['Id_Persona']));
+            //     $this->db->bind(':importe',trim($datos['importe']));
+
+            // $this->db->execute();
+            // $id_movimiento = $this->db->executeLastId();
+
+
             $this->db->query("UPDATE PRESTAMO SET Id_Estado='5' WHERE Id_Prestamo=:id_prestamoA");
 
             $this->db->bind(':id_prestamoA', $id_prestamo);

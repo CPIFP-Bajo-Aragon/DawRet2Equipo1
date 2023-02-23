@@ -118,7 +118,7 @@
                 $curso=$_POST;
     
                 if($this->cursoModelo->mod_curso($curso, $id_curso)){
-                    redireccionar("/admin/ver_curso/$id_curso");
+                    redireccionar("/admin/see_curso/$id_curso");
                 } else{
                     echo "¡¡Se ha producido un error!!";
                 }
@@ -197,7 +197,7 @@
                 $centro=$_POST;
 
                 if($this->centroModelo->editCentro($centro, $Id_Centro)){
-                    redireccionar("/admin/ver_centro/$Id_Centro");
+                    redireccionar("/admin/see_centro/$Id_Centro");
                 }else{
                     echo "¡Se ha producido un error!";
                 }
@@ -291,7 +291,7 @@
                 $persona = $_POST;
     
                 if($this->personaModelo->editPersona($persona, $id_persona)){
-                    redireccionar("/admin/ver_persona/$id_persona");
+                    redireccionar("/admin/see_persona/$id_persona");
                 }else {
                     echo "Se ha producido un error";
                 }
@@ -304,6 +304,22 @@
             }
     
     
+        }
+
+        public function new_usuario(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $usuario = $_POST;
+    
+                
+                if($this->personaModelo->new_usuario($usuario)){
+                    redireccionar("/admin/gestionar_personas");
+                }else{
+                    echo "Se ha producido un error";
+                }
+    
+            }else{
+    
+            } 
         }
 
         // Gestion Becas

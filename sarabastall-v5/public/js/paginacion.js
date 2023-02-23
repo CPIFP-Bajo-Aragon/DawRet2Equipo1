@@ -1,11 +1,11 @@
-let listado = []; // Variable donde se guardan los datos (Es global para toas las hojas JS)
+let listado = []; // Variable donde se guardan los datos (Es global para todas las hojas JS)
 let arrayMaestro = []; // Array de Soporte para no alterar los datos Originales
 let nItems = 4; // Numero de Elementos mostrados en cada Pagina
 
 // Funcion que toma el array de objetos obtenido por PHP
 function caja_fuerte(arrayElementos){
 
-  listado = arrayElementos;
+  listado = arrayElementos.slice();
 }
 
 // Funcion que segmenta el array dependiendo de el numero de elementos que queramos mostrar en cada pagina.
@@ -15,6 +15,8 @@ function lista_page(page){
   for (i = 0; i < nItems; i++){
     if (arrayMaestro[parseInt(page*nItems)+i] != null){
       chunk.push(arrayMaestro[parseInt(page*nItems)+i]);
+    } else {
+      break;
     }
   }
 
@@ -24,7 +26,7 @@ function lista_page(page){
 function listar_elementos(inicial){ 
 
     if (inicial){
-      arrayMaestro = listado;
+      arrayMaestro = listado.slice();
     }
 
     document.getElementById("contenido_tabla").innerHTML = "";
@@ -110,7 +112,72 @@ function listar_elementos(inicial){
                   case "movimiento":
                     break;
                   case "prestamo":
+
                     newTd = document.createElement("td");
+
+                    if (arraySon[1] == "Pendiente"){
+                      // Boton Aprobar
+
+                      newBoton = document.createElement("button");
+                      newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
+                      newBoton.setAttribute("onclick", 'place_idAceptar(' + arraySon[0]+ ')');
+                      newBoton.setAttribute("data-bs-toggle", "modal");
+                      newBoton.setAttribute("data-bs-target", "#modalAprobarEstado");
+
+
+                      newI = document.createElement("i");
+                      newI.classList.add("bi", "bi-hand-thumbs-up-fill");
+
+                      newBoton.appendChild(newI);
+                      newTd.appendChild(newBoton);
+
+                      // Boton Rechazar
+
+                      newBoton = document.createElement("button");
+                      newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
+                      newBoton.setAttribute("onclick", 'place_idRechazar(' + arraySon[0]+ ')');
+                      newBoton.setAttribute("data-bs-toggle", "modal");
+                      newBoton.setAttribute("data-bs-target", "#modalRechazarEstado");
+
+
+                      newI = document.createElement("i");
+                      newI.classList.add("bi", "bi-hand-thumbs-down-fill");
+
+                      newBoton.appendChild(newI);
+                      newTd.appendChild(newBoton);
+                    } else {
+                      if (arraySon[1] == "Aprobado"){
+                        newBoton = document.createElement("button");
+                        newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
+                        newBoton.setAttribute("onclick", 'place_id(' + arraySon[0]+ ')');
+                        newBoton.setAttribute("data-bs-toggle", "modal");
+                        newBoton.setAttribute("data-bs-target", "#modalEliminar" + item);
+    
+    
+                        newI = document.createElement("i");
+                        newI.classList.add("fa", "fa-share-square");
+    
+                        newBoton.appendChild(newI);
+                        newTd.appendChild(newBoton);
+                      }
+                    }
+                    
+
+                    
+                    break;
+                  case "persona":
+                    
+                    newTd = document.createElement("td");
+                    newBoton = document.createElement("button");
+                    newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
+                    newA = document.createElement("a");
+                    newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0]; // Se puede mejorar la Url 
+                    newI = document.createElement("i");
+                    newI.classList.add("bi", "bi-pencil-square");
+                    newA.appendChild(newI);
+                    newBoton.appendChild(newA);
+                    newTd.appendChild(newBoton);
+
                     newBoton = document.createElement("button");
                     newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
                     newBoton.setAttribute("onclick", 'place_id(' + arraySon[0]+ ')');
@@ -119,51 +186,33 @@ function listar_elementos(inicial){
 
 
                     newI = document.createElement("i");
-                    newI.classList.add("fa", "fa-share-square");
+                    newI.classList.add("bi", "bi-trash");
 
                     newBoton.appendChild(newI);
                     newTd.appendChild(newBoton);
 
-                    // Boton Aprobar
 
-                    newBoton = document.createElement("button");
-                    newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
-                    newBoton.setAttribute("onclick", 'place_idAceptar(' + arraySon[0]+ ')');
-                    newBoton.setAttribute("data-bs-toggle", "modal");
-                    newBoton.setAttribute("data-bs-target", "#modalAprobarEstado");
+                    if (arraySon[8] == null){
+                      newBoton = document.createElement("button");
+                      newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
+                      newBoton.setAttribute("onclick", 'place_idUser(' + arraySon[0]+ ')');
+                      newBoton.setAttribute("data-bs-toggle", "modal");
+                      newBoton.setAttribute("data-bs-target", "#modalNewUser");
 
+                      newI = document.createElement("i");
+                      newI.classList.add("bi", "bi-person-fill-add");
 
-                    newI = document.createElement("i");
-                    newI.classList.add("bi", "bi-hand-thumbs-up-fill");
+                      newBoton.appendChild(newI);
+                      newTd.appendChild(newBoton);
+                    }
 
-                    newBoton.appendChild(newI);
-                    newTd.appendChild(newBoton);
-
-                    // Boton Rechazar
-
-                    newBoton = document.createElement("button");
-                    newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
-                    newBoton.setAttribute("onclick", 'place_idRechazar(' + arraySon[0]+ ')');
-                    newBoton.setAttribute("data-bs-toggle", "modal");
-                    newBoton.setAttribute("data-bs-target", "#modalRechazarEstado");
-
-
-                    newI = document.createElement("i");
-                    newI.classList.add("bi", "bi-hand-thumbs-down-fill");
-
-                    newBoton.appendChild(newI);
-                    newTd.appendChild(newBoton);
-
-                    
-                    break;
-                  case "":
                     break;
                   default:
                     newTd = document.createElement("td");
                     newBoton = document.createElement("button");
                     newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
                     newA = document.createElement("a");
-                    newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0];  // Se puede mejorar la Url 
+                    newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0]; // Se puede mejorar la Url 
                     newI = document.createElement("i");
                     newI.classList.add("bi", "bi-pencil-square");
                     newA.appendChild(newI);

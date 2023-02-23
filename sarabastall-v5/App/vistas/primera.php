@@ -12,28 +12,38 @@
             </h1>
         </div>
 
+        <br>
+
         <div class="contenido">
-            <span>Somos una pequeña ONG española, que nace y trabaja en la provincia de Zaragoza, en Caspe y su Comarca, y desarrollamos
-                 proyectos de cooperación en Asia.</span>
+            <div>
+                <p>Pequeña ONG española, que nace y trabaja en la provincia de Zaragoza, en Caspe y su Comarca, y desarrollamos
+                 proyectos de cooperación en Asia.</p>
+            </div>
+            
+            <div>
+                <p>En 1983, un grupo de jóvenes empezamos a realizar campamentos de verano para niños y niñas de la zona,
+                en el Pirineo aragonés. Ampliaron los proyectos y, además de los campamentos, comenzamos a realizar actividades medioambientales, 
+                solidarias y culturales. La cual surgió la Asociación Sarabastall en un referente de participación social y voluntariado.</p>
+            </div>
 
-            <span>Nuestros orígenes se remontan al año 1983, cuando un grupo de jóvenes empezamos a realizar campamentos de verano para niños y niñas de la zona,
-                en el Pirineo aragonés. Pronto se ampliaron los proyectos y, además de los campamentos, comenzamos a realizar actividades medioambientales, 
-                solidarias y culturales, convirtiendo a la Asociación Sarabastall en un referente de participación social y voluntariado.</span>
+            <div>
+                <p>Cuando nuestros proyectos de cooperación comienzan a crecer, Sarabastall se organiza en dos entidades:</p>
+            </div>
 
-            <span>Fruto de la evolución, y cuando nuestros proyectos de cooperación comienzan a crecer, con el ánimo de mejorar el funcionamiento, Sarabastall 
-                se organiza en dos entidades:</span>
-            <br>
-            <span>- ASOCIACIÓN SARABASTALL. Se encarga de desarrollar actividades culturales, de animación y campamentos de verano</span>
-            <br>
-            <span>- FUNDACIÓN SARABASTALL. ONG, inscrita en el Registro de la DGA con nº 319(I) según Orden publicada en el BOA del 16 de agosto de 2011, y
-                 cuyo objeto es desarrollar proyectos de cooperación en países en vías de desarrollo, y realizar actividades de captación de fondos.</span>
+            <div id="div_asociacion_fundacion">
+                <p><strong>-<u>ASOCIACIÓN SARABASTALL</u></strong> : Se encarga de desarrollar actividades culturales, de animación y campamentos de verano.</p>
+            </div>
+
+            <div id="div_asociacion_fundacion">
+                <p><strong>-<u>FUNDACIÓN SARABASTALL. ONG</u></strong> : Inscrita en el Registro de la DGA con nº 319(I) según Orden publicada en el BOA del 16 de agosto de 2011, y
+                 cuyo objeto es desarrollar proyectos de cooperación en países en vías de desarrollo, y realizar actividades de captación de fondos.</p>
+            </div>
 
         </div>
 
     </div>
 
     <a id="acceder_sesion" class="btn btn-primary me-md-2" type="button" href="<?php echo RUTA_URL ?>/login">ACCEDER</a>
-    <!-- <button id="acceder_sesion" type="button" class="btn btn-outline btn-sm ml-auto" href="">ACCEDER</button> -->
 
 </div>
 

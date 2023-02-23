@@ -147,9 +147,9 @@
 <input disabled id="page_controller" name="beca" value="0" hidden>
 <div class="container">
 <div class="col-3">
-    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-      <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
-    </form>
+   
+    <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+   
 
     <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
 
