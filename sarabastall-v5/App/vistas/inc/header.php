@@ -29,7 +29,11 @@
       </a>
     </div>
     
-      <button id="cerrar_sesion" type="button" class="btn btn-outline-danger btn-sm ml-auto"><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>">Cerrar Sesion</a></button>
+    <a class="btn btn-outline-danger btn-lg" href="<?php echo RUTA_URL ?>">
+      <i class="bi bi-box-arrow-left"></i>
+    </a>
+    
+      <!-- <button id="cerrar_sesion" type="button" class="btn btn-outline-danger btn-sm ml-auto"><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>">Cerrar Sesion</a></button> -->
       
     
 </nav>

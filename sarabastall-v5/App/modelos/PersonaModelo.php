@@ -71,7 +71,7 @@
         public function new_usuario($datos){
             // Funcion para asignar un usuario
 
-            $this->db->query("UPDATE PERSONA SET Login= :user, `Password`= SHA2(':clave', 256), Id_Rol = :rol WHERE Id_Persona=:Id"); // SHA2 da error
+            $this->db->query("UPDATE PERSONA SET Login= :user, Password= SHA2(:clave, 256), Id_Rol = :rol WHERE Id_Persona=:Id"); // SHA2 da error
             
             $this->db->bind(':user', $datos["usuario"]);
             $this->db->bind(':clave', $datos["clave"]);

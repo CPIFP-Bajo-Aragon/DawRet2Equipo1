@@ -148,17 +148,16 @@ function listar_elementos(inicial){
                     } else {
                       if (arraySon[1] == "Aprobado"){
                         newBoton = document.createElement("button");
+
+                        newBoton = document.createElement("button");
                         newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
-                        newBoton.setAttribute("onclick", 'place_id(' + arraySon[0]+ ')');
-                        newBoton.setAttribute("data-bs-toggle", "modal");
-                        newBoton.setAttribute("data-bs-target", "#modalEliminar" + item);
-    
-    
+                        newA = document.createElement("a");
+                        newA.href = 'http://localhost/sarabastall-v5/admin/add_abono/' + arraySon[0]; // Se puede mejorar la Url 
                         newI = document.createElement("i");
-                        newI.classList.add("fa", "fa-share-square");
-    
+                        newI.classList.add("bi", "fa-share-square");
                         newBoton.appendChild(newI);
-                        newTd.appendChild(newBoton);
+                        newA.appendChild(newBoton);
+                        newTd.appendChild(newA);
                       }
                     }
                     
@@ -174,9 +173,9 @@ function listar_elementos(inicial){
                     newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0]; // Se puede mejorar la Url 
                     newI = document.createElement("i");
                     newI.classList.add("bi", "bi-pencil-square");
-                    newA.appendChild(newI);
-                    newBoton.appendChild(newA);
-                    newTd.appendChild(newBoton);
+                    newBoton.appendChild(newI);
+                    newA.appendChild(newBoton);
+                    newTd.appendChild(newA);
 
                     newBoton = document.createElement("button");
                     newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
@@ -215,9 +214,9 @@ function listar_elementos(inicial){
                     newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0]; // Se puede mejorar la Url 
                     newI = document.createElement("i");
                     newI.classList.add("bi", "bi-pencil-square");
-                    newA.appendChild(newI);
-                    newBoton.appendChild(newA);
-                    newTd.appendChild(newBoton);
+                    newBoton.appendChild(newI);
+                    newA.appendChild(newBoton);
+                    newTd.appendChild(newA);
 
                     newBoton = document.createElement("button");
                     newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");

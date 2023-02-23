@@ -61,6 +61,7 @@
         public function logout(){
             Sesion::cerrarSesion();
             redireccionar('/');
+            //$this->vista('primera', $this->datos);
         }
 
     }

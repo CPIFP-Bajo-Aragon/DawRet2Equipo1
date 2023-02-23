@@ -56,7 +56,6 @@
                 $this->db->bind(':texto', "Costeo del Curso: ".trim($datos['nombre']));
                 $this->db->bind(':importe',trim($datos['importe']));
 
-                $this->db->execute();
                 // Consulta o funcion para insertar nuevo movimiento (Si es funcion, devolvera el id del movimineto)
                 $id_movimiento = $this->db->executeLastId();
                 
@@ -144,19 +143,20 @@
 
 
         public function add_Material($datos){
-            // Cambiamos estado asesoria = 2 -Procesando-
-            $this->db->query("UPDATE asesoria SET id_estado=2 WHERE id_asesoria=:id_asesoria");
 
-            $this->db->bind(':id_asesoria', $datos['id_asesoria']);
-            
-            $this->db->execute();
+            $this->db->query("INSERT INTO MATERIAL (Nombre, Archivo)
+                VALUES (:nombre, null)");
 
-            $this->db->query("INSERT INTO reg_acciones (fecha_reg, accion, automatica, id_asesoria, id_profesor)
-                                        VALUES (NOW(), :accion, 0, :id_asesoria, :id_profesor)");
-            
-            $this->db->bind(':id_asesoria', $datos['id_asesoria']);
-            $this->db->bind(':id_profesor', $datos['id_profesor']);
-            $this->db->bind(':accion', $datos['accion']);
+                $this->db->bind(':nombre', trim($datos['nombre']));
+
+                $id_movimiento = $this->db->executeLastId();
+
+
+            $this->db->query("INSERT INTO POSEER (Id_Material, Id_Curso)
+                VALUES (:material, :curso)");
+
+                $this->db->bind(':material', $id_movimiento);
+                $this->db->bind(':curso', trim($datos['id_curso']));
 
             if($this->db->execute()){
                 return true;

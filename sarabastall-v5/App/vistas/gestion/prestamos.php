@@ -56,8 +56,8 @@
     </select> -->
     
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Fecha Inicio:</label>
-        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio">
+        <label for="exampleFormControlInput1" class="form-label">Fecha Expirar:</label>
+        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
     </div>
     
     <div class="mb-3">
@@ -123,38 +123,6 @@
     </div>
 
     </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary">Guardar cambios</button>
-  </div>
-</div>
-</div>
-</div>
-</div>
-
-
-<!-- Modal ingresos -->
-<div class="modal fade" id="modalEliminarprestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Ingresos</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
-
-  <!-- Añadir Formulario y funcion de crear Abono, y Movimiento -->
-        
-    <div class="mb-3">
-        <label for="Importe" class="form-label">Ingreso:</label>
-        <input type="number" step="1.00" class="form-control" id="Importe" aria-describedby="text" required>
-    </div>
-
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Fecha Movimiento:</label>
-        <input type="date" class="form-control" id="exampleFormControlInput1">
-    </div>
-  
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
     <button type="button" class="btn btn-primary">Guardar cambios</button>
@@ -247,7 +215,7 @@
     <th scope="col">Estado</th>
     <th scope="col">Tipo</th>
     <th scope="col">Nombre Persona</th>
-    <th scope="col">Fecha <button type="button" name="4" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
+    <th scope="col">Fecha Fin <button type="button" name="4" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
     <th scope="col">Cantidad</th>
     <th scope="col">Acciones</th>
     </tr>

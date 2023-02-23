@@ -66,6 +66,18 @@
       <br>
     </div>
 
+    <?php
+        $total = 0;
+        foreach($datos["MovimientosTotales"] as $move){
+            if ($move->Nombre_TipoMov == "Ingreso"){
+                $total = $total + $move->Cantidad;
+            } else {
+                $total = $total - $move->Cantidad;
+            }
+        }
+        echo "<h2 class='verde'>Total: ".$total."€</h2>";
+    ?>
+
 
     <input disabled id="page_controller" name="movimiento" value="0" hidden>
 

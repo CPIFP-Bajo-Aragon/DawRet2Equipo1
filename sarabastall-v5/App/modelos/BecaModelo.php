@@ -60,7 +60,7 @@
         }
 
         public function getCentro(){
-            $this->db->query("SELECT * FROM CENTRO");
+            $this->db->query("SELECT * FROM CENTRO WHERE Id_Estado != 4");
 
             return $this->db->registros();
         }

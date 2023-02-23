@@ -1,14 +1,12 @@
 <?php require_once RUTA_APP.'/vistas/inc/header.php'?>
 
-<!-- Si la asesoria está cerrada, desactiva el boton modal -->
+<!-- Si no es el profesor que lleva el curso, no puede editarlo -->
 <?php 
   $estadoFormulario ="";
   if($datos['curso']->Profesor != $datos['usuarioSesion']->Nombre){
     $estadoFormulario = "disabled";
   } 
 ?>
-
-<?php print_r($datos) ?>
 
 
 <div class="container">
@@ -29,21 +27,29 @@
     <div class="row">
         <div class="col-md-7">
         
-          <!-- Añadir textarea y boton para añadir nuevas acciones -->
-            <form method="post" action="<?php echo RUTA_URL?>/admin/add_material">
 
-              <input type="hidden" name="id_curso" value="<?php echo $datos['curso']->Id ?>">
+        <!-- Añadir textarea y boton para añadir nuevos materiales -->
+        <div class="card">
+          
+          <form method="post" action="<?php echo RUTA_URL?>/admin/add_material">
+            <br>
+            <input type="hidden" name="id_curso" value="<?php echo $datos['curso']->Id ?>">
 
-              <div class="row">
-                <div class="col-mb-3 col-10">
-                    
-                    <textarea class="form-control form-control-sm" id="accion" name="accion" placeholder="Agregar Archivo"></textarea>
-                </div>
-                <div class="col-mb-3 col-2">
-                    <button type="submit" class="w-100 btn btn-success btn-lg">Añadir</button>
-                </div>
+            <div class="row">
+              <div class="col-mb-3 col-10">
+
+                  <textarea class="form-control form-control-sm" id="accion" name="nombre" placeholder="Agregar Material"></textarea>
               </div>
-            </form>
+              <div class="col-mb-3 col-2">
+                  <button type="submit" class="w-100 btn btn-success btn-lg">Añadir</button>
+              </div>
+            </div>
+            <br>
+          </form>
+          
+        </div>
+         
+            
         
 
         <div class="card">
@@ -80,18 +86,18 @@
                     <?php endforeach ?>
                   </select>
                 </div>
-                <div class="mb-3 col-6">
+                <!-- <div class="mb-3 col-6">
                   <label for="importe" class="form-label">Importe</label>
                   <input <?php echo $estadoFormulario ?> type="text" class="form-control" id="importe" name="importe" value="<?php echo $datos["curso"]->Importe?>">
-                </div>
+                </div> -->
                 <div class="mb-3 col-6">
                   <label for="importe" class="form-label">Fecha de Finalizacion</label>
-                  <input <?php echo $estadoFormulario ?> type="text" class="form-control" id="fecha" name="fecha" value="<?php echo $datos["curso"]->Fecha?>">
+                  <input <?php echo $estadoFormulario ?> type="date" class="form-control" id="fecha" name="fecha" value="<?php echo $datos["curso"]->Fecha?>">
                 </div> 
 
-                <div class="card-footer d-flex justify-content-end">
+                <!-- <div class="card-footer d-flex justify-content-end">
                     <span class="card-text">#<?php echo $datos["curso"]->Id?></span>
-                </div>
+                </div> -->
 
                 <div class="col-8">
                   <button type="submit" class="w-100 btn btn-success btn-lg" <?php echo $estadoFormulario ?>>Modificar</button>
@@ -104,15 +110,6 @@
           </div>
         </div>  
         <br>
-        <!-- Accion en el boton cerrar asesoria para poner id de estado de la asesoria 3 como que esta cerrada -->
-        <!-- SOlo hay que mostrar el boton si la Asesoria aun no está cerrada -->
-        <!-- <?php if($datos['curso']->Profesor == $datos['usuarioSesion']->Nombre):?>
-        <button type="button" onclick="asesoriaCerrada(<?php echo $datos['asesoria']->id_asesoria ?>)" 
-        data-bs-toggle="modal" data-bs-target="#modalCerrarAccion" class="w-100 btn btn-warning btn-lg">
-                    Desactivar Curso
-        </button> -->
-        
-        <!-- <?php endif ?> -->
 
         </div>
 

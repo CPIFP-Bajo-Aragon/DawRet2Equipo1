@@ -154,7 +154,7 @@
         public function del_material($id_curso, $id_material){
             
             if($this->cursoModelo->del_Material($id_curso, $id_material)){
-                redireccionar("/admin/ver_curso/$id_curso");
+                redireccionar("/admin/see_curso/$id_curso");
             }else{
                 echo "Se ha producido un error";
             }
@@ -167,6 +167,24 @@
                 $curso = $_POST;
     
                 if($this->cursoModelo->add_Curso($curso)){
+                    redireccionar("/admin/gestionar_cursos");
+                }else{
+                    echo "Se ha producido un error";
+                }
+    
+            }else{
+    
+            } 
+
+        }
+
+        public function add_material(){
+
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+                $material = $_POST;
+    
+                if($this->cursoModelo->add_Material($material)){
                     redireccionar("/admin/gestionar_cursos");
                 }else{
                     echo "Se ha producido un error";
@@ -353,7 +371,7 @@
                 $prestamo = $_POST;
                    print_r($prestamo);
 
-                if(!$_POST['concepto'] && !$_POST['importe'] && !$_POST['estado'] && !$_POST['fecha_inicio'] && !$_POST['Id_Persona'] && !$_POST['Id_TipoPrestamo']){
+                if(!$_POST['concepto'] && !$_POST['importe'] && !$_POST['estado'] && !$_POST['fecha_fin'] && !$_POST['Id_Persona'] && !$_POST['Id_TipoPrestamo']){
                     //  redireccionar('/admin/gestionar_personas');
                 }else{   
                     if($this->prestamoModelo->addPrestamo($prestamo)){
@@ -391,6 +409,27 @@
             }
                 
         }
+
+        public function add_abono($id_prestamo){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $prestamo = $_POST;
+    
+                if($this->prestamoModelo->get_prestamo($prestamo)){
+                    redireccionar("/admin/add_abono/$id_prestamo");
+                }else {
+                    echo "Se ha producido un error";
+                }
+                
+            }else{
+                $this->datos["prestamo"] = $this->prestamoModelo->get_prestamo($id_prestamo);
+
+                 //print_r($this->datos["persona"]);
+                $this->vista("gestion/ver_abonos",$this->datos);
+            }
+    
+    
+        }
+        
 
         public function aprobarEstado(){
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
