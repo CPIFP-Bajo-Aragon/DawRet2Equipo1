@@ -368,54 +368,46 @@ th button:hover {
 
 /*ACCESIBILIDAD*/
 
-.acces_butt {
-    color: #ffffff;
+.panel_accesibilidad {
+    display: flex;
     position: fixed;
-    /* width: 50%; */
-    top: 85px;
-    /* right: -50%; */
-    z-index: 10;
-    padding: 8px;
-    background-color: none;
-}
-
-.accesibilidad{
-    color: #ffffff;
-    /* display: flex;
-    justify-content: space-around; */
-    align-items: top;
-    position: fixed;
+    border: 2px solid red;
     width: 50%;
     top: 85px;
     z-index: 10;
     padding: 8px;
     background-color: none;
-    transition: 1s;
+}
+
+
+.acces_butt {
+    display: block;
+    border: 2px solid green;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    color: #ffffff;
+    font-size: large;
+    top: 85px;
+    left: -100px;
+    z-index: 10;
+    padding: 8px;
+    background-color: none;
+}
+
+.accesibilidad {
+    border: 2px solid orange;
 }
 
 .show{
-    left: 0%;
+    display: block;
 }
 
 .hide{
-    left: 0%;
-}
-
-
-.accesibilidad button{
-    width: 30px;
-}
-
-.accesibilidad i{
-    /* cursor: pointer; */
-    font-size: 100px;
-    color: #d9730d;
-}
-.accesibilidad img{
-    cursor: pointer;
+    display: none;
 }
 
 .contraste {
     height: 10px;
-    width: 40px;
+    width: 60px;
 }

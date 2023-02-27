@@ -332,6 +332,17 @@ function mod_show(flag = false){ // A cualquier cambio en la busqueda se llama a
 
 // ACCESIBILIDAD
 
-function show_accesibility(){
-  document.getElementById("panel_accesibilidad").classList.replace("show", "hide");
+function show_accesibility(accion){
+
+  panel = document.getElementById("panel_accesibilidad");
+
+  if (accion){
+    panel.classList.remove("hide");
+    panel.classList.add("show");
+    document.getElementById("acces_butt").setAttribute("onclick", "show_accesibility(false)");
+  } else {
+    panel.classList.remove("show");
+    panel.classList.add("hide");
+    document.getElementById("acces_butt").setAttribute("onclick", "show_accesibility(true)");
+  }
 }
