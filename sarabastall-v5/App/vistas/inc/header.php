@@ -37,3 +37,13 @@
       
     
 </nav>
+
+<button class="acces_butt" onclick="show_accesibility();"><i class="fa fa-universal-access"></i></button>
+<div id="panel_accesibilidad" class="accesibilidad hide">
+  <button class="font_size">A+</button>
+  <button class="font_size">A-</button>
+  <button class="font_size">A</button>
+  <button class="contraste"></button>
+  <button class="contraste"></button>
+  <button class="contraste"></button>
+</div>

@@ -49,7 +49,20 @@
           
         </div>
          
-            
+        <div class="col-md-3">
+          <?php foreach($datos["curso"]->material as $material): ?>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-subtitle"> <?php echo $material->Nombre ?>:</h5>
+              <p class="card-text ps-2"> <?php echo $material->Archivo ?></p>
+              <a class="btn btn-danger btn-lg ml-auto" style="float:right" href="<?php echo RUTA_URL?>/admin/del_material/<?php echo $datos['curso']->Id?>/<?php echo $material->Id?>"><i class="bi bi-trash"></i></a>
+              <div class="card-footer d-flex justify-content-end">
+                <span class="card-text">#<?php echo $material->Id?></span>
+              </div>
+            </div>
+          </div>
+          <?php endforeach?>
+        </div>  
         
 
         <div class="card">
@@ -57,7 +70,7 @@
             <!-- Formulario rellenado con la informacion de la asesoria para modificar cualquier dato -->
             <form method="post" class="mb-5">
               <div class="row">
-                <div class="mb-3 col-6">
+                <div class="mb-6 col-6">
                   <label for="nombre" class="form-label">Nombre</label>
                   <input <?php echo $estadoFormulario ?> type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $datos["curso"]->Curso?>">
                 </div>
@@ -114,21 +127,19 @@
         </div>
 
         <!-- Material que tiene dicho Curso-->
-        <div class="col-md-5">
-            <?php foreach($datos["curso"]->material as $material): ?>
-                <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-subtitle"> <?php echo $material->Nombre ?>:</h5>
-                      <p class="card-text ps-2"> <?php echo $material->Archivo ?></p>
-                      <a class="btn btn-danger btn-lg ml-auto" style="float:right" href="<?php echo RUTA_URL?>/admin/del_material/<?php echo $datos['curso']->Id?>/<?php echo $material->Id?>"><i class="bi bi-trash"></i></a>
-                      <div class="card-footer d-flex justify-content-end">
-                        <span class="card-text">#<?php echo $material->Id?></span>
-                      </div>
-
-                    </div>
-
-                </div>
-            <?php endforeach?>
+        <div class="col-md-3">
+          <?php foreach($datos["curso"]->material as $material): ?>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-subtitle"> <?php echo $material->Nombre ?>:</h5>
+              <p class="card-text ps-2"> <?php echo $material->Archivo ?></p>
+              <a class="btn btn-danger btn-lg ml-auto" style="float:right" href="<?php echo RUTA_URL?>/admin/del_material/<?php echo $datos['curso']->Id?>/<?php echo $material->Id?>"><i class="bi bi-trash"></i></a>
+              <div class="card-footer d-flex justify-content-end">
+                <span class="card-text">#<?php echo $material->Id?></span>
+              </div>
+            </div>
+          </div>
+          <?php endforeach?>
         </div>  
     </div>
 </div>

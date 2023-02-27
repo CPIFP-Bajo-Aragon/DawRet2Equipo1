@@ -10,8 +10,15 @@
     </ol>
   </nav>
 
-  <!-- Modal ingresos -->
-    <div class="modal fade" id="modalEliminarprestamo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <?php 
+  $total = $datos["prestamo"]->Importe;
+  foreach($datos["abonos"] as $abono){
+    $total = $total - $abono->Cantidad;
+  }
+  ?>
+
+  <!-- Modal Abonar -->
+    <div class="modal fade" id="modalAbonar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -21,18 +28,18 @@
       <div class="modal-body">
     
       <!-- Añadir Formulario y funcion de crear Abono, y Movimiento -->
-        <form method="post" id="formAbonar" action="<?php echo RUTA_URL ?>/admin/add_abono">
+        <form method="post" id="formAbonar" action="<?php echo RUTA_URL ?>/admin/add_abono/<?php echo $datos['prestamo']->Id ?>/<?php echo $total ?>">
             
         <div class="mb-3">
             <label for="Importe" class="form-label">Abonar:</label>
-            <input type="number" step=".01" min="0" max="" class="form-control" id="Importe" aria-describedby="text" required>
+            <input id="importeMax" name="importe" type="number" step=".01" min="0" max="<?php echo $total ?>" class="form-control" id="Importe" aria-describedby="text" required>
         </div>
     
-        <input type="hidden" id="Id_Prestacion" name="id_prestamo">
+        <input type="hidden" id="Id_Prestamo" value="<?php echo $datos['prestamo']->Id ?>" name="id_prestamo">
     
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary">Abonar</button>
+          <button type="submit" class="btn btn-primary">Abonar</button>
         </div>
         </form>
       </div>
@@ -41,54 +48,44 @@
     </div>
             
     <div class="col-12">
-        <h1>Prestamo: <?php echo $datos["centro"]->Nombre ?> </h1>
+        <h1>[<?php echo $datos["prestamo"]->NombreEst ?>] Prestamo: #<?php echo $datos["prestamo"]->Id ?> </h1>
     </div>
     
     <br>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <!-- Formulario rellenado con la informacion del centro para modificar cualquier dato -->
+            <?php
+            echo "<h2>Total a Pagar: <span class='rojo'>".$total."</span></h2>";
+            echo "<hr>";
+            ?>
+            <?php if(count($datos["abonos"]) == 0):?>
+            <h3> No se han realizado abonos todavia </h3>
+            <?php endif ?>
+            <?php $n = 1;?>
+            <?php foreach($datos["abonos"] as $abono):?>
+            
+            <?php echo $n."º-     Se han abonado <span class='verde'>".$abono->Cantidad." €</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp Fecha del Abono: ".$abono->Fecha; ?>
+            <?php $n = $n+1;?>
+            <hr>
+            <?php endforeach?>
 
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-              <div class="card-body">
-                <!-- Formulario rellenado con la informacion del centro para modificar cualquier dato -->
-                <form method="post" class="mb-5">
-                  <div class="row">
+            <div class="card-footer">
 
-                  <input hidden name="Id_Ciudad" type="text" value="<?php echo $datos["centro"]->Id_Ciudad?>">
-                    <div class="mb-3 col-6">
-                      <label for="Nombre" class="form-label">Nombre</label>
-                      <input type="text" class="form-control" id="Nombre" name="Nombre" value="<?php echo $datos["centro"]->Nombre?>">
-                    </div>
+            <?php if($total != 0):?>
+              <button class="btn-lg w-80" data-bs-toggle="modal" data-bs-target="#modalAbonar"><i class="fa fa-plus"></i> Añadir Abono</button>
+              <?php else:?>
+              <h3 class="verde">El Prestamo ya se ha devuelto</h3>
+              <?php endif?>
 
-                    <div class="mb-3 col-6">
-                      <label for="Cuantia" class="form-label">Cuantia</label>
-                      <input type="text" class="form-control" id="Cuantia" name="Cuantia" value="<?php echo $datos["centro"]->Cuantia?>">
-                    </div>
+            </div>
 
-                    <div class="mb-3 col-6">
-                      <label for="Ciudad" class="form-label">Ciudad</label>
-                      <input type="text" class="form-control" id="Ciudad" name="Ciudad" value="<?php echo $datos["centro"]->Nombre_Ciudad?>">
-                    </div>
-
-                    <div class="mb-3 col-6">
-                      <label for="Distancia" class="form-label">Distancia</label>
-                      <input type="text" class="form-control" id="Distancia" name="Distancia" value="<?php echo $datos["centro"]->Distancia?>">
-                    </div>  
-
-                    <div class="col-8">
-                      <button type="submit" class="w-100 btn btn-success btn-lg">Modificar</button>
-                    </div>
-
-                    <div class="col-4">
-                      <a class="w-100 btn btn-danger btn-lg" href="<?php echo RUTA_URL?>/admin/gestionar_centros">Atras</a>
-                    </div>
-
-                  </div>
-                </form>
-              </div>
-          </div>  
-          <br>
-        </div> 
+          </div>
+        </div>  
+      <br>
+      </div> 
     </div>
 </div>
 

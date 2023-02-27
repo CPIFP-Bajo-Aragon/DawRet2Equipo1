@@ -410,11 +410,12 @@
                 
         }
 
-        public function add_abono($id_prestamo){
+        public function add_abono($id_prestamo, $resto = 0){
             if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $prestamo = $_POST;
-    
-                if($this->prestamoModelo->get_prestamo($prestamo)){
+                
+
+                if($this->prestamoModelo->add_abono($prestamo, $resto)){
                     redireccionar("/admin/add_abono/$id_prestamo");
                 }else {
                     echo "Se ha producido un error";
@@ -422,6 +423,7 @@
                 
             }else{
                 $this->datos["prestamo"] = $this->prestamoModelo->get_prestamo($id_prestamo);
+                $this->datos["abonos"] = $this->prestamoModelo->get_abonos($id_prestamo);
 
                  //print_r($this->datos["persona"]);
                 $this->vista("gestion/ver_abonos",$this->datos);

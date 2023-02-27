@@ -79,6 +79,11 @@
             return $this->stmt->rowCount();
         }
 
+        public function fetchColumn(){
+            $this->execute();
+            return $this->stmt->fetchColumn();
+        }
+
         public function executeLastId(){
             $this->execute();
             return $this->dbh->lastInsertId();

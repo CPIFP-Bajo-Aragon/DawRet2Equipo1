@@ -154,7 +154,7 @@ function listar_elementos(inicial){
                         newA = document.createElement("a");
                         newA.href = 'http://localhost/sarabastall-v5/admin/add_abono/' + arraySon[0]; // Se puede mejorar la Url 
                         newI = document.createElement("i");
-                        newI.classList.add("bi", "fa-share-square");
+                        newI.classList.add("fa", "fa-share-square");
                         newBoton.appendChild(newI);
                         newA.appendChild(newBoton);
                         newTd.appendChild(newA);
