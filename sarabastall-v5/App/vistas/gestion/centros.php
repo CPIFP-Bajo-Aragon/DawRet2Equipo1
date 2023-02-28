@@ -23,21 +23,21 @@
         <hr>
         <form method="post" action="<?php echo RUTA_URL ?>/admin/add_centro">
             <label>Nombre Centro:</label>
-            <input type="text" id="nombreCentro" name="nombreCentro">
+            <input type="text" id="nombreCentro" name="nombreCentro" class="color_input">
             <p id="ErrorNombre"></p>
 
             <label>Ciudad:</label>
-            <select name="selectNombre">
+            <select name="selectNombre" class="color_input">
               <?php foreach($datos["ciudades"] as $ciudad): ?>
                 <option value="<?php echo $ciudad->Id ?>"><?php echo $ciudad->Nombre?></option>
               <?php endforeach ?>
             </select>
 
             <label>Cuantia:</label>
-            <input type="number" step="any" id="cuantia" name="cuantia"> 
+            <input type="number" step="any" id="cuantia" name="cuantia" class="color_input"> 
             <p id="ErrorCuantia"></p>
 
-            <input type="submit" value="Insertar" onclick="todos()">
+            <input type="submit" value="Insertar" onclick="todos()" class="color_input">
         </form>
 
     </div>
@@ -55,9 +55,9 @@
               <input type="text" id="Nombre_Ciudad" name="Nombre_Ciudad">
 
               <label>Distancia:</label>
-              <input type="number" step="any" id="Distancia" name="Distancia">
+              <input type="number" step="any" id="Distancia" name="Distancia" class="color_input">
 
-              <input type="submit" value="Agregar" onclick="todos()">
+              <input type="submit" value="Agregar" onclick="todos()" class="color_input">
           </form>
       </div>
   </div>
@@ -94,12 +94,12 @@
 <div id="container">
 
   <div class="col-3">
-    <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+    <input type="search" class="form-control form-control-dark color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
     
 
     <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
 
-    <select id="panel_filtro" name="Tipo" onchange="mod_show()">
+    <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="color_input">
     <option id="refresh" value="0" selected></option>
       <?php foreach($datos["ciudades"] as $ciudad): ?>
         <option value="<?php echo $ciudad->Id ?>"><?php echo $ciudad->Nombre ?></option>
@@ -119,7 +119,7 @@
 
   <input disabled id="page_controller" name="centro" value="0" hidden>
   <div class="container">
-    <table class="table table-striped table-hover">
+    <table id="tabla_gestion" class="table color_sheet table_sheet table-hover">
       <thead class="thead-azul">
         <tr>
           <th scope="col">Nº Centro <button type="button" name="0" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
@@ -157,6 +157,8 @@
   window.onload=caja_fuerte(<?php echo json_encode($datos["centros"])?>); // Aqui pasamos el array en cuestion recibido por PHP
 
   window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
+
+  window.onload=save_config(); // Cargar los datos de Accesibilidad
 
 </script>
     

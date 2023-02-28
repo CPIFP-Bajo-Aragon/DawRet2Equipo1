@@ -1,12 +1,12 @@
 <?php require_once RUTA_APP.'/vistas/inc/header.php'?>
 
 <div class="container">
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/admin/index">Menu</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Gestion Economia</li>
-    </ol>
-</nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/admin/index">Menu</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Gestion Economia</li>
+        </ol>
+    </nav>
 
     <div id="ventanaModal" class="modalJS"> 
         <div class="content">
@@ -53,11 +53,11 @@
 <div id="contenido">
 
     <div class="col-3">
-      <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+      <input type="search" class="color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
 
       <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
 
-      <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+      <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="form-select color_input form-select-lg mb-3" aria-label=".form-select-lg example">
       <option id="refresh" value="0" selected></option>
         <?php foreach($datos["tipos_movimiento"] as $movimiento): ?>
           <option value="<?php echo $movimiento->Id ?>"><?php echo $movimiento->Nombre ?></option>
@@ -85,8 +85,8 @@
     <br>
     <br>
     <div id="contenido">
-        <table class="table table-striped table-hover">
-            <thead class="thead-azul">
+        <table id="tabla_gestion" class="table color_sheet table_sheet table-hover">
+            <thead class="">
                 <tr>
                     <th scope="col">Nº Movimiento</th>
                     <th scope="col">Tipo Movimiento</th>
@@ -116,6 +116,7 @@
     <script>
       window.onload=caja_fuerte(<?php echo json_encode($datos["MovimientosTotales"])?>);
       window.onload=listar_elementos(true);
+      window.onload=save_config(); // Cargar los datos de Accesibilidad
     </script>
 
 </div>

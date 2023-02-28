@@ -3,7 +3,7 @@
 <?php require_once RUTA_APP.'/vistas/inc/header.php'?>
 
 
-    <div id="menuFondo">
+    <div>
 
         <div class="row d-flex justify-content-center text-center" >
             <!-- <div class="col-12"> -->
@@ -71,6 +71,9 @@
 
    
 
+    <script>
+      window.onload=save_config(); // Cargar los datos de Accesibilidad
+    </script>
 
 
     

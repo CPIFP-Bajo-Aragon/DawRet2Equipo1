@@ -73,7 +73,9 @@
 
 </div>
 
-
+<script>
+  window.onload=save_config(); // Cargar los datos de Accesibilidad  
+</script>
 
 
 <?php require_once RUTA_APP.'/vistas/inc/footer.php'?>

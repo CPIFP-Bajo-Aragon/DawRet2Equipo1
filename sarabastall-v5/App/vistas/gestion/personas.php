@@ -154,7 +154,7 @@
 <input disabled id="page_controller" name="persona" value="0" hidden>
 
 
-<table class="table table-striped table-hover">
+<table id="tabla_gestion" class="table color_sheet table_sheet table-hover">
   <thead class="thead-azul">
     <tr>
     <th scope="col">Nº</th>
@@ -187,6 +187,7 @@
 <script>
   window.onload=caja_fuerte(<?php echo json_encode($datos["PersonasTotales"])?>);
   window.onload=listar_elementos(true);
+  window.onload=save_config(); // Cargar los datos de Accesibilidad
 </script>
 
 

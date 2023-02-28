@@ -17,8 +17,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;400&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
 
     <script src="<?php echo RUTA_URL?>/js/paginacion.js"></script>
+    <script src="<?php echo RUTA_URL?>/js/accesibilidad.js"></script>
 </head>
-<body>
+<body id="fondo_color" class="color_fondo">
 
  
 
@@ -40,12 +41,12 @@
 <div class="panel_accesibilidad">
   
   <div id="panel_accesibilidad" class="accesibilidad hide">
-    <button class="font_size">A+</button>
-    <button class="font_size">A-</button>
-    <button class="font_size">A</button>
-    <button class="contraste"></button>
-    <button class="contraste"></button>
-    <button class="contraste"></button>
+    <button onclick="size_font('+')" class="font_size">A+</button>
+    <button onclick="size_font('-')" class="font_size">A-</button>
+    <button onclick="size_font('=')" class="font_size">A</button>
+    <button onclick="color_web('')" class="contraste low-contrast"></button>
+    <button onclick="color_web('A')" class="contraste alternative"></button>
+    <button onclick="color_web('H')" class="contraste high-contrast"></button>
   </div>
   <button id="acces_butt" class="acces_butt" onclick="show_accesibility(true);"><i class="fa fa-universal-access"></i></button>
 </div>

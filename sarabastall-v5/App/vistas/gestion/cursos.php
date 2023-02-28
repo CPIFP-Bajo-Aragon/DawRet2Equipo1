@@ -34,11 +34,11 @@
         <hr>
         <form method="post" onsubmit="return Validar(this, 'nombreCurso', 'profesor', 'fechaCurso')" action="<?php echo RUTA_URL ?>/admin/add_curso">
             <label>Nombre:</label>
-            <input type="text" id="nombreCurso" name="nombre">
+            <input type="text" id="nombreCurso" name="nombre" class="color_input">
             <p id="ErrorNombre"></p>
             <br>
             <label>Profesor:</label>
-            <select name="profesor">
+            <select name="profesor" class="color_input" class="color_input">
               <?php foreach($datos["profesores"] as $profesor): ?>
                   <option value="<?php echo $profesor->Id ?>"><?php echo $profesor->Nombre ?></option>
               <?php endforeach ?>
@@ -52,16 +52,16 @@
             </select>
             <br>
             <label>Fecha:</label>
-            <input type="date" id="fechaCurso" name="fecha">
+            <input type="date" id="fechaCurso" name="fecha" class="color_input">
             <p id="ErrorFecha"></p>
             <br>
             <label>Importe:</label>  <!--Controlar que solo se usen valores numericos-->
-            <input type="number" step="1.00" id="importe" name="importe">
+            <input type="number" step="1.00" id="importe" name="importe" class="color_input">
             <p id="ErrorImporte"></p>
             <br>
             <hr>
             <!-- <input class="boton" value="Guardar Cambios" type="button" onclick="importeNoNegativo()"> -->
-            <input type="submit" value="Entrar" onclick="todos()">
+            <input type="submit" value="Entrar" onclick="todos()" class="color_input">
         </form>
 
     </div>
@@ -102,11 +102,11 @@
 <!-- BUSCADOR + FILTROS -->
 
 <div class="col-3">
-  <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+  <input type="search" class="form-control form-control-dark color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
 
   <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
 
-  <select id="panel_filtro" name="Tipo" onchange="mod_show()">
+  <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="color_input">
   <option id="refresh" value="0" selected></option>
     <?php foreach($datos["especialidades"] as $especialidad): ?>
       <option value="<?php echo $especialidad->Id ?>"><?php echo $especialidad->Nombre ?></option>
@@ -121,7 +121,7 @@
 
 <div class="container">
 
-  <table class="table table-striped table-hover">
+  <table id="tabla_gestion" class="table color_sheet table_sheet table-hover">
     <thead class="thead-azul">
       <tr>
       <th scope="col">Nº Curso</th>
@@ -161,6 +161,8 @@
   window.onload=caja_fuerte(<?php echo json_encode($datos["CursosTotales"])?>); // Aqui pasamos el array en cuestion recibido por PHP
 
   window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
+
+  window.onload=save_config(); // Cargar los datos de Accesibilidad
 
 </script>
     

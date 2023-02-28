@@ -13,6 +13,7 @@
     //Ruta url, Ejemplo: http://localhost/atletismo
     define('RUTA_URL', 'http://localhost/sarabastall-v5'); // Si va ha cambiar esto, revisar listar_elementos, que dara problemas
 
+
     DEFINE('NOMBRE_SITIO', 'sarabataa!');
 
     //echo dirname(dirname(__FILE__));

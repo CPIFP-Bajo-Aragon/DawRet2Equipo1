@@ -31,7 +31,7 @@
   <form method="post" action="<?php echo RUTA_URL ?>/admin/add_beca">
     <div class="mb-3">
       <label for="NombreText" class="form-label">Nombre:</label>
-      <select name="Id_Persona">
+      <select name="Id_Persona" class="color_input">
       <?php foreach($datos["nombrealumno"] as $becasNombreAlumno): ?>
         <option value="<?php echo $becasNombreAlumno->Id_Persona ?>"><?php echo $becasNombreAlumno->Nombre?></option>
         <?php endforeach?>
@@ -42,14 +42,14 @@
     </div>
 
     <label for="NombreText" class="form-label">Tipo de Beca:</label>
-    <select name="Id_Tipo_Beca">
+    <select name="Id_Tipo_Beca" class="color_input">
       <?php foreach($datos["tipobeca"] as $becasTipo): ?>
         <option value="<?php echo $becasTipo->Id_Tipo_Beca ?>"><?php echo $becasTipo->Tipo_Beca?></option>
         <?php endforeach?>
       </select>
 
     <label for="NombreText" class="form-label">Centro:</label>
-    <select name="Id_Centro">
+    <select name="Id_Centro" class="color_input">
       <?php foreach($datos["centros"] as $becasCentro): ?>
         <option value="<?php echo $becasCentro->Id_Centro ?>"><?php echo $becasCentro->Nombre?></option>
         <?php endforeach?>
@@ -57,17 +57,17 @@
 
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Nota media:</label>
-        <input type="text" class="form-control" id="Nota_Media" name="Nota_Media">
+        <input type="text" class="form-control color_input" id="Nota_Media" name="Nota_Media">
     </div>
     
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Fecha:</label>
-        <input type="date" class="form-control" id="Fecha_Beca" name="Fecha_Beca">
+        <input type="date" class="form-control color_input" id="Fecha_Beca" name="Fecha_Beca">
     </div>
     
     <div class="mb-3">
         <label for="Importe" class="form-label">Importe:</label>
-        <input type="number" step="1.00" class="form-control" id="Importe" name="Importe" aria-describedby="text" required>
+        <input type="number" step="1.00" class="form-control color_input" id="Importe" name="Importe" aria-describedby="text" required>
     </div>
     
     <br>
@@ -80,7 +80,7 @@
   <div class="modal-footer">
     <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
     <button type="button" class="btn btn-primary">Guardar cambios</button> -->
-    <input type="submit" value="Entrar">
+    <input type="submit" value="Entrar" class="color_input">
   </div>
   </form>
 </div>
@@ -148,12 +148,12 @@
 <div class="container">
 <div class="col-3">
    
-    <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+    <input type="search" class="form-control form-control-dark color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
    
 
     <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
 
-    <select id="panel_filtro" name="Tipo" onchange="mod_show()">
+    <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="color_input">
     <option id="refresh" value="0" selected></option>
       <?php foreach($datos["tipos"] as $tipo): ?>
         <option value="<?php echo $tipo->Id ?>"><?php echo $tipo->Nombre ?></option>
@@ -162,7 +162,7 @@
     <br>
   </div>
 
-<table class="table table-striped table-hover">
+<table id="tabla_gestion" class="table color_sheet table_sheet table-hover">
   <thead class="thead-azul">
     <tr>
     <th scope="col">Nº Beca</th>
@@ -194,6 +194,8 @@
   window.onload=caja_fuerte(<?php echo json_encode($datos["BecasTotales"])?>); // Aqui pasamos el array en cuestion recibido por PHP
 
   window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
+
+  window.onload=save_config(); // Cargar los datos de Accesibilidad
 
 </script>
     

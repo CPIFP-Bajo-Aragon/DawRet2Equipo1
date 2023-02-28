@@ -174,7 +174,7 @@
       function valida_cerrar(id_asesoria){
         document.getElementById("id_asesoria").value = id_asesoria
       }
+      window.onload=save_config(); // Cargar los datos de Accesibilidad
   </script>
-    
 
 <?php require_once RUTA_APP.'/vistas/inc/footer.php'?>

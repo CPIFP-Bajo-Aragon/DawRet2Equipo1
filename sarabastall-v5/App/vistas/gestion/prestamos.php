@@ -29,7 +29,7 @@
   <form method="post" action="<?php echo RUTA_URL ?>/admin/add_prestamo">
     <div class="mb-3">
       <label for="NombreText" class="form-label">Nombre:</label>
-      <select name="Id_Persona">
+      <select name="Id_Persona" class="color_input">
       <?php foreach($datos["nombrepersona"] as $prestamoNombrePersona): ?>
         <option value="<?php echo $prestamoNombrePersona->Id_Persona ?>"><?php echo $prestamoNombrePersona->Nombre?></option>
         <?php endforeach?>
@@ -38,11 +38,11 @@
 
     <div class="mb-3">
       <label for="Concepto" class="form-label">Concepto:</label>
-      <input type="text" class="form-control" id="concepto" name="concepto" aria-describedby="text">
+      <input type="text" class="form-control color_input" id="concepto" name="concepto" aria-describedby="text">
     </div>
 
     <label for="NombreText" class="form-label">Tipo de Préstamo:</label>
-    <select name="Id_TipoPrestamo">
+    <select name="Id_TipoPrestamo" class="color_input">
       <?php foreach($datos["tipoprestamo"] as $tipoPrestamo): ?>
         <option value="<?php echo $tipoPrestamo->Id_TipoPrestamo ?>"><?php echo $tipoPrestamo->Nombre?></option>
         <?php endforeach?>
@@ -57,12 +57,12 @@
     
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Fecha Expirar:</label>
-        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
+        <input type="date" class="form-control color_input" id="fecha_fin" name="fecha_fin">
     </div>
     
     <div class="mb-3">
         <label for="Importe" class="form-label">Importe:</label>
-        <input type="number" step="1.00" class="form-control" id="importe" name="importe" aria-describedby="text" required>
+        <input type="number" step="1.00" class="form-control color_input" id="importe" name="importe" aria-describedby="text" required>
     </div>
     
     <br>
@@ -194,12 +194,12 @@
 <div class="container">
 <div class="col-3">
     
-    <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search" >
+    <input type="search" class="form-control form-control-dark color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search" >
     
 
     <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
 
-    <select id="panel_filtro" name="Tipo" onchange="mod_show()">
+    <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="color_input">
     <option id="refresh" value="0" selected></option>
       <?php foreach($datos["estados"] as $estado): ?>
         <option value="<?php echo $estado->Id ?>"><?php echo $estado->Nombre ?></option>
@@ -208,7 +208,7 @@
     <br>
   </div>
   
-<table class="table table-striped table-hover">
+<table id="tabla_gestion" class="table color_sheet table_sheet table-hover">
   <thead class="thead-azul">
     <tr>
     <th scope="col">Nº Préstamo</th>
@@ -252,6 +252,8 @@
   window.onload=caja_fuerte(<?php echo json_encode($datos["PrestamosTotales"])?>); // Aqui pasamos el array en cuestion recibido por PHP
 
   window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
+
+  window.onload=save_config(); // Cargar los datos de Accesibilidad
 
 </script>
     

@@ -346,3 +346,5 @@ function show_accesibility(accion){
     document.getElementById("acces_butt").setAttribute("onclick", "show_accesibility(true)");
   }
 }
+
+
