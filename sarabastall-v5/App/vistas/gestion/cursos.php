@@ -55,10 +55,6 @@
             <input type="date" id="fechaCurso" name="fecha" class="color_input">
             <p id="ErrorFecha"></p>
             <br>
-            <label>Importe:</label>  <!--Controlar que solo se usen valores numericos-->
-            <input type="number" step="1.00" id="importe" name="importe" class="color_input">
-            <p id="ErrorImporte"></p>
-            <br>
             <hr>
             <!-- <input class="boton" value="Guardar Cambios" type="button" onclick="importeNoNegativo()"> -->
             <input type="submit" value="Entrar" onclick="todos()" class="color_input">

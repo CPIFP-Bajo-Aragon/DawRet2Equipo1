@@ -10,7 +10,7 @@
         public function get_Curso($id_curso){
             //Devuelve la informacion de un Curso concreto
 
-            $this->db->query("SELECT Importe, e.Nombre as Especialidad, c.Id_Curso as Id, c.Nombre as Curso, p.Nombre as Profesor, c.Fecha_Impartir as Fecha FROM CURSO c, PERSONA p, ESPECIALIDAD e
+            $this->db->query("SELECT e.Nombre as Especialidad, c.Id_Curso as Id, c.Nombre as Curso, p.Nombre as Profesor, c.Fecha_Impartir as Fecha FROM CURSO c, PERSONA p, ESPECIALIDAD e
             WHERE c.Id_Persona = p.Id_Persona AND c.Id_Especialidad = e.Id_Especialidad AND c.Id_Curso = :id
             ORDER BY c.Nombre DESC");
 
@@ -45,43 +45,12 @@
         // EN FUNCIONAMIENTO
         public function add_Curso($datos){
 
-            
-
-            if($datos['importe']){ // Puede que haya que poner '||trim($datos['importe_input']) != null'
-                // Utilizar el modelo Economia para introducir un nuevo movimiento
-
-                $this->db->query("INSERT INTO MOVIMIENTO (Fecha, Procedencia, Cantidad, Id_TipoMov)
-                VALUES (NOW(), :texto, :importe, 2)");
-
-                $this->db->bind(':texto', "Costeo del Curso: ".trim($datos['nombre']));
-                $this->db->bind(':importe',trim($datos['importe']));
-
-                // Consulta o funcion para insertar nuevo movimiento (Si es funcion, devolvera el id del movimineto)
-                $id_movimiento = $this->db->executeLastId();
-                
-
-
-                $this->db->query("INSERT INTO CURSO (Nombre, Importe, Fecha_Impartir, Id_Persona, Id_Especialidad, Id_Movimiento, Id_Estado)
-                VALUES (:nombre, :importe, :fecha, :profesor, :especialidad, :movimiento, 3)");
-
-                $this->db->bind(':nombre',trim($datos['nombre']));
-                $this->db->bind(':importe',trim($datos['importe']));
-                $this->db->bind(':fecha',trim($datos['fecha']));
-                $this->db->bind(':especialidad',trim($datos['tipo']));
-                $this->db->bind(':profesor',trim($datos['profesor']));
-                $this->db->bind(':movimiento', $id_movimiento);
-
-            } else {
-
-                $this->db->query("INSERT INTO CURSO (Nombre, Importe, Fecha_Impartir, Id_Persona, Id_Especialidad, Id_Movimiento, Id_estado)
-                VALUES (:nombre, null, :fecha, :profesor, :especialidad, null, 3)");
-
-                $this->db->bind(':nombre',trim($datos['nombre']));
-                $this->db->bind(':fecha',trim($datos['fecha']));
-                $this->db->bind(':profesor',trim($datos['profesor']) );
-                $this->db->bind(':especialidad',trim($datos['tipo']));
-
-            }
+            $this->db->query("INSERT INTO CURSO (Nombre, Importe, Fecha_Impartir, Id_Persona, Id_Especialidad, Id_Movimiento, Id_estado)
+            VALUES (:nombre, null, :fecha, :profesor, :especialidad, null, 3)");
+            $this->db->bind(':nombre',trim($datos['nombre']));
+            $this->db->bind(':fecha',trim($datos['fecha']));
+            $this->db->bind(':profesor',trim($datos['profesor']) );
+            $this->db->bind(':especialidad',trim($datos['tipo']));
 
             if($this->db->execute()){
                 return true;

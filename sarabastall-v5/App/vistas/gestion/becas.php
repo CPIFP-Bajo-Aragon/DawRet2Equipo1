@@ -33,7 +33,7 @@
       <label for="NombreText" class="form-label">Nombre:</label>
       <select name="Id_Persona" class="color_input">
       <?php foreach($datos["nombrealumno"] as $becasNombreAlumno): ?>
-        <option value="<?php echo $becasNombreAlumno->Id_Persona ?>"><?php echo $becasNombreAlumno->Nombre?></option>
+        <option value="<?php echo $becasNombreAlumno->Id_Persona ?>"><?php echo $becasNombreAlumno->Nombre?>; &nbsp;&nbsp;Padre: <?php echo $becasNombreAlumno->Tutor_Legal?></option>
         <?php endforeach?>
       </select>
       <!-- <input type="text" class="form-control" id="Nombre" name ="Nombre" aria-describedby="text">
@@ -52,13 +52,8 @@
     <select name="Id_Centro" class="color_input">
       <?php foreach($datos["centros"] as $becasCentro): ?>
         <option value="<?php echo $becasCentro->Id_Centro ?>"><?php echo $becasCentro->Nombre?></option>
-        <?php endforeach?>
-      </select>
-
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Nota media:</label>
-        <input type="text" class="form-control color_input" id="Nota_Media" name="Nota_Media">
-    </div>
+      <?php endforeach?>
+    </select>
     
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Fecha:</label>
@@ -146,14 +141,11 @@
 
 <input disabled id="page_controller" name="beca" value="0" hidden>
 <div class="container">
-<div class="col-3">
-   
-    <input type="search" class="form-control form-control-dark color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
-   
 
+  <div class="col-3">
+    <input type="search" class="color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
     <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
-
-    <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="color_input">
+    <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="form-select color_input form-select-lg mb-3" aria-label=".form-select-lg example">
     <option id="refresh" value="0" selected></option>
       <?php foreach($datos["tipos"] as $tipo): ?>
         <option value="<?php echo $tipo->Id ?>"><?php echo $tipo->Nombre ?></option>

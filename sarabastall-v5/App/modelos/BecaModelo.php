@@ -17,13 +17,12 @@
         }
 
         public function addBeca($datos){
-            $this->db->query("INSERT INTO BECA (Importe, Observaciones, Fecha_Beca, Nota_Media, Id_Persona, Id_Tipo_Beca, Id_Centro)
-                VALUES (:Importe, :Observaciones, :Fecha_Beca, :Nota_Media, :Id_Persona, :Id_Tipo_Beca, :Id_Centro)");
+            $this->db->query("INSERT INTO BECA (Importe, Observaciones, Fecha_Beca, Id_Persona, Id_Tipo_Beca, Id_Centro)
+                VALUES (:Importe, :Observaciones, :Fecha_Beca, :Id_Persona, :Id_Tipo_Beca, :Id_Centro)");
 
                 $this->db->bind(':Importe',trim($datos['Importe']));
                 $this->db->bind(':Observaciones',trim($datos['Observaciones']));
                 $this->db->bind(':Fecha_Beca',trim($datos['Fecha_Beca']));
-                $this->db->bind(':Nota_Media',trim($datos['Nota_Media']));
                 $this->db->bind(':Id_Persona',trim($datos['Id_Persona']));
                 $this->db->bind(':Id_Tipo_Beca',trim($datos['Id_Tipo_Beca']));
                 $this->db->bind(':Id_Centro',trim($datos['Id_Centro']));
@@ -41,7 +40,7 @@
         }
 
         public function getalumnoBeca(){
-            $this->db->query("SELECT p.Id_Persona as Id_Persona, p.Nombre as Nombre FROM PERSONA p, ALUMNO a
+            $this->db->query("SELECT p.Id_Persona as Id_Persona, p.Nombre as Nombre, a.Tutor_Legal as Tutor_Legal FROM PERSONA p, ALUMNO a
                                 WHERE p.Id_Persona= a.Id_Persona");
 
             return $this->db->registros();
