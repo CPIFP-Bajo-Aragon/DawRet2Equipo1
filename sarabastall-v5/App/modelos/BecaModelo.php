@@ -58,6 +58,12 @@
             return $this->db->registros();
         }
 
+        public function getCiudad(){
+            $this->db->query("SELECT * FROM CIUDAD");
+
+            return $this->db->registros();
+        }
+
         
         // public function getVisualizarBeca($id_beca){
         //     $this->db->query("SELECT * FROM BECA

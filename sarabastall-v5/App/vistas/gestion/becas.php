@@ -48,17 +48,21 @@
         <?php endforeach?>
       </select>
 
+
+    <label for="NombreText" class="form-label">Centro:</label>
+    <select name="Id_Ciudad">
+      <?php foreach($datos["ciudades"] as $becasCentro): ?>
+        <option value="<?php echo $becasCentro->Id_Centro ?>"><?php echo $becasCentro->Nombre?></option>
+        <?php endforeach?>
+    </select>
+
     <label for="NombreText" class="form-label">Centro:</label>
     <select name="Id_Centro">
-      <?php foreach($datos["centros"] as $becasCentro): ?>
-        <option value="<?php echo $becasCentro->Id_Centro ?>"><?php echo $becasCentro->Nombre?></option>
+      <?php foreach($datos["centros"] as $becasCiudad): ?>
+        <option value="<?php echo $becasCiudad->Id_Ciudad ?>"><?php echo $becasCiudad->Nombre?></option>
         <?php endforeach?>
       </select>
 
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Nota media:</label>
-        <input type="text" class="form-control" id="Nota_Media" name="Nota_Media">
-    </div>
     
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Fecha:</label>

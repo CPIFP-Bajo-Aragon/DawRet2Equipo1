@@ -75,6 +75,8 @@
 
             $this->datos["centros"] = $this->becaModelo->getCentro();
 
+            $this->datos["ciudades"] = $this->becaModelo->getCiudad();
+
             $this->vista("gestion/becas",$this->datos);
         }
 
