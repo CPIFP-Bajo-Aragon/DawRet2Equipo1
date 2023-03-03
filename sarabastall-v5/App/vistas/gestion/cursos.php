@@ -171,6 +171,7 @@
   window.onload=save_config(); // Cargar los datos de Accesibilidad
 
 
+  // Este es un Fetch para reasignar el array de cursos segun la seleccion especificada por el trabajador
   async function fetch_cursos(flag){
   
     funcion = flag.options[flag.selectedIndex].value;
