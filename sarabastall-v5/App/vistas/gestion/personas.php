@@ -31,6 +31,12 @@
             <input type="text" id="apellidosPersona" name="apellidosPersona">
             <p id="ErrorProfesor"></p>
 
+            <label>Genero:</label>
+            <select name="genero" id="">
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+            </select>
+
             <label>Direccion:</label>
             <input type="text" id="direccionPersona" name="direccionPersona">
             <p id="ErrorProfesor"></p>
@@ -137,11 +143,9 @@
 <div class="container">
 
 <div class="col-3">
-  <input type="search" class="form-control form-control-dark" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+<input type="search" class="color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search" onkeyup="mod_show()">
 
-  <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
-
-  <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+  <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="form-select color_input form-select-lg mb-3" aria-label=".form-select-lg example">
   <option id="refresh" value="0" selected></option>
     <?php foreach($datos["roles"] as $rol): ?>
       <option value="<?php echo $rol->Id ?>"><?php echo $rol->Nombre ?></option>

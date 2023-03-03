@@ -11,7 +11,7 @@
 
             $this->datos["rolesPermitidos"] = [5];
 
-            if(!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, $this->datos["rolesPermitidos"])){
+            if(tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, $this->datos["rolesPermitidos"])){
                 exit();
             }
 
@@ -25,9 +25,27 @@
 
         }
 
-        
+        public function agrupar_cursos($orden, $id){
+            if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
-       
+                switch ($orden){
+                    case "aviable":
+                        $data = $this->cursoModelo->get_Aviables();
+                        break;
+                    case "apuntado":
+                        $data = $this->cursoModelo->get_Apuntado($id);
+                        break;
+                    case "completo":
+                        $data = $this->cursoModelo->get_Realizados($id);
+                        break;
+                    default:
+                        $data = $this->cursoModelo->get_Cursos();
+                        break;
+                }
+
+                $this->vistaApi($data);
+            }
+        }       
 
     }
 

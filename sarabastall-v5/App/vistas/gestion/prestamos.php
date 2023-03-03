@@ -11,7 +11,6 @@
 </nav>
     <h1>Préstamos</h1>
     
-
 <!-- Button trigger modal -->
 <button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 +
@@ -192,14 +191,11 @@
 
 <input disabled id="page_controller" name="prestamo" value="0" hidden>  
 <div class="container">
-<div class="col-3">
+  <div class="col-3">
     
-    <input type="search" class="form-control form-control-dark color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search" >
-    
+    <input type="search" class="color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search" onkeyup="mod_show()">
 
-    <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
-
-    <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="color_input">
+    <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="form-select color_input form-select-lg mb-3" aria-label=".form-select-lg example">
     <option id="refresh" value="0" selected></option>
       <?php foreach($datos["estados"] as $estado): ?>
         <option value="<?php echo $estado->Id ?>"><?php echo $estado->Nombre ?></option>
@@ -207,6 +203,8 @@
     </select>
     <br>
   </div>
+  
+
   
 <table id="tabla_gestion" class="table color_sheet table_sheet table-hover">
   <thead class="thead-azul">
@@ -249,7 +247,7 @@
 
 <script>
 
-  window.onload=caja_fuerte(<?php echo json_encode($datos["PrestamosTotales"])?>); // Aqui pasamos el array en cuestion recibido por PHP
+  window.onload=caja_fuerte(<?php echo json_encode($datos["PrestamosTotales"])?>, <?php echo $datos["usuarioSesion"]->Id_Rol?>); // Aqui pasamos el array en cuestion recibido por PHP
 
   window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
 

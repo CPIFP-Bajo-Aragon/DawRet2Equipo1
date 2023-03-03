@@ -326,7 +326,7 @@ function mod_show(flag = false){ // A cualquier cambio en la busqueda se llama a
     ordenaras(flag);
   }
   page_maker();
-  listar_elementos(false); // Por ultimo se paginan los resultados
+  listar_elementos(false);// Por ultimo se paginan los resultados
   // Se le envia con un parametro falso indicando que no es una ejecucion automatica. La cual se hace al cargar la pagina
 }
 

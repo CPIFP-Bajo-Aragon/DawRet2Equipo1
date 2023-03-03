@@ -34,11 +34,12 @@
         }
 
         public function addPersona($datos){
-            $this->db->query("INSERT INTO PERSONA (Nombre, Apellidos, Direccion, Fecha_Nacimiento, Telefono, Email, Id_Rol, Id_Estado)
-                VALUES (:nombrePersona, :apellidosPersona, :direccionPersona, :fechaNacimientoPersona, :telefonoPersona, :emailPersona, 5, 3)"); // CAMBIAR El ROL Por el que sea No Log
+            $this->db->query("INSERT INTO PERSONA (Nombre, Apellidos, Direccion, Genero, Fecha_Nacimiento, Telefono, Email, Id_Rol, Id_Estado)
+                VALUES (:nombrePersona, :apellidosPersona, :direccionPersona, :genero, :fechaNacimientoPersona, :telefonoPersona, :emailPersona, 5, 3)"); // CAMBIAR El ROL Por el que sea No Log
 
                 $this->db->bind(':nombrePersona',trim($datos['nombrePersona']));
                 $this->db->bind(':apellidosPersona',trim($datos['apellidosPersona']));
+                $this->db->bind(':genero',trim($datos['genero']));
                 $this->db->bind(':direccionPersona',trim($datos['direccionPersona']));
                 $this->db->bind(':fechaNacimientoPersona',trim($datos['fechaNacimientoPersona']));
                 $this->db->bind(':telefonoPersona',trim($datos['telefonoPersona']));

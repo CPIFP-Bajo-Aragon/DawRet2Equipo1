@@ -20,6 +20,7 @@
 +
 </button> -->
 
+
 <!-- Modal -->
 
 <button id="abrirModal">+</button>
@@ -96,21 +97,30 @@
 <!-- Modal Seguro desea Eliminar FINAL -->
 
 <!-- BUSCADOR + FILTROS -->
+<div class="row justify-content-start">
+  <div class="col-4">
+  <input type="search" class="color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search" onkeyup="mod_show()">
 
-<div class="col-3">
-  <input type="search" class="form-control form-control-dark color_input" id="buscador" name="buscador" placeholder="Buscador" aria-label="Search">
+    <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="color_input">
+    <option id="refresh" value="0" selected></option>
+      <?php foreach($datos["especialidades"] as $especialidad): ?>
+        <option value="<?php echo $especialidad->Id ?>"><?php echo $especialidad->Nombre ?></option>
+      <?php endforeach ?>
+    </select>
 
-  <button id="buscador" onclick="mod_show()"><i class="bi bi-search"></i></button>
+    <br>
+  </div>
 
-  <select id="panel_filtro" name="Tipo" onchange="mod_show()" class="color_input">
-  <option id="refresh" value="0" selected></option>
-    <?php foreach($datos["especialidades"] as $especialidad): ?>
-      <option value="<?php echo $especialidad->Id ?>"><?php echo $especialidad->Nombre ?></option>
-    <?php endforeach ?>
-  </select>
-  <br>
+  <div class="col-4">
+    <select id="panel_filtro" name="Tipo" onchange="fetch_cursos(this)" class="color_input">
+      <option id="refresh" value="0" selected>Todos</option>
+      <option value="aviable">Disponibles</option>
+      <option value="apuntado">Mis Cursos</option>
+      <option value="completo">Realizados</option>
+        
+    </select>
+  </div>
 </div>
-
 
 
 <input disabled id="page_controller" name="curso" value="0" hidden>
@@ -159,6 +169,29 @@
   window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
 
   window.onload=save_config(); // Cargar los datos de Accesibilidad
+
+
+  async function fetch_cursos(flag){
+  
+    funcion = flag.options[flag.selectedIndex].value;
+
+    await fetch(`<?php echo RUTA_URL?>/profesor/agrupar_cursos/`+funcion+`/<?php echo $datos["usuarioSesion"]->Id_Persona?>`, {
+        method: "GET",
+    })
+        .then((resp) => resp.json())
+        .then(function(data) {
+            console.log(data)
+            if(data){
+              caja_fuerte(data);
+              mod_show();  
+            } else {
+                alert("Ha surgido un error inesperado, posiblemente por tu culpa");
+            }
+            
+        })
+    }
+
+
 
 </script>
     

@@ -364,6 +364,8 @@
                 
         }
 
+
+
         // Gestion Prestamos
 
         public function add_prestamo(){

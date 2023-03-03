@@ -146,15 +146,19 @@ function listar_elementos(inicial){
                       newBoton.appendChild(newI);
                       newTd.appendChild(newBoton);
                     } else {
-                      if (arraySon[1] == "Aprobado"){
-                        newBoton = document.createElement("button");
 
+                      if ((arraySon[1] == "Aprobado")||(arraySon[1] == "Finalizado")){
+                        newBoton = document.createElement("button");
                         newBoton = document.createElement("button");
                         newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
                         newA = document.createElement("a");
                         newA.href = 'http://localhost/sarabastall-v5/admin/add_abono/' + arraySon[0]; // Se puede mejorar la Url 
                         newI = document.createElement("i");
-                        newI.classList.add("fa", "fa-share-square");
+                        if (arraySon[1] == "Aprobado"){
+                          newI.classList.add("bi", "bi-cash-coin");
+                        } else {
+                          newI.classList.add("bi", "bi-search");
+                        }
                         newBoton.appendChild(newI);
                         newA.appendChild(newBoton);
                         newTd.appendChild(newA);

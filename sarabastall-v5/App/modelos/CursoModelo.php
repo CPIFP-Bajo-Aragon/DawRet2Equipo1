@@ -30,6 +30,43 @@
             return $this->db->registros();
         }
 
+        public function get_Realizados($id){
+            // Devuelve toda la informacion de los cursos ha insertar en las tablas
+
+            $this->db->query("SELECT c.Id_Curso as Id_Curso, e.Nombre as Especialidad, c.Nombre as Nombre, p.Nombre as Profesor, c.Fecha_Impartir as Fecha 
+            FROM CURSO c, PERSONA p, ESPECIALIDAD e, RECIBIR r
+            WHERE c.Id_Persona = p.Id_Persona AND c.Id_Especialidad = e.Id_Especialidad AND r.Id_Curso = c.Id_Curso AND r.Id_Persona = :id AND c.Fecha_Impartir < CURDATE()
+            ORDER BY c.Nombre DESC");
+
+            $this->db->bind(':id', $id);
+
+            return $this->db->registros();
+        }
+
+        public function get_Apuntado($id){
+            // Devuelve toda la informacion de los cursos ha insertar en las tablas
+
+            $this->db->query("SELECT c.Id_Curso as Id_Curso, e.Nombre as Especialidad, c.Nombre as Nombre, p.Nombre as Profesor, c.Fecha_Impartir as Fecha 
+            FROM CURSO c, PERSONA p, ESPECIALIDAD e, RECIBIR r
+            WHERE c.Id_Persona = p.Id_Persona AND c.Id_Especialidad = e.Id_Especialidad AND r.Id_Curso = c.Id_Curso AND r.Id_Persona = :id AND c.Fecha_Impartir >= CURDATE()
+            ORDER BY c.Nombre DESC");
+
+            $this->db->bind(':id', $id);
+
+            return $this->db->registros();
+        }
+
+        public function get_Aviables(){
+            // Devuelve toda la informacion de los cursos ha insertar en las tablas
+
+            $this->db->query("SELECT c.Id_Curso as Id_Curso, e.Nombre as Especialidad, c.Nombre as Nombre, p.Nombre as Profesor, c.Fecha_Impartir as Fecha 
+            FROM CURSO c, PERSONA p, ESPECIALIDAD e, RECIBIR r
+            WHERE c.Id_Persona = p.Id_Persona AND c.Id_Especialidad = e.Id_Especialidad AND r.Id_Curso = c.Id_Curso AND c.Fecha_Impartir >= CURDATE()
+            ORDER BY c.Nombre DESC");
+
+            return $this->db->registros();
+        }
+
         // EN FUNCIONAMIENTO
         public function get_Cursos_Disponibles(){
             // Personalmente intentaria emular la funcionalidad de los Cursos como se hace en el moddle,
@@ -41,6 +78,8 @@
 
             return $this->db->registros();
         }
+
+        
 
         // EN FUNCIONAMIENTO
         public function add_Curso($datos){
