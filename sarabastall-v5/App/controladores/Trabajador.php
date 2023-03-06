@@ -64,7 +64,7 @@
                         redireccionar('/trabajador/solicitar_prestamo');
                     }else{
                         echo "Se ha producido un error";
-                }
+                    }
 
                 }
 
@@ -73,6 +73,42 @@
             }
                 
         }
+
+        public function apuntarse_curso($id_curso){
+
+            if($this->cursoModelo->join_curso($id_curso, $this->datos["usuarioSesion"]->Id_Persona)){
+                redireccionar('/trabajador/ver_cursos');
+            }else{
+                echo "Se ha producido un error";
+            }
+
+        }
+
+        public function agrupar_cursos($orden, $id){
+            if($_SERVER['REQUEST_METHOD'] == 'GET'){
+
+                switch ($orden){
+                    case "aviable":
+                        $data = $this->cursoModelo->get_Aviables();
+                        break;
+                    case "apuntado":
+                        $data = $this->cursoModelo->get_Apuntado($id);
+                        break;
+                    case "completo":
+                        $data = $this->cursoModelo->get_Realizados($id);
+                        break;
+                    default:
+                        $data = $this->cursoModelo->get_Cursos();
+                        break;
+                }
+
+                $this->vistaApi($data);
+            }
+        }     
+
+
+
+
     }
 
 ?>

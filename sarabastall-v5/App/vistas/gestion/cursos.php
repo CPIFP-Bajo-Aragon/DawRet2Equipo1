@@ -23,6 +23,8 @@
 
 <!-- Modal -->
 
+<?php if (tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [5, 1])):?>
+
 <button id="abrirModal">+</button>
 
 
@@ -64,6 +66,7 @@
     </div>
 </div>
 
+<?php endif ?>
 
 
 <!-- Modal Seguro desea Eliminar -->
@@ -111,6 +114,9 @@
     <br>
   </div>
 
+
+  <?php if (tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [5, 2])):?>
+
   <div class="col-4">
     <select id="panel_filtro" name="Tipo" onchange="fetch_cursos(this)" class="color_input">
       <option id="refresh" value="0" selected>Todos</option>
@@ -120,6 +126,7 @@
         
     </select>
   </div>
+  <?php endif ?>
 </div>
 
 
@@ -164,7 +171,7 @@
 
 <script>
 
-  window.onload=caja_fuerte(<?php echo json_encode($datos["CursosTotales"])?>); // Aqui pasamos el array en cuestion recibido por PHP
+  window.onload=caja_fuerte(<?php echo json_encode($datos["CursosTotales"])?>, <?php echo json_encode($datos["usuarioSesion"]->Nombre)?>, <?php echo $datos["usuarioSesion"]->Id_Rol?>); // Aqui pasamos el array en cuestion recibido por PHP
 
   window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
 
@@ -175,8 +182,20 @@
   async function fetch_cursos(flag){
   
     funcion = flag.options[flag.selectedIndex].value;
+    controlador = "";
 
-    await fetch(`<?php echo RUTA_URL?>/profesor/agrupar_cursos/`+funcion+`/<?php echo $datos["usuarioSesion"]->Id_Persona?>`, {
+    switch(rol){
+      case 5:
+        controlador = "profesor";
+        break;
+      case 2:
+        controlador = "trabajador";
+        break;
+    }
+
+
+
+    await fetch(`<?php echo RUTA_URL?>/`+controlador+`/agrupar_cursos/`+funcion+`/<?php echo $datos["usuarioSesion"]->Id_Persona?>`, {
         method: "GET",
     })
         .then((resp) => resp.json())
@@ -186,7 +205,7 @@
               caja_fuerte(data);
               mod_show();  
             } else {
-                alert("Ha surgido un error inesperado, posiblemente por tu culpa");
+              alert("Ha surgido un error inesperado, posiblemente por tu culpa, desgraciado: Deja de intentar hackearnos");
             }
             
         })

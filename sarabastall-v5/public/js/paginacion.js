@@ -1,11 +1,15 @@
 let listado = []; // Variable donde se guardan los datos (Es global para todas las hojas JS)
 let arrayMaestro = []; // Array de Soporte para no alterar los datos Originales
-let nItems = 4; // Numero de Elementos mostrados en cada Pagina
+let nItems = 8; // Numero de Elementos mostrados en cada Pagina
+let rol = 0;
+let usuario = "";
 
 // Funcion que toma el array de objetos obtenido por PHP
-function caja_fuerte(arrayElementos){
+function caja_fuerte(arrayElementos, nombre, permiso){
 
   listado = arrayElementos.slice();
+  rol = permiso;
+  usuario = nombre;
 }
 
 // Funcion que segmenta el array dependiendo de el numero de elementos que queramos mostrar en cada pagina.
@@ -215,25 +219,33 @@ function listar_elementos(inicial){
                     newBoton = document.createElement("button");
                     newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
                     newA = document.createElement("a");
-                    newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0]; // Se puede mejorar la Url 
+
+                    if (rol == 2){
+                      newA.href = 'http://localhost/sarabastall-v5/trabajador/apuntarse_curso/' + arraySon[0]; // Se puede mejorar la Url 
+                    } else {
+                      newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0]; // Se puede mejorar la Url 
+                    }
+
                     newI = document.createElement("i");
                     newI.classList.add("bi", "bi-pencil-square");
                     newBoton.appendChild(newI);
                     newA.appendChild(newBoton);
                     newTd.appendChild(newA);
 
-                    newBoton = document.createElement("button");
-                    newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
-                    newBoton.setAttribute("onclick", 'place_id(' + arraySon[0]+ ')');
-                    newBoton.setAttribute("data-bs-toggle", "modal");
-                    newBoton.setAttribute("data-bs-target", "#modalEliminar" + item);
-
-
-                    newI = document.createElement("i");
-                    newI.classList.add("bi", "bi-trash");
-
-                    newBoton.appendChild(newI);
-                    newTd.appendChild(newBoton);
+                    if ((rol == 1)||(rol == 5 && usuario == arraySon[3])){
+                      newBoton = document.createElement("button");
+                      newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
+                      newBoton.setAttribute("onclick", 'place_id(' + arraySon[0]+ ')');
+                      newBoton.setAttribute("data-bs-toggle", "modal");
+                      newBoton.setAttribute("data-bs-target", "#modalEliminar" + item);
+  
+  
+                      newI = document.createElement("i");
+                      newI.classList.add("bi", "bi-trash");
+  
+                      newBoton.appendChild(newI);
+                      newTd.appendChild(newBoton);
+                    }
                     break;
                 }
                 

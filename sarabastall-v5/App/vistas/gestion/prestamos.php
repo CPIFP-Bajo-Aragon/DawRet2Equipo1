@@ -247,7 +247,7 @@
 
 <script>
 
-  window.onload=caja_fuerte(<?php echo json_encode($datos["PrestamosTotales"])?>, <?php echo $datos["usuarioSesion"]->Id_Rol?>); // Aqui pasamos el array en cuestion recibido por PHP
+  window.onload=caja_fuerte(<?php echo json_encode($datos["PrestamosTotales"])?>, <?php echo json_encode($datos["usuarioSesion"]->Nombre)?>, <?php echo $datos["usuarioSesion"]->Id_Rol?>); // Aqui pasamos el array en cuestion recibido por PHP
 
   window.onload=listar_elementos(true); // Se le pasa true indicando que es la primera vez que se ejecuta la funcion
 

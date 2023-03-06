@@ -11,7 +11,7 @@
 
             $this->datos["rolesPermitidos"] = [5];
 
-            if(tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, $this->datos["rolesPermitidos"])){
+            if(!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, $this->datos["rolesPermitidos"])){
                 exit();
             }
 
@@ -45,7 +45,31 @@
 
                 $this->vistaApi($data);
             }
-        }       
+        }     
+        
+        public function see_curso($id_curso){
+
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+                $curso=$_POST;
+    
+                if($this->cursoModelo->mod_curso($curso, $id_curso)){
+                    redireccionar("/profesor/see_curso/$id_curso");
+                } else{
+                    echo "¡¡Se ha producido un error!!";
+                }
+    
+            }else{
+                $this->datos["curso"]=$this->cursoModelo->get_curso($id_curso);
+                $this->datos["curso"]->material = $this->cursoModelo->get_material($id_curso);
+                $this->datos["especialidades"] = $this->cursoModelo->get_especialidades();
+                $this->datos["profesores"] = $this->personaModelo->get_profesores();
+    
+                $this->vista("gestion/ver_curso",$this->datos);
+    
+            }
+
+        }
 
     }
 

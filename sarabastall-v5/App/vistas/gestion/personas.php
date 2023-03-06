@@ -189,7 +189,7 @@
 <h2 id="nomaches"></h2>
 
 <script>
-  window.onload=caja_fuerte(<?php echo json_encode($datos["PersonasTotales"])?>);
+  window.onload=caja_fuerte(<?php echo json_encode($datos["PersonasTotales"])?>, <?php echo json_encode($datos["usuarioSesion"]->Nombre)?>, <?php echo $datos["usuarioSesion"]->Id_Rol?>);
   window.onload=listar_elementos(true);
   window.onload=save_config(); // Cargar los datos de Accesibilidad
 </script>

@@ -30,7 +30,7 @@
       </a>
     </div>
     
-    <a class="btn btn-outline-danger btn-lg" href="<?php echo RUTA_URL ?>">
+    <a class="btn btn-outline-danger btn-lg" href="<?php echo RUTA_URL ?>/login/logout">
       <i class="bi bi-box-arrow-left"></i>
     </a>
     

@@ -222,6 +222,22 @@
             return $this->db->registros();
         }
 
+        public function join_curso($id_curso, $id_trabajador){
+
+            $this->db->query("INSERT INTO RECIBIR (Id_Curso, Id_Persona, Fecha) 
+                VALUES (:id_curso, :id_trabajador, NOW())");
+
+                $this->db->bind(':id_trabajador', $id_trabajador);
+                $this->db->bind(':id_curso', $id_curso);
+
+            if($this->db->execute()){
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+
         // Funciones individuales por Especialidad??
         // Consultar
 
