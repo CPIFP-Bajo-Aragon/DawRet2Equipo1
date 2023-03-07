@@ -1,0 +1,59 @@
+version: "3.5"
+# SERVICIOS - APLICACIONES, CADA SERVICIO CON UN NOMBRE
+services:
+  # WEBSERVER APACHE
+  #apache:
+  #  container_name: wsapache
+  #  image: romeoz/docker-apache-php
+  #  ports:
+  #    - "81:80"
+  # WEBSERVER NGINX
+  nginx:
+    container_name: wsnginx
+    image: wyveo/nginx-php-fpm
+    depends_on:
+      - mysql
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./web:/var/www/html
+  # DATABASE SERVER MYSQL
+  mysql:
+    container_name: mysqql
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: Sarabastall3242
+      MYSQL_USER: sarabastall
+      MYSQL_PASSWORD: sarabastall      
+    ports:
+      - "3306:3306"
+    networks:
+      - frontend
+    volumes:
+      - db_dat:/var/lib/postgresql/data
+ # PHPMYADMIN MYSQL
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: pma
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    networks:
+      frontend:
+        ipv4_address: 192.168.16.4
+    ports:
+      - 8080:80
+#VOLUMENES
+volumes:
+  db_dat:
+#REDES
+networks:
+  frontend:
+    ipam:
+      config:
+        - subnet: 192.168.16.0/24
