@@ -119,7 +119,7 @@ function listar_elementos(inicial){
 
                     newTd = document.createElement("td");
 
-                    if (arraySon[1] == "Pendiente"){
+                    if (arraySon[1] == "Pendiente" && rol == 1){
                       // Boton Aprobar
 
                       newBoton = document.createElement("button");
@@ -156,7 +156,12 @@ function listar_elementos(inicial){
                         newBoton = document.createElement("button");
                         newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
                         newA = document.createElement("a");
-                        newA.href = 'http://localhost/sarabastall-v5/admin/add_abono/' + arraySon[0]; // Se puede mejorar la Url 
+                        if (rol != 2) {
+                          newA.href = 'http://localhost/sarabastall-v5/admin/add_abono/' + arraySon[0]; // Se puede mejorar la Url 
+                        } else {
+                          newA.href = 'http://localhost/sarabastall-v5/trabajador/see_abono/' + arraySon[0]; // Se puede mejorar la Url 
+                        }
+                        
                         newI = document.createElement("i");
                         if (arraySon[1] == "Aprobado"){
                           newI.classList.add("bi", "bi-cash-coin");

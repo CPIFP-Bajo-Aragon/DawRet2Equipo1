@@ -18,9 +18,10 @@
         }
 
         public function get_prestamos_usuario($id){
-            $this->db->query("SELECT p.Id_Prestamo, p.Concepto, p.Importe, est.Id_Estado, est.Nombre as NombreEst, p.Fecha_Inicio, pers.Nombre as NombrePers, tipo.Nombre as NombreTipo 
+
+            $this->db->query("SELECT p.Id_Prestamo, est.Nombre as NombreEst, tipo.Nombre as NombreTipo, pers.Nombre as NombrePers, p.Fecha_Fin, p.Importe
                                 FROM PRESTAMO p, PERSONA pers, TIPO_PRESTAMO tipo, ESTADO est
-                            WHERE pers.Id_Persona=p.Id_Persona AND tipo.Id_TipoPrestamo=p.Id_TipoPrestamo AND est.Id_Estado=p.Id_Estado AND :id=p.Id_Persona");
+                                WHERE pers.Id_Persona=p.Id_Persona AND tipo.Id_TipoPrestamo=p.Id_TipoPrestamo AND est.Id_Estado=p.Id_Estado AND :id=p.Id_Persona");
 
             $this->db->bind(':id',$id);
 
@@ -79,6 +80,12 @@
         
         public function gettipoPrestamo(){
             $this->db->query("SELECT * FROM TIPO_PRESTAMO");
+
+            return $this->db->registros();
+        }
+
+        public function get_estados(){
+            $this->db->query("SELECT Id_Estado as Id, Nombre as Nombre FROM ESTADO WHERE Id_Estado != 3 AND Id_Estado != 4");
 
             return $this->db->registros();
         }

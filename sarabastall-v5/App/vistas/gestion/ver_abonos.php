@@ -5,7 +5,11 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/admin/index">Menu</a></li>
+      <?php if (!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [2])):?>
       <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/admin/gestionar_prestamos">Gestion Prestamos</a></li>
+      <?php else: ?>
+        <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/admin/gestionar_prestamos">Mis Prestamos</a></li>
+      <?php endif ?>
       <li class="breadcrumb-item active" aria-current="page">Abonos</li>
     </ol>
   </nav>

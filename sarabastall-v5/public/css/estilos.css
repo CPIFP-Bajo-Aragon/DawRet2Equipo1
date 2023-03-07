@@ -446,11 +446,11 @@ table.table_sheet thead th:first-child {
 }
 
 .high-contrast {
-   background-color: #656565; 
+   background-color: #FBDCD0; 
 }
 
 .alternative {
-    background-color: #d65636;
+    background-color: #FDF5ED;
 }
 
 /* COLORES */
@@ -464,13 +464,13 @@ table.table_sheet thead th:first-child {
 }
 
 .color_fondoA {
-    background-color: #662E37;
+    background-color: #FBDCD0;
     background-size: cover;
     height: 90vh;
 }
 
 .color_fondoH {
-    background-color: #000000;
+    background-color: #FDF5ED;
     background-size: cover;
     height: 90vh;
 }
@@ -512,8 +512,8 @@ table.color_sheet thead th {
 }
 
 table.color_sheetA {
-    border: 1px solid #792396;
-    background-color: #CC3BFC;
+    border: 1px solid #ad9288;
+    background-color: #f8e9e3;
 }
 
 table.color_sheetA td, table.blueTable th {
@@ -527,10 +527,10 @@ table.color_sheetA tr:nth-child(even) {
 }
 
 table.color_sheetA thead {
-  background: #792396;
-  background: -moz-linear-gradient(top, #CC3BFC 0%, #CC3BFC 66%, #792396 100%);
-  background: -webkit-linear-gradient(top, #CC3BFC 0%, #CC3BFC 66%, #792396 100%);
-  background: linear-gradient(to bottom, #CC3BFC 0%, #CC3BFC 66%, #792396 100%);
+  background: #ad9288;
+  background: -moz-linear-gradient(top, #f8e9e3 0%, #f8e9e3 66%, #ad9288 100%);
+  background: -webkit-linear-gradient(top, #f8e9e3 0%, #f8e9e3 66%, #ad9288 100%);
+  background: linear-gradient(to bottom, #f8e9e3 0%, #f8e9e3 66%, #ad9288 100%);
   border-bottom: 2px solid #444444;
 }
 

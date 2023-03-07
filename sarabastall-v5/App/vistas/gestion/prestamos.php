@@ -6,11 +6,18 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Menu</a></li>
+
+        <?php if (!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [2])):?>
         <li class="breadcrumb-item active" aria-current="page">Gestion Préstamos</li>
+        <?php else:?>
+        <li class="breadcrumb-item active" aria-current="page">Mis Préstamos</li>
+        <?php endif?>
     </ol>
 </nav>
     <h1>Préstamos</h1>
     
+
+  <?php if (!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [2])):?>
 <!-- Button trigger modal -->
 <button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 +
@@ -81,55 +88,7 @@
 </div>
 </div>
 
-<!-- Modal Ver Mas -->
-<div class="modal fade" id="VerMas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Ingresos</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
 
-  <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Ingreso realizado</h5>
-        <small class="text-muted">25/09/2022</small>
-      </div>
-      <p class="Ingreso">230</p>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Ingreso realizado</h5>
-        <small class="text-muted">26/09/2022</small>
-      </div>
-      <p class="Ingreso">150</p>
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">Ingreso realizado</h5>
-        <small class="text-muted">28/09/2022</small>
-      </div>
-      <p class="Ingreso">70</p>
-    </a>
-  </div>
-    
-    <br>
-    <div class="form-floating">
-        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-        <label for="floatingTextarea">Observaciones</label>
-    </div>
-
-    </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-    <button type="button" class="btn btn-primary">Guardar cambios</button>
-  </div>
-</div>
-</div>
-</div>
-</div>
 
 <!-- Modal Aprobar Estado-->
 
@@ -187,6 +146,7 @@
   </div> 
 </div>
   
+<?php endif ?>
 
 
 <input disabled id="page_controller" name="prestamo" value="0" hidden>  

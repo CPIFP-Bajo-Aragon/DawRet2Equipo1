@@ -8,6 +8,7 @@
             //$this->datos["usuarioSesion"] = $this->asesoriaModelo->getPersona(1);
             $this->pedirConsultarPrestamo = $this->modelo('PedirConsultarPrestamo');
             $this->cursoModelo = $this->modelo('CursoModelo');
+            $this->prestamoModelo = $this->modelo('PrestamoModelo');
 
 
             $this->datos["rolesPermitidos"] = [2];
@@ -38,9 +39,10 @@
 
             $id = $this->datos["usuarioSesion"]->Id_Persona;
 
-            $this->datos["prestamos"] = $this->pedirConsultarPrestamo->get_prestamos_usuario($id);
+            $this->datos["estados"] = $this->pedirConsultarPrestamo->get_estados();
+            $this->datos["PrestamosTotales"] = $this->pedirConsultarPrestamo->get_prestamos_usuario($id);
 
-            $this->vista("gestion/prestamos/consultarPrestamo",$this->datos);
+            $this->vista("gestion/prestamos",$this->datos);
 
         }
 
@@ -107,6 +109,15 @@
         }     
 
 
+        public function see_abono($id_prestamo, $resto = 0){
+            
+            $this->datos["prestamo"] = $this->prestamoModelo->get_prestamo($id_prestamo);
+            $this->datos["abonos"] = $this->prestamoModelo->get_abonos($id_prestamo);
+
+            //print_r($this->datos["persona"]);
+            $this->vista("gestion/ver_abonos",$this->datos);
+            
+        }
 
 
     }

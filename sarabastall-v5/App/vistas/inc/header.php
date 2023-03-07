@@ -29,10 +29,17 @@
         <img src="<?php echo RUTA_URL?>/public/img/logo-fundacion-sarabastal.png" width="290" height="58" class="d-inline-block align-text-top">
       </a>
     </div>
-    
-    <a class="btn btn-outline-danger btn-lg" href="<?php echo RUTA_URL ?>/login/logout">
-      <i class="bi bi-box-arrow-left"></i>
-    </a>
+
+    <ul class="navbar-nav ms-auto mb-2 md-8">
+      <li class="navbar-text">
+        <?php echo $datos['usuarioSesion']->Nombre ?>
+      </li>
+      <li class="nav-item">
+        <a class="btn btn-outline-danger btn-lg" href="<?php echo RUTA_URL ?>/login/logout">
+          <i class="bi bi-box-arrow-left"></i>
+        </a>
+      </li>
+    </ul>
     
       <!-- <button id="cerrar_sesion" type="button" class="btn btn-outline-danger btn-sm ml-auto"><a class="nav-link active" aria-current="page" href="<?php echo RUTA_URL?>">Cerrar Sesion</a></button> -->
       
