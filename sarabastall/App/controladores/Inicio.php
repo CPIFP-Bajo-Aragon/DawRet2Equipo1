@@ -3,6 +3,7 @@
 class Inicio extends Controlador{
 
     public function __construct(){
+<<<<<<< HEAD
         //echo 'Inicio controlador cargado';
 
         //Sesion::iniciarSesion($this->datos);
@@ -38,6 +39,16 @@ class Inicio extends Controlador{
         // print_r($this->datos["asesoriasActivas"]);
         // exit;
 
+=======
+
+        $this->datos["menuActivo"] = "home";
+
+        $this->datos["rolesPermitidos"] = [1, 2, 3, 4, 5];
+
+    }   
+    
+    public function index(){
+>>>>>>> david
         $this->vista("primera",$this->datos);
     }  
 }
