@@ -18,7 +18,7 @@
         }
 
         public function get_prestamo($id){
-            $this->db->query("SELECT p.Id_Prestamo as Id, est.Nombre as NombreEst, tipo.Nombre as NombreTipo, pers.Nombre as NombrePers, p.Fecha_Fin, p.Importe as Importe
+            $this->db->query("SELECT p.Id_Prestamo as Id, est.Nombre as NombreEst, tipo.Nombre as NombreTipo, pers.Nombre as NombrePers, p.Fecha_Fin as Fecha, p.Importe as Importe
                                 FROM PRESTAMO p, PERSONA pers, TIPO_PRESTAMO tipo, ESTADO est
                                 WHERE pers.Id_Persona=p.Id_Persona AND tipo.Id_TipoPrestamo=p.Id_TipoPrestamo AND est.Id_Estado=p.Id_Estado AND p.Id_Prestamo = :id");
 

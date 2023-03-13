@@ -5,10 +5,10 @@
 <div class="container">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Menu</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo RUTA_URL?>/<?php echo $this->datos['controlador']?>">Menu</a></li>
 
-        <?php if (!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [2])):?>
-        <li class="breadcrumb-item active" aria-current="page">Gestion Préstamos</li>
+        <?php if (!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [2, 3])):?>
+        <li class="breadcrumb-item active" aria-current="page">Gestion Préstamos</li> 
         <?php else:?>
         <li class="breadcrumb-item active" aria-current="page">Mis Préstamos</li>
         <?php endif?>
@@ -17,7 +17,7 @@
     <h1>Préstamos</h1>
     
 
-  <?php if (!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [2])):?>
+  <?php if (tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [1])):?>
 <!-- Button trigger modal -->
 <button type="button" id="anadir" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
 +

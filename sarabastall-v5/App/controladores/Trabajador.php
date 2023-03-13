@@ -9,6 +9,7 @@
             $this->pedirConsultarPrestamo = $this->modelo('PedirConsultarPrestamo');
             $this->cursoModelo = $this->modelo('CursoModelo');
             $this->prestamoModelo = $this->modelo('PrestamoModelo');
+            $this->datos["controlador"] = "trabajador";
 
 
             $this->datos["rolesPermitidos"] = [2];
@@ -47,8 +48,10 @@
         }
 
         public function ver_cursos(){
+
+            $id = $this->datos["usuarioSesion"]->Id_Persona;
             
-            $this->datos["CursosTotales"] = $this->cursoModelo->get_cursos();
+            $this->datos["CursosTotales"] = $this->cursoModelo->get_Cursos_trabajador($id);
 
             $this->vista("gestion/cursos",$this->datos);
         }
@@ -100,7 +103,7 @@
                         $data = $this->cursoModelo->get_Realizados($id);
                         break;
                     default:
-                        $data = $this->cursoModelo->get_Cursos();
+                        $data = $this->cursoModelo->get_Cursos_trabajador($id);
                         break;
                 }
 
@@ -117,6 +120,22 @@
             //print_r($this->datos["persona"]);
             $this->vista("gestion/ver_abonos",$this->datos);
             
+        }
+
+        public function obtener_certificado($id_curso){
+            // Funcion para crear un cerfificado y poder imprimirlo
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
 

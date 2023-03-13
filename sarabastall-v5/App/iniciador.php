@@ -12,6 +12,7 @@ require_once 'config/configurar.php';
 require_once 'librerias/Base.php';
 require_once 'librerias/Controlador.php';
 require_once 'librerias/Core.php';
+require 'librerias/tcpdf/src/Tcpdf.php';
 
 //Autoload php IMPORTANTE
 spl_autoload_register(function($nombreClase){

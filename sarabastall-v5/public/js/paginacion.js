@@ -107,8 +107,19 @@ function listar_elementos(inicial){
                   break;
                 }
               }
+
+              if (item == "curso" && (z == 5)){
+                if (arraySon[z] != 'No'){
+                  textoTd = document.createTextNode("Si");
+                } else {
+                  textoTd = document.createTextNode(arraySon[z]);
+                }
+              } else {
+                textoTd = document.createTextNode(arraySon[z]);
+              }
               
-              textoTd = document.createTextNode(arraySon[z]);
+              
+              
               newTd.appendChild(textoTd);
 
             } else{
@@ -156,12 +167,14 @@ function listar_elementos(inicial){
                         newBoton = document.createElement("button");
                         newBoton.classList.add("w-80", "btn", "btn-warning", "btn-lg");
                         newA = document.createElement("a");
-                        if (rol != 2) {
+                        if (rol == 1) {
                           newA.href = 'http://localhost/sarabastall-v5/admin/add_abono/' + arraySon[0]; // Se puede mejorar la Url 
-                        } else {
+                        } else if(rol == 2) {
                           newA.href = 'http://localhost/sarabastall-v5/trabajador/see_abono/' + arraySon[0]; // Se puede mejorar la Url 
+                        } else {
+                          newA.href = 'http://localhost/sarabastall-v5/defecto/see_abono/' + arraySon[0]; // Se puede mejorar la Url 
                         }
-                        
+
                         newI = document.createElement("i");
                         if (arraySon[1] == "Aprobado"){
                           newI.classList.add("bi", "bi-cash-coin");
@@ -226,7 +239,11 @@ function listar_elementos(inicial){
                     newA = document.createElement("a");
 
                     if (rol == 2){
-                      newA.href = 'http://localhost/sarabastall-v5/trabajador/apuntarse_curso/' + arraySon[0]; // Se puede mejorar la Url 
+                        if (arraySon[5] == 'No'){
+                          newA.href = 'http://localhost/sarabastall-v5/trabajador/apuntarse_curso/' + arraySon[0]; // Se puede mejorar la Url 
+                        } else {
+                          newA.href = 'http://localhost/sarabastall-v5/trabajador/obtener_certificado/' + arraySon[0]; // Se puede mejorar la Url 
+                        }
                     } else {
                       newA.href = 'http://localhost/sarabastall-v5/admin/see_' + item + '/' + arraySon[0]; // Se puede mejorar la Url 
                     }

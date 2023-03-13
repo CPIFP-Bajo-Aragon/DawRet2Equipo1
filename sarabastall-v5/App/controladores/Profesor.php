@@ -8,7 +8,7 @@
             //$this->datos["usuarioSesion"] = $this->asesoriaModelo->getPersona(1);
             $this->cursoModelo = $this->modelo('CursoModelo');
 
-
+            $this->datos["controlador"] = "profesor";
             $this->datos["rolesPermitidos"] = [5];
 
             if(!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, $this->datos["rolesPermitidos"])){

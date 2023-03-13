@@ -5,7 +5,7 @@
 <div class="container">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Menu</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo RUTA_URL?>/<?php echo $this->datos['controlador']?>">Menu</a></li>
         <li class="breadcrumb-item active" aria-current="page">Gestion Centros</li>
     </ol>
 </nav>

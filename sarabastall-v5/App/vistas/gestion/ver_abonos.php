@@ -4,11 +4,11 @@
 <div class="container">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/admin/index">Menu</a></li>
-      <?php if (!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [2])):?>
-      <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/admin/gestionar_prestamos">Gestion Prestamos</a></li>
+      <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/<?php echo $this->datos['controlador']?>">Menu</a></li>
+      <?php if (!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [2, 3])):?>
+      <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/<?php echo $this->datos['controlador']?>/gestionar_centros">Gestion Prestamos</a></li>
       <?php else: ?>
-        <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/admin/gestionar_prestamos">Mis Prestamos</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/<?php echo $this->datos['controlador']?>/ver_prestamos">Mis Prestamos</a></li>
       <?php endif ?>
       <li class="breadcrumb-item active" aria-current="page">Abonos</li>
     </ol>
@@ -66,7 +66,7 @@
             echo "<hr>";
             ?>
             <?php if(count($datos["abonos"]) == 0):?>
-            <h3> No se han realizado abonos todavia </h3>
+            <h4> No se han realizado abonos todavia </h4>
             <?php endif ?>
             <?php $n = 1;?>
             <?php foreach($datos["abonos"] as $abono):?>
@@ -79,7 +79,11 @@
             <div class="card-footer">
 
             <?php if($total != 0):?>
+              <?php if (!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [2, 3])):?>
               <button class="btn-lg w-80" data-bs-toggle="modal" data-bs-target="#modalAbonar"><i class="fa fa-plus"></i> Añadir Abono</button>
+              <?php else: ?>
+                <h3>Tienes hasta el dia <span class="rojo"><?php echo $datos["prestamo"]->Fecha?></span> para devolver el prestamo.</h3>
+              <?php endif ?>
               <?php else:?>
               <h3 class="verde">El Prestamo ya se ha devuelto</h3>
               <?php endif?>

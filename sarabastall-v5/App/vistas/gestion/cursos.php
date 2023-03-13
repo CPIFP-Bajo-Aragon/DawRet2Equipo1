@@ -5,7 +5,7 @@
 <div class="container">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Menu</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo RUTA_URL?>/<?php echo $this->datos['controlador']?>">Menu</a></li>
         <li class="breadcrumb-item active" aria-current="page">Gestion Cursos</li>
     </ol>
 </nav>
@@ -119,7 +119,7 @@
 
   <div class="col-4">
     <select id="panel_filtro" name="Tipo" onchange="fetch_cursos(this)" class="color_input">
-      <option id="refresh" value="0" selected>Todos</option>
+      <option value="todos" id="refresh" value="0" selected>Todos</option>
       <option value="aviable">Disponibles</option>
       <option value="apuntado">Mis Cursos</option>
       <option value="completo">Realizados</option>
@@ -142,6 +142,9 @@
       <th scope="col">Nombre</th>
       <th scope="col">Profesor</th>
       <th scope="col">Fecha <button type="button" name="4" value="1" onclick="mod_show(this)"><i class="fa fa-sort"></i></button></th>
+      <?php if (tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, [2])): ?>
+      <th scope="col">Apuntado</th>
+      <?php endif ?>
       <th scope="col">Detalle</th>
       </tr>
     </thead> 
@@ -182,20 +185,8 @@
   async function fetch_cursos(flag){
   
     funcion = flag.options[flag.selectedIndex].value;
-    controlador = "";
 
-    switch(rol){
-      case 5:
-        controlador = "profesor";
-        break;
-      case 2:
-        controlador = "trabajador";
-        break;
-    }
-
-
-
-    await fetch(`<?php echo RUTA_URL?>/`+controlador+`/agrupar_cursos/`+funcion+`/<?php echo $datos["usuarioSesion"]->Id_Persona?>`, {
+    await fetch(`<?php echo RUTA_URL?>/<?php echo $this->datos['controlador']?>/agrupar_cursos/`+funcion+`/<?php echo $datos["usuarioSesion"]->Id_Persona?>`, {
         method: "GET",
     })
         .then((resp) => resp.json())

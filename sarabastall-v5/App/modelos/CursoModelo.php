@@ -30,6 +30,20 @@
             return $this->db->registros();
         }
 
+        // EN FUNCIONAMIENTO
+        public function get_Cursos_trabajador($id){
+            // Devuelve toda la informacion de los cursos ha insertar en las tablas
+
+            $this->db->query("SELECT c.Id_Curso as Id_Curso, e.Nombre as Especialidad, c.Nombre as Nombre, p.Nombre as Profesor, c.Fecha_Impartir as Fecha, COALESCE(r.Id_Persona, 'No') as Apuntado 
+                            FROM ESPECIALIDAD e, PERSONA p, RECIBIR r RIGHT JOIN CURSO c ON r.Id_Curso = c.Id_Curso AND r.Id_Persona = :id
+                            WHERE c.Id_Especialidad = e.Id_Especialidad AND c.Id_Persona = p.Id_Persona 
+                            ORDER BY c.Nombre DESC;");
+
+                $this->db->bind(':id', $id);
+
+            return $this->db->registros();
+        }
+
         public function get_Realizados($id){
             // Devuelve toda la informacion de los cursos ha insertar en las tablas
 

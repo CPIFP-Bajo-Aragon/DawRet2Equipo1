@@ -7,8 +7,11 @@
 
             //$this->datos["usuarioSesion"] = $this->asesoriaModelo->getPersona(1);
             $this->pedirConsultarPrestamo = $this->modelo('PedirConsultarPrestamo');
+            $this->prestamoModelo = $this->modelo('PrestamoModelo');
 
+            $this->datos["controlador"] = "defecto";
             $this->datos["rolesPermitidos"] = [3];
+            
 
             if(!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, $this->datos["rolesPermitidos"])){
                 exit();
@@ -29,18 +32,27 @@
             $this->datos["nombrepersona"] = $this->pedirConsultarPrestamo->getpersonaPrestamo();
 
 
-            $this->vista("gestion/prestamos/pedirPrestamoDefault",$this->datos);
+            $this->vista("gestion/prestamos/pedirPrestamo",$this->datos);
         }
 
         public function ver_prestamos(){
 
             $id = $this->datos["usuarioSesion"]->Id_Persona;
 
+            $this->datos["estados"] = $this->pedirConsultarPrestamo->get_estados();
+            $this->datos["PrestamosTotales"] = $this->pedirConsultarPrestamo->get_prestamos_usuario($id);
 
-            $this->datos["prestamos"] = $this->pedirConsultarPrestamo->get_prestamos_usuario($id);
+            $this->vista("gestion/prestamos",$this->datos);
 
-            $this->vista("gestion/prestamos/consultarPrestamo",$this->datos);
 
+        }
+
+        public function see_abono($id_prestamo, $resto = 0){
+            
+            $this->datos["prestamo"] = $this->prestamoModelo->get_prestamo($id_prestamo);
+            $this->datos["abonos"] = $this->prestamoModelo->get_abonos($id_prestamo);
+
+            $this->vista("gestion/ver_abonos",$this->datos); 
         }
 
 

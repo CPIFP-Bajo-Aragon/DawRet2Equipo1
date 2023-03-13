@@ -5,8 +5,8 @@
 <div class="container">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item">Home</a></li>
-      <li class="breadcrumb-item" aria-current="page">Persona</li>
+      <li class="breadcrumb-item"><a href="<?php echo RUTA_URL?>/<?php echo $this->datos['controlador']?>">Menu</a></li>
+      <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/<?php echo $this->datos['controlador']?>/gestionar_personas">Gestion Pertsona</a></li>
       <li class="breadcrumb-item active" aria-current="page">Editar Persona</li>
 
     </ol>

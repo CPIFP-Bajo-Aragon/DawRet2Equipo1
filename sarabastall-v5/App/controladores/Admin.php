@@ -13,6 +13,7 @@
             $this->economiaModelo = $this->modelo('EconomiaModelo');
             $this->personaModelo = $this->modelo('PersonaModelo');
 
+            $this->datos["controlador"] = "admin";
             $this->datos["rolesPermitidos"] = [1];
 
             if(!tienePrivilegios($this->datos["usuarioSesion"]->Id_Rol, $this->datos["rolesPermitidos"])){

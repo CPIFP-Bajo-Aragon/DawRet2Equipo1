@@ -4,8 +4,8 @@
 <div class="container">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/admin/index">Menu</a></li>
-      <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/admin/gestionar_centros">Gestion Centros</a></li>
+      <li class="breadcrumb-item"><a href="<?php echo RUTA_URL?>/<?php echo $this->datos['controlador']?>">Menu</a></li>
+      <li class="breadcrumb-item"><a href="<?php echo RUTA_URL ?>/<?php echo $this->datos['controlador']?>/gestionar_centros">Gestion Centros</a></li>
       <li class="breadcrumb-item active" aria-current="page">Ver Centro</li>
     </ol>
   </nav>
