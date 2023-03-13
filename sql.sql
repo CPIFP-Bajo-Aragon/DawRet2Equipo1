@@ -1,3 +1,7 @@
+create schema sarabastal;
+use sarabastal;
+
+
 CREATE TABLE ROL(
 Id_Rol INT AUTO_INCREMENT NOT NULL,
 Nombre_Rol VARCHAR(50) NOT NULL,
@@ -51,7 +55,7 @@ Fecha_Nacimiento DATE NOT NULL,
 Telefono VARCHAR(15),
 Email VARCHAR(50),
 Nom_User VARCHAR(30),
-Password VARCHAR(20),
+Password VARCHAR(256),
 Id_Rol INT,
 
 PRIMARY KEY (Id_Persona),
