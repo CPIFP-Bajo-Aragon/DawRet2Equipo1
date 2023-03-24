@@ -3,13 +3,8 @@
 } */
 
 #menuFondo{
-<<<<<<< HEAD
-    height: 100vh;
-    background-image: linear-gradient(rgba(49, 49, 49, 0.5),rgba( 49, 49, 49, 0.5)), url("../img/hushe.jpeg");
-=======
     height: 90vh;
     background-image: linear-gradient(rgba(40, 40, 40, 0.5),rgba( 40, 40, 40, 0.9)), url("../img/hushe.jpeg");
->>>>>>> david
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -72,15 +67,6 @@ h5{
     margin-top: 5%;
 }
 
-<<<<<<< HEAD
-.titulosPrincipales{
-    margin-top: 6%;
-}
-
-.titulo1{
-
-    color: #b84b30;
-=======
 #div_asociacion_fundacion{
     margin-left: 7%;
 }
@@ -96,7 +82,6 @@ h5{
 
 .titulo1{
     color: #d65636;
->>>>>>> david
     font-size: 50px;
     font-family: Montserrat;
 }
@@ -108,18 +93,6 @@ h5{
 }
 
 .contenido{
-<<<<<<< HEAD
-   padding-left: 30%;
-   padding-right: 30%;
-    font-weight: bold;
-    font-family: Josefin Sans;
-    color: #ffffff;
-    text-align: center;
-    font-size: 18px;
-}
-
-/* Parte de css para la gestion de prestamos */
-=======
     padding-left: 30%;
     padding-right: 30%;
     font-weight: bold;
@@ -131,26 +104,10 @@ h5{
 
 /*Css de las paginas de Gestion Admin*/
 
->>>>>>> david
 #anadir{
     float:right;
     background-color: #0d6efd;
 }
-<<<<<<< HEAD
-.container {
-    text-align: center;
-}
-table{
-    font-family: 'Montserrat', sans-serif;
-}
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: #8ec4ff;
-}
-.table-hover tbody tr:hover {
-    background-color: #2E64FE;
-    color: #FFFFFF;
-}
-=======
   
 .container {
     text-align: center;
@@ -169,32 +126,10 @@ table{
     color: #FFFFFF;
 }
   
->>>>>>> david
 .thead-azul {
     background-color: #5b9bd5;
     color: white;
 }
-<<<<<<< HEAD
-.page-item{
-    font-family: 'Source Sans Pro', sans-serif;
-}
-#breadcrumb-item{
-    color: #0d6efd;
-}
-.Ingreso{
-    font-family: 'Montserrat', sans-serif;
-    color:#04B431;
-}
-.modal{
-    font-family: 'Montserrat', sans-serif;
-}
-.Pago{
-    font-family: 'Montserrat', sans-serif;
-    color:#B40404;
-}
-
-
-=======
   
 .page-item{
     font-family: 'Source Sans Pro', sans-serif;
@@ -666,4 +601,3 @@ table.color_sheetH thead th {
 .formBien{
     border:1px solid green !important;
 }
->>>>>>> david
